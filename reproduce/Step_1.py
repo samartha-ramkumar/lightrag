@@ -40,7 +40,6 @@ async def initialize_rag():
 
     return rag
 
-
 def main():
     # Initialize RAG instance
     rag = asyncio.run(initialize_rag())
