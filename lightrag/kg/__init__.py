@@ -14,6 +14,7 @@ STORAGE_IMPLEMENTATIONS = {
             "NetworkXStorage",
             "Neo4JStorage",
             "PGGraphStorage",
+            "FalkorDBStorage"
             # "AGEStorage",
             # "MongoGraphStorage",
             # "TiDBGraphStorage",
@@ -56,6 +57,7 @@ STORAGE_ENV_REQUIREMENTS: dict[str, list[str]] = {
     "NetworkXStorage": [],
     "Neo4JStorage": ["NEO4J_URI", "NEO4J_USERNAME", "NEO4J_PASSWORD"],
     "MongoGraphStorage": [],
+    "FalkorDBStorage": ["REDIS_HOST", "REDIS_PORT", "REDIS_PASSWORD"],
     # "TiDBGraphStorage": ["TIDB_USER", "TIDB_PASSWORD", "TIDB_DATABASE"],
     "AGEStorage": [
         "AGE_POSTGRES_DB",
@@ -85,6 +87,7 @@ STORAGE_ENV_REQUIREMENTS: dict[str, list[str]] = {
 
 # Storage implementation module mapping
 STORAGES = {
+    "FalkorDBStorage": ".kg.falkordb_impl",
     "NetworkXStorage": ".kg.networkx_impl",
     "JsonKVStorage": ".kg.json_kv_impl",
     "NanoVectorDBStorage": ".kg.nano_vector_db_impl",
