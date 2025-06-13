@@ -1,0 +1,875 @@
+2025-06-12 23:52:09,243 - lightrag - INFO - [65] Created new empty graph
+2025-06-12 23:52:11,327 - lightrag - INFO - [59] Process 369558 KV load full_docs with 0 records
+2025-06-12 23:52:11,328 - lightrag - INFO - [59] Process 369558 KV load text_chunks with 0 records
+2025-06-12 23:52:11,328 - lightrag - INFO - [59] Process 369558 KV load llm_response_cache with 0 records
+2025-06-12 23:52:11,329 - lightrag - INFO - [50] Process 369558 doc status load doc_status with 0 records
+2025-06-12 23:52:11,330 - lightrag - INFO - [474] limit_async: 16 new workers initialized
+2025-06-12 23:52:11,331 - lightrag - INFO - [464] Storage Initialization completed!
+2025-06-12 23:52:11,331 - lightrag - ERROR - [378] limit_async: Error in decorated function: name '__api_version__' is not defined
+2025-06-12 23:52:11,375 - lightrag - INFO - [1160] Creating a new event loop in main thread.
+23:56:56 - lightrag - INFO - [networkx_impl.py:65] Created new empty graph
+23:56:56 - lightrag - INFO - [json_kv_impl.py:59] Process 373035 KV load full_docs with 0 records
+23:56:56 - lightrag - INFO - [json_kv_impl.py:59] Process 373035 KV load text_chunks with 0 records
+23:56:56 - lightrag - INFO - [json_kv_impl.py:59] Process 373035 KV load llm_response_cache with 0 records
+23:56:56 - lightrag - INFO - [json_doc_status_impl.py:50] Process 373035 doc status load doc_status with 0 records
+23:56:56 - lightrag - INFO - [utils.py:474] limit_async: 16 new workers initialized
+23:56:56 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+23:56:57 - lightrag - INFO - [lightrag.py:464] Storage Finalization completed!
+2025-06-12 23:57:51,405 - lightrag - INFO - [networkx_impl.py:65] Created new empty graph
+2025-06-12 23:57:51,415 - lightrag - INFO - [json_kv_impl.py:59] Process 373624 KV load full_docs with 0 records
+2025-06-12 23:57:51,415 - lightrag - INFO - [json_kv_impl.py:59] Process 373624 KV load text_chunks with 0 records
+2025-06-12 23:57:51,416 - lightrag - INFO - [json_kv_impl.py:59] Process 373624 KV load llm_response_cache with 0 records
+2025-06-12 23:57:51,416 - lightrag - INFO - [json_doc_status_impl.py:50] Process 373624 doc status load doc_status with 0 records
+2025-06-12 23:57:51,417 - lightrag - INFO - [utils.py:474] limit_async: 16 new workers initialized
+2025-06-12 23:57:51,418 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-12 23:57:52,443 - lightrag - INFO - [lightrag.py:809] Stored 1 new unique documents
+2025-06-12 23:57:52,444 - lightrag - INFO - [lightrag.py:883] Processing 1 document(s)
+2025-06-12 23:57:52,445 - lightrag - INFO - [lightrag.py:936] Extracting stage 1/1: unknown_source
+2025-06-12 23:57:52,445 - lightrag - INFO - [lightrag.py:939] Processing d-id: doc-b38addbf74015e4bcb21b29f65fca272
+2025-06-12 23:57:52,468 - lightrag - INFO - [utils.py:474] limit_async: 4 new workers initialized
+2025-06-12 23:58:00,820 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 98e5933d3a0020fc6d36ea3f14f08311
+2025-06-12 23:58:03,066 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 2277ac26021ffea0fbe957acf9e8c72d
+2025-06-12 23:58:05,311 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 9b6e563c6d1f3de2848e74a54ca42de6
+2025-06-12 23:58:05,390 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: d7e8397a1ac4d846f08021592522bf0b
+2025-06-12 23:58:17,403 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: d82a4c3b7c741a124a7b68c0db11550b
+2025-06-12 23:58:17,407 - lightrag - INFO - [operate.py:815] Chunk 1 of 9 extracted 12 Ent + 11 Rel
+2025-06-12 23:58:22,931 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 8c63fd31efa4038cd243ffeb2156d8bc
+2025-06-12 23:58:22,935 - lightrag - INFO - [operate.py:815] Chunk 2 of 9 extracted 13 Ent + 9 Rel
+2025-06-12 23:58:26,027 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 0515b73dccce96f4992490d51be06290
+2025-06-12 23:58:26,031 - lightrag - INFO - [operate.py:815] Chunk 3 of 9 extracted 11 Ent + 8 Rel
+2025-06-12 23:58:26,649 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 49d16e4db43b56e1ecae6fa9bcb02ae6
+2025-06-12 23:58:26,654 - lightrag - INFO - [operate.py:815] Chunk 4 of 9 extracted 9 Ent + 10 Rel
+2025-06-12 23:58:30,506 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: f08ef35b1b6ef3766c2273d5cd880212
+2025-06-12 23:58:34,195 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: e61bff74a844ef2b3848203072b3f3cb
+2025-06-12 23:58:35,423 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 0035cdb52c32c4822e0ed64739f8f7be
+2025-06-12 23:58:36,448 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: f078c0ad4a713ce4aeb972196ce30ec9
+2025-06-12 23:58:45,465 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 86ca1c9d6ca9d1a2264f11fece263605
+2025-06-12 23:58:45,467 - lightrag - WARNING - [operate.py:174] Entity extraction error: invalid entity type in: ['"entity"', '"Scrooge\'s Dressing-Gown"', '("category"', '"Scrooge\'s Dressing-Gown is an item of clothing that symbolizes his comfort-seeking behavior and isolation as he prepares for a night alone."']
+2025-06-12 23:58:45,469 - lightrag - INFO - [operate.py:815] Chunk 5 of 9 extracted 12 Ent + 12 Rel
+2025-06-12 23:58:49,896 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 28c42158e5b6c98928cb4fabc06e4618
+2025-06-12 23:58:49,899 - lightrag - INFO - [operate.py:815] Chunk 6 of 9 extracted 9 Ent + 8 Rel
+2025-06-12 23:58:50,376 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 1dad221328b362966967b2eb7b9eb3b3
+2025-06-12 23:58:50,379 - lightrag - INFO - [operate.py:815] Chunk 7 of 9 extracted 14 Ent + 13 Rel
+2025-06-12 23:58:50,530 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 79700fa4277e51d5705842b962590cca
+2025-06-12 23:58:50,533 - lightrag - INFO - [operate.py:815] Chunk 8 of 9 extracted 13 Ent + 11 Rel
+2025-06-12 23:58:51,247 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 3e12434b56266803a76c06db5d8ea7d0
+2025-06-12 23:59:02,663 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 7020e204aac8411559b360b17d7c37c6
+2025-06-12 23:59:02,665 - lightrag - INFO - [operate.py:815] Chunk 9 of 9 extracted 8 Ent + 8 Rel
+2025-06-12 23:59:02,666 - lightrag - INFO - [operate.py:559] Merging stage 1/1: unknown_source
+2025-06-12 23:59:02,667 - lightrag - INFO - [operate.py:309] Merge N: Marley | 2+0
+2025-06-12 23:59:02,668 - lightrag - INFO - [operate.py:294] LLM merge N: Scrooge | 8+0
+2025-06-12 23:59:06,554 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 061d468925cc891043ce5ea2ec288c05
+2025-06-12 23:59:06,555 - lightrag - INFO - [operate.py:309] Merge N: Christmas Eve | 4+0
+2025-06-12 23:59:06,556 - lightrag - INFO - [operate.py:309] Merge N: Scrooge's Nephew | 2+0
+2025-06-12 23:59:06,556 - lightrag - INFO - [operate.py:309] Merge N: Christmas | 2+0
+2025-06-12 23:59:06,557 - lightrag - INFO - [operate.py:309] Merge N: Counting-House | 2+0
+2025-06-12 23:59:06,558 - lightrag - INFO - [operate.py:309] Merge N: Fire | 2+0
+2025-06-12 23:59:06,561 - lightrag - INFO - [operate.py:309] Merge N: Marley's Ghost | 3+0
+2025-06-12 23:59:06,561 - lightrag - INFO - [operate.py:309] Merge N: Jacob Marley | 2+0
+2025-06-12 23:59:06,562 - lightrag - INFO - [operate.py:309] Merge N: Chain of Regret | 2+0
+2025-06-12 23:59:06,564 - lightrag - INFO - [operate.py:473] Merge E: Marley - Scrooge | 2+0
+2025-06-12 23:59:06,565 - lightrag - INFO - [operate.py:473] Merge E: Christmas Eve - Scrooge | 3+0
+2025-06-12 23:59:06,565 - lightrag - INFO - [operate.py:473] Merge E: Scrooge - Scrooge's Nephew | 2+0
+2025-06-12 23:59:06,566 - lightrag - INFO - [operate.py:473] Merge E: Christmas - Scrooge | 2+0
+2025-06-12 23:59:06,568 - lightrag - INFO - [operate.py:473] Merge E: Marley - The Knocker | 2+0
+2025-06-12 23:59:06,569 - lightrag - INFO - [operate.py:473] Merge E: Marley's Ghost - Scrooge | 2+0
+2025-06-12 23:59:06,569 - lightrag - INFO - [operate.py:473] Merge E: Jacob Marley - Scrooge | 2+0
+2025-06-12 23:59:06,572 - lightrag - INFO - [operate.py:596] Updating 82 entities  1/1: unknown_source
+2025-06-12 23:59:08,660 - lightrag - INFO - [operate.py:617] Updating 82 relations 1/1: unknown_source
+2025-06-12 23:59:10,832 - lightrag - INFO - [networkx_impl.py:45] Writing graph with 84 nodes, 82 edges
+2025-06-12 23:59:10,886 - lightrag - INFO - [lightrag.py:1222] In memory DB persist to disk
+2025-06-12 23:59:10,887 - lightrag - INFO - [lightrag.py:1092] Completed processing file 1/1: unknown_source
+2025-06-12 23:59:10,887 - lightrag - INFO - [lightrag.py:1176] Document processing pipeline completed
+2025-06-12 23:59:12,529 - lightrag - INFO - [operate.py:1186] Vector query: 4 chunks, top_k: 60
+2025-06-12 23:59:21,504 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving naive: 0f90a64254d5f3524ae46df9f0b49bcf
+2025-06-12 23:59:22,730 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: 3eba15cddc40b8e5f2d5b974042add93
+2025-06-12 23:59:22,730 - lightrag - INFO - [operate.py:1224] Process 373624 building query context...
+2025-06-12 23:59:22,730 - lightrag - INFO - [operate.py:1348] Query nodes: Character development, Conflict, Setting, Symbolism, Plot dynamics, top_k: 60, cosine: 0.2
+2025-06-12 23:59:23,121 - lightrag - INFO - [operate.py:1410] Local query uses 30 entites, 58 relations, 4 chunks
+2025-06-12 23:59:32,562 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: 507b0c2ddf1020dfb58fa99b629a41fc
+2025-06-12 23:59:34,176 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 20f25304745f8c690c60c67fa5ed9e87
+2025-06-12 23:59:34,177 - lightrag - INFO - [operate.py:1224] Process 373624 building query context...
+2025-06-12 23:59:34,177 - lightrag - INFO - [operate.py:1651] Query edges: Themes, Story analysis, Literary elements, top_k: 60, cosine: 0.2
+2025-06-12 23:59:35,103 - lightrag - INFO - [operate.py:1719] Global query uses 56 entites, 53 relations, 4 chunks
+2025-06-12 23:59:45,468 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 51730a856e70c1d079a1664cfd217d3b
+2025-06-12 23:59:46,490 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: 8755e9fbac7e447eb32646483edace57
+2025-06-12 23:59:46,491 - lightrag - INFO - [operate.py:1224] Process 373624 building query context...
+2025-06-12 23:59:46,491 - lightrag - INFO - [operate.py:1348] Query nodes: Character development, Plot points, Moral lessons, Symbolism, Conflict, top_k: 60, cosine: 0.2
+2025-06-12 23:59:46,989 - lightrag - INFO - [operate.py:1410] Local query uses 45 entites, 75 relations, 3 chunks
+2025-06-12 23:59:46,991 - lightrag - INFO - [operate.py:1651] Query edges: Top themes, Story analysis, top_k: 60, cosine: 0.2
+2025-06-12 23:59:47,603 - lightrag - INFO - [operate.py:1719] Global query uses 55 entites, 50 relations, 4 chunks
+2025-06-12 23:59:56,753 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: 7b3ec7235b7ff099000dfa80f33c3a35
+2025-06-12 23:59:56,776 - lightrag - INFO - [lightrag.py:464] Storage Finalization completed!
+2025-06-13 00:16:12,433 - lightrag - INFO - [networkx_impl.py:65] Created new empty graph
+2025-06-13 00:16:12,447 - lightrag - INFO - [json_kv_impl.py:59] Process 385415 KV load full_docs with 0 records
+2025-06-13 00:16:12,448 - lightrag - INFO - [json_kv_impl.py:59] Process 385415 KV load text_chunks with 0 records
+2025-06-13 00:16:12,454 - lightrag - INFO - [json_kv_impl.py:59] Process 385415 KV load llm_response_cache with 26 records
+2025-06-13 00:16:12,455 - lightrag - INFO - [json_doc_status_impl.py:50] Process 385415 doc status load doc_status with 0 records
+2025-06-13 00:16:12,456 - lightrag - INFO - [utils.py:474] limit_async: 16 new workers initialized
+2025-06-13 00:16:12,456 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-13 00:16:13,469 - lightrag - INFO - [lightrag.py:809] Stored 1 new unique documents
+2025-06-13 00:16:13,470 - lightrag - INFO - [lightrag.py:883] Processing 1 document(s)
+2025-06-13 00:16:13,471 - lightrag - INFO - [lightrag.py:936] Extracting stage 1/1: unknown_source
+2025-06-13 00:16:13,471 - lightrag - INFO - [lightrag.py:939] Processing d-id: doc-df3c664f43fb3a1781a35617ff7f455f
+2025-06-13 00:16:13,477 - lightrag - INFO - [utils.py:474] limit_async: 4 new workers initialized
+2025-06-13 00:16:20,884 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: b8d11d8660218bb49206314a6b97a8f2
+2025-06-13 00:16:28,270 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 16ba0aa4a744b65e7b4fe02f9b9fcb9d
+2025-06-13 00:16:28,272 - lightrag - INFO - [operate.py:815] Chunk 1 of 2 extracted 9 Ent + 8 Rel
+2025-06-13 00:16:28,594 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: e4a1e47f2c7f25a846e4d297daae25ec
+2025-06-13 00:16:51,532 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 1eb53a9c184d363e023b20af3b7a61d1
+2025-06-13 00:16:51,536 - lightrag - INFO - [operate.py:815] Chunk 2 of 2 extracted 25 Ent + 17 Rel
+2025-06-13 00:16:51,539 - lightrag - INFO - [operate.py:559] Merging stage 1/1: unknown_source
+2025-06-13 00:16:51,543 - lightrag - INFO - [operate.py:596] Updating 34 entities  1/1: unknown_source
+2025-06-13 00:16:53,065 - lightrag - INFO - [operate.py:617] Updating 25 relations 1/1: unknown_source
+2025-06-13 00:16:54,323 - lightrag - INFO - [networkx_impl.py:45] Writing graph with 34 nodes, 25 edges
+2025-06-13 00:16:54,393 - lightrag - INFO - [lightrag.py:1222] In memory DB persist to disk
+2025-06-13 00:16:54,393 - lightrag - INFO - [lightrag.py:1092] Completed processing file 1/1: unknown_source
+2025-06-13 00:16:54,394 - lightrag - INFO - [lightrag.py:1176] Document processing pipeline completed
+2025-06-13 00:16:55,627 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: f1c83cf3c2d9aeaf301531faf5cdb535
+2025-06-13 00:16:55,627 - lightrag - INFO - [operate.py:1224] Process 385415 building query context...
+2025-06-13 00:16:55,628 - lightrag - INFO - [operate.py:1348] Query nodes: Main idea, Plot, Character development, Narrative, Conflict, top_k: 60, cosine: 0.2
+2025-06-13 00:16:56,124 - lightrag - INFO - [operate.py:1410] Local query uses 13 entites, 10 relations, 2 chunks
+2025-06-13 00:16:57,675 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: 57376d4289099e9f6280802ee47392b5
+2025-06-13 00:16:58,903 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 7c8a2037e74ad51e0caa274e954e12d0
+2025-06-13 00:16:58,904 - lightrag - INFO - [operate.py:1224] Process 385415 building query context...
+2025-06-13 00:16:58,904 - lightrag - INFO - [operate.py:1651] Query edges: Story theme, Literary analysis, top_k: 60, cosine: 0.2
+2025-06-13 00:16:59,455 - lightrag - INFO - [operate.py:1719] Global query uses 4 entites, 2 relations, 2 chunks
+2025-06-13 00:17:02,477 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: ebc775977f0db0f90f60c416d234482b
+2025-06-13 00:17:03,815 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: 00266f5935bb0a86bad5cd3635c2afa7
+2025-06-13 00:17:03,816 - lightrag - INFO - [operate.py:1224] Process 385415 building query context...
+2025-06-13 00:17:03,816 - lightrag - INFO - [operate.py:1348] Query nodes: Concise theme, Plot, Characters, Setting, Narrative, top_k: 60, cosine: 0.2
+2025-06-13 00:17:04,273 - lightrag - INFO - [operate.py:1410] Local query uses 7 entites, 8 relations, 2 chunks
+2025-06-13 00:17:04,273 - lightrag - INFO - [operate.py:1651] Query edges: Theme, Story, Literary analysis, top_k: 60, cosine: 0.2
+2025-06-13 00:17:04,689 - lightrag - INFO - [operate.py:1719] Global query uses 5 entites, 3 relations, 2 chunks
+2025-06-13 00:17:06,683 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: 39b4a46db9506658132131fa3c9015d0
+2025-06-13 00:17:06,694 - lightrag - INFO - [lightrag.py:464] Storage Finalization completed!
+2025-06-13 00:18:18,005 - lightrag - DEBUG - [lightrag.py:347] LightRAG init with param:
+  working_dir = ./testing,
+  kv_storage = JsonKVStorage,
+  vector_storage = NanoVectorDBStorage,
+  graph_storage = NetworkXStorage,
+  doc_status_storage = JsonDocStatusStorage,
+  log_level = None,
+  log_file_path = None,
+  entity_extract_max_gleaning = 1,
+  summary_to_max_tokens = 500,
+  force_llm_summary_on_merge = 6,
+  chunk_token_size = 1200,
+  chunk_overlap_token_size = 100,
+  tokenizer = <lightrag.utils.TiktokenTokenizer object at 0x7f5acef10090>,
+  tiktoken_model_name = gpt-4o-mini,
+  chunking_func = <function chunking_by_token_size at 0x7f5acffb6e80>,
+  embedding_func = {'embedding_dim': 1536, 'max_token_size': 8192, 'func': <function openai_embed at 0x7f5acf0caca0>},
+  embedding_batch_num = 32,
+  embedding_func_max_async = 16,
+  embedding_cache_config = {'enabled': False, 'similarity_threshold': 0.95, 'use_llm_check': False},
+  llm_model_func = <function gpt_4o_mini_complete at 0x7f5acf0ca660>,
+  llm_model_name = gpt-4o-mini,
+  llm_model_max_token_size = 32768,
+  llm_model_max_async = 4,
+  llm_model_kwargs = {},
+  vector_db_storage_cls_kwargs = {'cosine_better_than_threshold': 0.2},
+  namespace_prefix = ,
+  enable_llm_cache = True,
+  enable_llm_cache_for_entity_extract = True,
+  max_parallel_insert = 2,
+  addon_params = {'language': 'English'},
+  auto_manage_storages_states = True,
+  convert_response_to_json_func = <function convert_response_to_json at 0x7f5ad0cbee80>,
+  cosine_better_than_threshold = 0.2,
+  _storages_status = StoragesStatus.NOT_CREATED
+
+2025-06-13 00:18:18,357 - lightrag - INFO - [networkx_impl.py:61] Loaded graph from ./testing/graph_chunk_entity_relation.graphml with 34 nodes, 25 edges
+2025-06-13 00:18:18,374 - lightrag - INFO - [json_kv_impl.py:59] Process 386776 KV load full_docs with 1 records
+2025-06-13 00:18:18,375 - lightrag - INFO - [json_kv_impl.py:59] Process 386776 KV load text_chunks with 2 records
+2025-06-13 00:18:18,381 - lightrag - INFO - [json_kv_impl.py:59] Process 386776 KV load llm_response_cache with 36 records
+2025-06-13 00:18:18,381 - lightrag - INFO - [json_doc_status_impl.py:50] Process 386776 doc status load doc_status with 1 records
+2025-06-13 00:18:18,382 - lightrag - DEBUG - [lightrag.py:497] Initialized Storages
+2025-06-13 00:18:18,382 - lightrag - INFO - [utils.py:474] limit_async: 16 new workers initialized
+2025-06-13 00:18:18,383 - lightrag - DEBUG - [lightrag.py:497] Initialized Storages
+2025-06-13 00:18:18,383 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-13 00:18:19,210 - lightrag - INFO - [lightrag.py:804] No new unique documents were found.
+2025-06-13 00:18:19,210 - lightrag - INFO - [lightrag.py:847] No documents to process
+2025-06-13 00:18:19,211 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:local type:query)
+2025-06-13 00:18:19,211 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:local type:keywords)
+2025-06-13 00:18:19,214 - lightrag - DEBUG - [operate.py:1083] [kg_query]Prompt Tokens: 422
+2025-06-13 00:18:19,214 - lightrag - INFO - [utils.py:474] limit_async: 4 new workers initialized
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [utils.py:91] Query: ---Role---
+
+You are a helpful assistant tasked with identifying both high-level and low-level...
+2025-06-13 00:18:19,279 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:18:21,852 - lightrag - DEBUG - [openai.py:306] Response content len: 126
+2025-06-13 00:18:21,853 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-Bhr5wxsQsnXmmDpQw9rusNgSWhUti', choices=[Choice(finish_reason=...
+2025-06-13 00:18:21,854 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: 764f8e933e0ad1b8cf032ba5c71e3110
+2025-06-13 00:18:21,855 - lightrag - DEBUG - [json_kv_impl.py:124] Inserting 1 records to llm_response_cache
+2025-06-13 00:18:21,855 - lightrag - DEBUG - [operate.py:894] High-level keywords: ['Document theme', 'Conciseness']
+2025-06-13 00:18:21,855 - lightrag - DEBUG - [operate.py:895] Low-level  keywords: ['Main idea', 'Summary', 'Key points']
+2025-06-13 00:18:21,855 - lightrag - INFO - [operate.py:1224] Process 386776 building query context...
+2025-06-13 00:18:21,855 - lightrag - INFO - [operate.py:1348] Query nodes: Main idea, Summary, Key points, top_k: 60, cosine: 0.2
+2025-06-13 00:18:22,306 - lightrag - DEBUG - [operate.py:1569] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:18:22,309 - lightrag - DEBUG - [operate.py:1637] Truncate relations from 12 to 12 (max tokens:4000)
+2025-06-13 00:18:22,311 - lightrag - DEBUG - [operate.py:1406] Truncate entities from 12 to 12 (max tokens:4000)
+2025-06-13 00:18:22,312 - lightrag - INFO - [operate.py:1410] Local query uses 12 entites, 12 relations, 2 chunks
+2025-06-13 00:18:22,334 - lightrag - DEBUG - [operate.py:960] [kg_query]Prompt Tokens: 4022
+2025-06-13 00:18:22,461 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:18:22,462 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:18:22,462 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {'stream': False}
+2025-06-13 00:18:22,462 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:18:22,462 - lightrag - DEBUG - [utils.py:91] System prompt: ---Role---
+
+You are a helpful assistant responding to user query about Knowledge Grap...
+2025-06-13 00:18:22,462 - lightrag - DEBUG - [utils.py:91] Query: What is the main concise theme o f the docuent?
+2025-06-13 00:18:22,463 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:18:26,956 - lightrag - DEBUG - [openai.py:306] Response content len: 1535
+2025-06-13 00:18:26,957 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-Bhr5yMiYtoeb8p3Z8ro9EHlbfN6y4', choices=[Choice(finish_reason=...
+2025-06-13 00:18:26,959 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: b439f9e89d82930a7bfc45d3ae63c99e
+2025-06-13 00:18:26,959 - lightrag - DEBUG - [json_kv_impl.py:124] Inserting 1 records to llm_response_cache
+2025-06-13 00:18:26,960 - lightrag - DEBUG - [json_kv_impl.py:82] Process 386776 KV writting 38 records to llm_response_cache
+2025-06-13 00:18:26,981 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:global type:query)
+2025-06-13 00:18:26,981 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:global type:keywords)
+2025-06-13 00:18:26,982 - lightrag - DEBUG - [operate.py:1083] [kg_query]Prompt Tokens: 422
+2025-06-13 00:18:27,055 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:18:27,055 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:18:27,056 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:18:27,056 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:18:27,056 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:18:27,056 - lightrag - DEBUG - [utils.py:91] Query: ---Role---
+
+You are a helpful assistant tasked with identifying both high-level and low-level...
+2025-06-13 00:18:27,056 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:18:28,399 - lightrag - DEBUG - [openai.py:306] Response content len: 158
+2025-06-13 00:18:28,399 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-Bhr63MZCznjdEOAMYWUExCy09hwvQ', choices=[Choice(finish_reason=...
+2025-06-13 00:18:28,401 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 1dcc093359240dd981c5280e78c19e7c
+2025-06-13 00:18:28,401 - lightrag - DEBUG - [json_kv_impl.py:124] Inserting 1 records to llm_response_cache
+2025-06-13 00:18:28,402 - lightrag - DEBUG - [operate.py:894] High-level keywords: ['Document theme', 'Main ideas', 'Conciseness']
+2025-06-13 00:18:28,402 - lightrag - DEBUG - [operate.py:895] Low-level  keywords: ['Subject', 'Key points', 'Summary', 'Content analysis']
+2025-06-13 00:18:28,402 - lightrag - INFO - [operate.py:1224] Process 386776 building query context...
+2025-06-13 00:18:28,403 - lightrag - INFO - [operate.py:1651] Query edges: Document theme, Main ideas, Conciseness, top_k: 60, cosine: 0.2
+2025-06-13 00:18:28,847 - lightrag - DEBUG - [operate.py:1823] Truncate entities from 17 to 17 (max tokens:4000)
+2025-06-13 00:18:28,856 - lightrag - DEBUG - [operate.py:1884] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:18:28,856 - lightrag - INFO - [operate.py:1719] Global query uses 17 entites, 14 relations, 2 chunks
+2025-06-13 00:18:28,883 - lightrag - DEBUG - [operate.py:960] [kg_query]Prompt Tokens: 4606
+2025-06-13 00:18:29,010 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:18:29,011 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:18:29,011 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {'stream': False}
+2025-06-13 00:18:29,011 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:18:29,011 - lightrag - DEBUG - [utils.py:91] System prompt: ---Role---
+
+You are a helpful assistant responding to user query about Knowledge Grap...
+2025-06-13 00:18:29,011 - lightrag - DEBUG - [utils.py:91] Query: What is the main concise theme o f the docuent?
+2025-06-13 00:18:29,012 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:18:32,523 - lightrag - DEBUG - [openai.py:306] Response content len: 1133
+2025-06-13 00:18:32,523 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-Bhr65u3gBwJ3OjnCNniPnNJtZe6Fr', choices=[Choice(finish_reason=...
+2025-06-13 00:18:32,524 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 9b06d1ced3047db7c7b50091b9364676
+2025-06-13 00:18:32,524 - lightrag - DEBUG - [json_kv_impl.py:124] Inserting 1 records to llm_response_cache
+2025-06-13 00:18:32,524 - lightrag - DEBUG - [json_kv_impl.py:82] Process 386776 KV writting 40 records to llm_response_cache
+2025-06-13 00:18:32,535 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:hybrid type:query)
+2025-06-13 00:18:32,535 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:hybrid type:keywords)
+2025-06-13 00:18:32,537 - lightrag - DEBUG - [operate.py:1083] [kg_query]Prompt Tokens: 422
+2025-06-13 00:18:32,601 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:18:32,601 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:18:32,602 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:18:32,602 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:18:32,602 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:18:32,602 - lightrag - DEBUG - [utils.py:91] Query: ---Role---
+
+You are a helpful assistant tasked with identifying both high-level and low-level...
+2025-06-13 00:18:32,602 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:18:33,519 - lightrag - DEBUG - [openai.py:306] Response content len: 132
+2025-06-13 00:18:33,520 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-Bhr68ZCiFCqB9WIKWleolTzxogyoX', choices=[Choice(finish_reason=...
+2025-06-13 00:18:33,521 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: df5f1175a42fd2654b464d47a682bf15
+2025-06-13 00:18:33,521 - lightrag - DEBUG - [json_kv_impl.py:124] Inserting 1 records to llm_response_cache
+2025-06-13 00:18:33,522 - lightrag - DEBUG - [operate.py:894] High-level keywords: ['Theme', 'Document analysis']
+2025-06-13 00:18:33,522 - lightrag - DEBUG - [operate.py:895] Low-level  keywords: ['Concise', 'Main theme', 'Content', 'Summary']
+2025-06-13 00:18:33,523 - lightrag - INFO - [operate.py:1224] Process 386776 building query context...
+2025-06-13 00:18:33,523 - lightrag - INFO - [operate.py:1348] Query nodes: Concise, Main theme, Content, Summary, top_k: 60, cosine: 0.2
+2025-06-13 00:18:33,996 - lightrag - DEBUG - [operate.py:1569] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:18:34,000 - lightrag - DEBUG - [operate.py:1637] Truncate relations from 12 to 12 (max tokens:4000)
+2025-06-13 00:18:34,002 - lightrag - DEBUG - [operate.py:1406] Truncate entities from 16 to 16 (max tokens:4000)
+2025-06-13 00:18:34,003 - lightrag - INFO - [operate.py:1410] Local query uses 16 entites, 12 relations, 2 chunks
+2025-06-13 00:18:34,004 - lightrag - INFO - [operate.py:1651] Query edges: Theme, Document analysis, top_k: 60, cosine: 0.2
+2025-06-13 00:18:34,490 - lightrag - DEBUG - [operate.py:1823] Truncate entities from 20 to 20 (max tokens:4000)
+2025-06-13 00:18:34,501 - lightrag - DEBUG - [operate.py:1884] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:18:34,502 - lightrag - INFO - [operate.py:1719] Global query uses 20 entites, 18 relations, 2 chunks
+2025-06-13 00:18:34,538 - lightrag - DEBUG - [operate.py:960] [kg_query]Prompt Tokens: 5826
+2025-06-13 00:18:34,655 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:18:34,655 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:18:34,655 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {'stream': False}
+2025-06-13 00:18:34,656 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:18:34,656 - lightrag - DEBUG - [utils.py:91] System prompt: ---Role---
+
+You are a helpful assistant responding to user query about Knowledge Grap...
+2025-06-13 00:18:34,656 - lightrag - DEBUG - [utils.py:91] Query: What is the main concise theme o f the docuent?
+2025-06-13 00:18:34,656 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:18:39,050 - lightrag - DEBUG - [openai.py:306] Response content len: 1415
+2025-06-13 00:18:39,051 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-Bhr6ASaWs3fQacLdtCZLoB1gn95Tt', choices=[Choice(finish_reason=...
+2025-06-13 00:18:39,052 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: eb72892433279ba0709a56b9f1dcab85
+2025-06-13 00:18:39,052 - lightrag - DEBUG - [json_kv_impl.py:124] Inserting 1 records to llm_response_cache
+2025-06-13 00:18:39,053 - lightrag - DEBUG - [json_kv_impl.py:82] Process 386776 KV writting 42 records to llm_response_cache
+2025-06-13 00:18:39,072 - lightrag - DEBUG - [lightrag.py:520] Finalized Storages
+2025-06-13 00:18:39,073 - lightrag - INFO - [lightrag.py:464] Storage Finalization completed!
+2025-06-13 00:18:39,074 - lightrag - DEBUG - [utils.py:423] limit_async: Health check task exiting
+2025-06-13 00:18:39,074 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,074 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,075 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,075 - lightrag - DEBUG - [utils.py:423] limit_async: Health check task exiting
+2025-06-13 00:18:39,075 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,076 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,076 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,076 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,076 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,077 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,077 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,077 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,077 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,077 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,078 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,078 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,078 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,078 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,079 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,079 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:18:39,079 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:24:20,864 - lightrag - DEBUG - [lightrag.py:347] LightRAG init with param:
+  working_dir = ./testing,
+  kv_storage = PGKVStorage,
+  vector_storage = PGVectorStorage,
+  graph_storage = FalkorDBStorage,
+  doc_status_storage = PGDocStatusStorage,
+  log_level = None,
+  log_file_path = None,
+  entity_extract_max_gleaning = 1,
+  summary_to_max_tokens = 500,
+  force_llm_summary_on_merge = 6,
+  chunk_token_size = 1200,
+  chunk_overlap_token_size = 100,
+  tokenizer = <lightrag.utils.TiktokenTokenizer object at 0x7f9bad220f50>,
+  tiktoken_model_name = gpt-4o-mini,
+  chunking_func = <function chunking_by_token_size at 0x7f9bae3077e0>,
+  embedding_func = {'embedding_dim': 1536, 'max_token_size': 8192, 'func': <function openai_embed at 0x7f9bad403600>},
+  embedding_batch_num = 32,
+  embedding_func_max_async = 16,
+  embedding_cache_config = {'enabled': False, 'similarity_threshold': 0.95, 'use_llm_check': False},
+  llm_model_func = <function gpt_4o_mini_complete at 0x7f9bad402fc0>,
+  llm_model_name = gpt-4o-mini,
+  llm_model_max_token_size = 32768,
+  llm_model_max_async = 4,
+  llm_model_kwargs = {},
+  vector_db_storage_cls_kwargs = {'cosine_better_than_threshold': 0.2},
+  namespace_prefix = ,
+  enable_llm_cache = True,
+  enable_llm_cache_for_entity_extract = True,
+  max_parallel_insert = 2,
+  addon_params = {'language': 'English'},
+  auto_manage_storages_states = True,
+  convert_response_to_json_func = <function convert_response_to_json at 0x7f9baf0037e0>,
+  cosine_better_than_threshold = 0.2,
+  _storages_status = StoragesStatus.NOT_CREATED
+
+2025-06-13 00:24:21,315 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:24:21,316 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:24:21,367 - lightrag - INFO - [falkordb_impl.py:107] Created index for base nodes on entity_id in graph chunk-entity-relation
+2025-06-13 00:24:21,369 - lightrag - ERROR - [postgres_impl.py:81] PostgreSQL, Failed to connect database at localhost:5432/lightrag, Got:database "lightrag" does not exist
+2025-06-13 00:24:21,369 - lightrag - WARNING - [falkordb_impl.py:110] Failed to create or check index: Attribute 'entity_id' is already indexed
+2025-06-13 00:24:21,376 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-13 00:24:21,422 - lightrag - INFO - [utils.py:1160] Creating a new event loop in main thread.
+2025-06-13 00:32:19,588 - lightrag - DEBUG - [lightrag.py:347] LightRAG init with param:
+  working_dir = ./testing,
+  kv_storage = PGKVStorage,
+  vector_storage = PGVectorStorage,
+  graph_storage = FalkorDBStorage,
+  doc_status_storage = PGDocStatusStorage,
+  log_level = None,
+  log_file_path = None,
+  entity_extract_max_gleaning = 1,
+  summary_to_max_tokens = 500,
+  force_llm_summary_on_merge = 6,
+  chunk_token_size = 1200,
+  chunk_overlap_token_size = 100,
+  tokenizer = <lightrag.utils.TiktokenTokenizer object at 0x7f8b9aec7e90>,
+  tiktoken_model_name = gpt-4o-mini,
+  chunking_func = <function chunking_by_token_size at 0x7f8b9bdaee80>,
+  embedding_func = {'embedding_dim': 1536, 'max_token_size': 8192, 'func': <function openai_embed at 0x7f8b9aebeca0>},
+  embedding_batch_num = 32,
+  embedding_func_max_async = 16,
+  embedding_cache_config = {'enabled': False, 'similarity_threshold': 0.95, 'use_llm_check': False},
+  llm_model_func = <function gpt_4o_mini_complete at 0x7f8b9aebe660>,
+  llm_model_name = gpt-4o-mini,
+  llm_model_max_token_size = 32768,
+  llm_model_max_async = 4,
+  llm_model_kwargs = {},
+  vector_db_storage_cls_kwargs = {'cosine_better_than_threshold': 0.2},
+  namespace_prefix = ,
+  enable_llm_cache = True,
+  enable_llm_cache_for_entity_extract = True,
+  max_parallel_insert = 2,
+  addon_params = {'language': 'English'},
+  auto_manage_storages_states = True,
+  convert_response_to_json_func = <function convert_response_to_json at 0x7f8b9c972e80>,
+  cosine_better_than_threshold = 0.2,
+  _storages_status = StoragesStatus.NOT_CREATED
+
+2025-06-13 00:32:19,890 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:32:19,891 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:32:19,952 - lightrag - INFO - [postgres_impl.py:77] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-13 00:32:19,955 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_doc_full" does not exist
+2025-06-13 00:32:19,957 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_DOC_FULL in database
+2025-06-13 00:32:19,971 - lightrag - INFO - [postgres_impl.py:171] PostgreSQL, Creation success table LIGHTRAG_DOC_FULL in PostgreSQL database
+2025-06-13 00:32:19,979 - lightrag - INFO - [postgres_impl.py:192] PostgreSQL, Creating index idx_lightrag_doc_full_id on table LIGHTRAG_DOC_FULL
+2025-06-13 00:32:19,988 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_doc_chunks" does not exist
+2025-06-13 00:32:19,990 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_DOC_CHUNKS in database
+2025-06-13 00:32:19,993 - lightrag - ERROR - [postgres_impl.py:279] PostgreSQL database,
+sql:CREATE TABLE LIGHTRAG_DOC_CHUNKS (
+                    id VARCHAR(255),
+                    workspace VARCHAR(255),
+                    full_doc_id VARCHAR(256),
+                    chunk_order_index INTEGER,
+                    tokens INTEGER,
+                    content TEXT,
+                    content_vector VECTOR,
+                    file_path VARCHAR(256),
+                    create_time TIMESTAMP(0) WITH TIME ZONE,
+                    update_time TIMESTAMP(0) WITH TIME ZONE,
+	                CONSTRAINT LIGHTRAG_DOC_CHUNKS_PK PRIMARY KEY (workspace, id)
+                    ),
+data:None,
+error:type "vector" does not exist
+2025-06-13 00:32:19,994 - lightrag - ERROR - [postgres_impl.py:175] PostgreSQL, Failed to create table LIGHTRAG_DOC_CHUNKS in database, Please verify the connection with PostgreSQL database, Got: type "vector" does not exist
+2025-06-13 00:32:19,997 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-13 00:33:46,684 - lightrag - DEBUG - [lightrag.py:347] LightRAG init with param:
+  working_dir = ./testing,
+  kv_storage = PGKVStorage,
+  vector_storage = PGVectorStorage,
+  graph_storage = FalkorDBStorage,
+  doc_status_storage = PGDocStatusStorage,
+  log_level = None,
+  log_file_path = None,
+  entity_extract_max_gleaning = 1,
+  summary_to_max_tokens = 500,
+  force_llm_summary_on_merge = 6,
+  chunk_token_size = 1200,
+  chunk_overlap_token_size = 100,
+  tokenizer = <lightrag.utils.TiktokenTokenizer object at 0x7fc10ae9fe90>,
+  tiktoken_model_name = gpt-4o-mini,
+  chunking_func = <function chunking_by_token_size at 0x7fc10bd86e80>,
+  embedding_func = {'embedding_dim': 1536, 'max_token_size': 8192, 'func': <function openai_embed at 0x7fc10ae96ca0>},
+  embedding_batch_num = 32,
+  embedding_func_max_async = 16,
+  embedding_cache_config = {'enabled': False, 'similarity_threshold': 0.95, 'use_llm_check': False},
+  llm_model_func = <function gpt_4o_mini_complete at 0x7fc10ae96660>,
+  llm_model_name = gpt-4o-mini,
+  llm_model_max_token_size = 32768,
+  llm_model_max_async = 4,
+  llm_model_kwargs = {},
+  vector_db_storage_cls_kwargs = {'cosine_better_than_threshold': 0.2},
+  namespace_prefix = ,
+  enable_llm_cache = True,
+  enable_llm_cache_for_entity_extract = True,
+  max_parallel_insert = 2,
+  addon_params = {'language': 'English'},
+  auto_manage_storages_states = True,
+  convert_response_to_json_func = <function convert_response_to_json at 0x7fc10c94ae80>,
+  cosine_better_than_threshold = 0.2,
+  _storages_status = StoragesStatus.NOT_CREATED
+
+2025-06-13 00:33:46,981 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:33:46,982 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:33:47,034 - lightrag - INFO - [postgres_impl.py:77] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-13 00:33:47,051 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_doc_chunks" does not exist
+2025-06-13 00:33:47,053 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_DOC_CHUNKS in database
+2025-06-13 00:33:47,183 - lightrag - INFO - [postgres_impl.py:171] PostgreSQL, Creation success table LIGHTRAG_DOC_CHUNKS in PostgreSQL database
+2025-06-13 00:33:47,192 - lightrag - INFO - [postgres_impl.py:192] PostgreSQL, Creating index idx_lightrag_doc_chunks_id on table LIGHTRAG_DOC_CHUNKS
+2025-06-13 00:33:47,202 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_vdb_entity" does not exist
+2025-06-13 00:33:47,204 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_VDB_ENTITY in database
+2025-06-13 00:33:47,215 - lightrag - INFO - [postgres_impl.py:171] PostgreSQL, Creation success table LIGHTRAG_VDB_ENTITY in PostgreSQL database
+2025-06-13 00:33:47,223 - lightrag - INFO - [postgres_impl.py:192] PostgreSQL, Creating index idx_lightrag_vdb_entity_id on table LIGHTRAG_VDB_ENTITY
+2025-06-13 00:33:47,234 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_vdb_relation" does not exist
+2025-06-13 00:33:47,236 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_VDB_RELATION in database
+2025-06-13 00:33:47,245 - lightrag - INFO - [postgres_impl.py:171] PostgreSQL, Creation success table LIGHTRAG_VDB_RELATION in PostgreSQL database
+2025-06-13 00:33:47,251 - lightrag - INFO - [postgres_impl.py:192] PostgreSQL, Creating index idx_lightrag_vdb_relation_id on table LIGHTRAG_VDB_RELATION
+2025-06-13 00:33:47,259 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_llm_cache" does not exist
+2025-06-13 00:33:47,261 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_LLM_CACHE in database
+2025-06-13 00:33:47,269 - lightrag - INFO - [postgres_impl.py:171] PostgreSQL, Creation success table LIGHTRAG_LLM_CACHE in PostgreSQL database
+2025-06-13 00:33:47,275 - lightrag - INFO - [postgres_impl.py:192] PostgreSQL, Creating index idx_lightrag_llm_cache_id on table LIGHTRAG_LLM_CACHE
+2025-06-13 00:33:47,283 - lightrag - ERROR - [postgres_impl.py:248] PostgreSQL database, error:relation "lightrag_doc_status" does not exist
+2025-06-13 00:33:47,284 - lightrag - INFO - [postgres_impl.py:169] PostgreSQL, Try Creating table LIGHTRAG_DOC_STATUS in database
+2025-06-13 00:33:47,293 - lightrag - INFO - [postgres_impl.py:171] PostgreSQL, Creation success table LIGHTRAG_DOC_STATUS in PostgreSQL database
+2025-06-13 00:33:47,298 - lightrag - INFO - [postgres_impl.py:192] PostgreSQL, Creating index idx_lightrag_doc_status_id on table LIGHTRAG_DOC_STATUS
+2025-06-13 00:33:47,317 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-13 00:33:47,326 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-13 00:33:47,334 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-13 00:33:47,342 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-13 00:33:47,351 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-13 00:33:47,359 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-13 00:33:47,359 - lightrag - DEBUG - [lightrag.py:497] Initialized Storages
+2025-06-13 00:33:47,360 - lightrag - INFO - [utils.py:474] limit_async: 16 new workers initialized
+2025-06-13 00:33:47,795 - lightrag - DEBUG - [lightrag.py:497] Initialized Storages
+2025-06-13 00:33:47,796 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-13 00:33:49,030 - lightrag - DEBUG - [postgres_impl.py:1034] Inserting 1 to doc_status
+2025-06-13 00:33:49,125 - lightrag - INFO - [lightrag.py:809] Stored 1 new unique documents
+2025-06-13 00:33:49,260 - lightrag - INFO - [lightrag.py:883] Processing 1 document(s)
+2025-06-13 00:33:49,261 - lightrag - INFO - [lightrag.py:936] Extracting stage 1/1: unknown_source
+2025-06-13 00:33:49,261 - lightrag - INFO - [lightrag.py:939] Processing d-id: doc-df3c664f43fb3a1781a35617ff7f455f
+2025-06-13 00:33:49,266 - lightrag - DEBUG - [postgres_impl.py:1034] Inserting 1 to doc_status
+2025-06-13 00:33:49,266 - lightrag - DEBUG - [postgres_impl.py:684] Inserting 2 to chunks
+2025-06-13 00:33:49,267 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to full_docs
+2025-06-13 00:33:49,268 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 2 to text_chunks
+2025-06-13 00:33:49,343 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:default type:extract)
+2025-06-13 00:33:49,343 - lightrag - INFO - [utils.py:474] limit_async: 4 new workers initialized
+2025-06-13 00:33:49,408 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:33:49,409 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:33:49,409 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:33:49,409 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:33:49,409 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:33:49,409 - lightrag - DEBUG - [utils.py:91] Query: ---Goal---
+Given a text document that is potentially relevant to this activity and a list of ...
+2025-06-13 00:33:49,410 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:33:49,477 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:default type:extract)
+2025-06-13 00:33:49,542 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:33:49,543 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:33:49,543 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:33:49,543 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:33:49,543 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:33:49,543 - lightrag - DEBUG - [utils.py:91] Query: ---Goal---
+Given a text document that is potentially relevant to this activity and a list of ...
+2025-06-13 00:33:49,544 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:33:57,175 - lightrag - DEBUG - [openai.py:306] Response content len: 1665
+2025-06-13 00:33:57,176 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrKwvIY5ntgZGs2va1SU5QIitNf5', choices=[Choice(finish_reason=...
+2025-06-13 00:33:57,183 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: b8d11d8660218bb49206314a6b97a8f2
+2025-06-13 00:33:57,183 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:33:57,230 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:default type:extract)
+2025-06-13 00:33:57,295 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:33:57,295 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:33:57,295 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:33:57,295 - lightrag - DEBUG - [openai.py:167] Num of history messages: 2
+2025-06-13 00:33:57,296 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:33:57,296 - lightrag - DEBUG - [utils.py:91] Query: MANY entities and relationships were missed in the last extraction.
+
+---Remember Steps---
+
+1....
+2025-06-13 00:33:57,296 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:10,478 - lightrag - DEBUG - [openai.py:306] Response content len: 3766
+2025-06-13 00:34:10,479 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrKwDGh2OfgLWlK5BtvGy6wKp3xC', choices=[Choice(finish_reason=...
+2025-06-13 00:34:10,487 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: e4a1e47f2c7f25a846e4d297daae25ec
+2025-06-13 00:34:10,487 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:10,541 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:default type:extract)
+2025-06-13 00:34:10,623 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:34:10,623 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:34:10,623 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:34:10,623 - lightrag - DEBUG - [openai.py:167] Num of history messages: 2
+2025-06-13 00:34:10,623 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:34:10,623 - lightrag - DEBUG - [utils.py:91] Query: MANY entities and relationships were missed in the last extraction.
+
+---Remember Steps---
+
+1....
+2025-06-13 00:34:10,624 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:12,326 - lightrag - DEBUG - [openai.py:306] Response content len: 2625
+2025-06-13 00:34:12,327 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrL3CtMf8Ku9x1kYzFL7X5RxObt8', choices=[Choice(finish_reason=...
+2025-06-13 00:34:12,334 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 1ca050947a3e5d152868f5f00e80a4ef
+2025-06-13 00:34:12,334 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:12,355 - lightrag - INFO - [operate.py:815] Chunk 1 of 2 extracted 10 Ent + 10 Rel
+2025-06-13 00:34:36,704 - lightrag - DEBUG - [openai.py:306] Response content len: 5562
+2025-06-13 00:34:36,704 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrLGkTXeVzzNV0Wdbctf4aAZsHM2', choices=[Choice(finish_reason=...
+2025-06-13 00:34:36,711 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving default: 2d8bea5a67298d31efb5bbd54aded4ce
+2025-06-13 00:34:36,711 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:36,735 - lightrag - INFO - [operate.py:815] Chunk 2 of 2 extracted 22 Ent + 20 Rel
+2025-06-13 00:34:36,737 - lightrag - INFO - [operate.py:559] Merging stage 1/1: unknown_source
+2025-06-13 00:34:36,748 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Interview Questions' and properties: {'entity_id': 'Interview Questions', 'entity_type': 'event', 'description': 'Interview Questions are a set of inquiries designed to assess a candidate’s qualifications, skills, and fit for a position within an organization.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,758 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Organization' and properties: {'entity_id': 'Organization', 'entity_type': 'organization', 'description': 'An organization refers to a structured group of people working together to achieve common goals, often related to employment and industry standards.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,766 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Career Advancement' and properties: {'entity_id': 'Career Advancement', 'entity_type': 'category', 'description': 'Career Advancement encompasses the processes and discussions related to the growth and promotion opportunities available within a professional environment.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,775 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Self Awareness' and properties: {'entity_id': 'Self Awareness', 'entity_type': 'category', 'description': "Self Awareness refers to understanding one's strengths, weaknesses, and career motivations, often explored during interviews.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,784 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Values' and properties: {'entity_id': 'Values', 'entity_type': 'category', 'description': 'Values represent the core principles and priorities that guide individual behavior and decisions in a job context.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,793 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Knowledge of the Organization' and properties: {'entity_id': 'Knowledge of the Organization', 'entity_type': 'category', 'description': 'Knowledge of the Organization pertains to understanding the mission, culture, and operations of the organization a candidate is applying to.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,802 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Experience' and properties: {'entity_id': 'Experience', 'entity_type': 'category', 'description': 'Experience refers to the practical contact with and observation of facts or events, particularly relevant to job roles and interviews.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,808 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Education' and properties: {'entity_id': 'Education', 'entity_type': 'category', 'description': 'Education encompasses the formal learning and training that prepares individuals for a career or job.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,814 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Interview Environment' and properties: {'entity_id': 'Interview Environment', 'entity_type': 'category', 'description': 'Interview Environment refers to the context and atmosphere in which the interview takes place, affecting candidate performance.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,819 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Stress Questions' and properties: {'entity_id': 'Stress Questions', 'entity_type': 'category', 'description': 'Stress Questions are designed to evaluate how a candidate handles pressure and challenging situations during interviews.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,824 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Sample Interview Questions' and properties: {'entity_id': 'Sample Interview Questions', 'entity_type': 'event', 'description': "Sample Interview Questions refer to a structured set of inquiries used to evaluate a candidate's suitability for a position during a job interview.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,830 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Self Awareness Questions' and properties: {'entity_id': 'Self Awareness Questions', 'entity_type': 'category', 'description': "Self Awareness Questions focus on a candidate's understanding of their own strengths, weaknesses, and career motivations, often explored in interviews.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,836 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Weaknesses/Negatives Questions' and properties: {'entity_id': 'Weaknesses/Negatives Questions', 'entity_type': 'category', 'description': 'Weaknesses/Negatives Questions address a candidate’s handling of challenges, mistakes, and potential areas for improvement.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,842 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Skills/Abilities/Qualifications Questions' and properties: {'entity_id': 'Skills/Abilities/Qualifications Questions', 'entity_type': 'category', 'description': 'Skills/Abilities/Qualifications Questions assess the relevant skills and qualifications that candidates bring to a job position.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,847 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Knowledge of the Organization Questions' and properties: {'entity_id': 'Knowledge of the Organization Questions', 'entity_type': 'category', 'description': 'Knowledge of the Organization Questions evaluate how much a candidate understands about the organization they are applying to.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,858 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Values Questions' and properties: {'entity_id': 'Values Questions', 'entity_type': 'category', 'description': "Values Questions inquire about a candidate's core principles and what they prioritize in a work environment.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,864 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Experience Questions' and properties: {'entity_id': 'Experience Questions', 'entity_type': 'category', 'description': "Experience Questions focus on a candidate's prior work history, what they learned, and how it relates to the current position.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,869 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Goals/Objectives Questions' and properties: {'entity_id': 'Goals/Objectives Questions', 'entity_type': 'category', 'description': "Goals/Objectives Questions explore the candidate's aspirations and long-term vision in their career.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,875 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Education Questions' and properties: {'entity_id': 'Education Questions', 'entity_type': 'category', 'description': "Education Questions assess a candidate's academic background and how it has prepared them for the job.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,880 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Interests Questions' and properties: {'entity_id': 'Interests Questions', 'entity_type': 'category', 'description': "Interests Questions gather information about a candidate's hobbies and personal pursuits outside of work.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,886 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Brain Teasers' and properties: {'entity_id': 'Brain Teasers', 'entity_type': 'category', 'description': 'Brain Teasers are meant to challenge candidates’ problem-solving abilities and adaptability during interviews.', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,891 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Interview Environment Questions' and properties: {'entity_id': 'Interview Environment Questions', 'entity_type': 'category', 'description': "Interview Environment Questions seek to understand the candidate's preferred work environment and cultural fit.", 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,896 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Employer' and properties: {'entity_id': 'Employer', 'entity_type': 'organization', 'description': 'The Employer represents the company or organization conducting interviews and hiring new employees.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,902 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Employee' and properties: {'entity_id': 'Employee', 'entity_type': 'person', 'description': 'The Employee refers to a prospective new hire preparing for a job interview and considering the organization’s culture and mission.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,908 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Department' and properties: {'entity_id': 'Department', 'entity_type': 'category', 'description': 'The Department represents the specific section within the organization that the prospective employee may join, with its own mission and challenges.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,913 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Interview Process' and properties: {'entity_id': 'Interview Process', 'entity_type': 'event', 'description': 'The Interview Process outlines the steps a candidate goes through when applying for a job, including questions to ask and things to avoid.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,919 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Customer Service' and properties: {'entity_id': 'Customer Service', 'entity_type': 'category', 'description': 'Customer Service refers to the supportive role within an organization that focuses on meeting the needs and expectations of customers, integral to the corporate mission.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,924 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Research' and properties: {'entity_id': 'Research', 'entity_type': 'category', 'description': 'Research refers to the process of investigating and gathering information relevant to the mission of an organization, often expected from new employees during interviews.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,930 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Business Cards' and properties: {'entity_id': 'Business Cards', 'entity_type': 'category', 'description': 'Business Cards are professional cards exchanged during business meetings or interviews to facilitate future communication and networking opportunities.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,936 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Challenges' and properties: {'entity_id': 'Challenges', 'entity_type': 'category', 'description': 'Challenges refer to the difficulties or obstacles that a department may currently face, important to discuss during the interview to understand the role better.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,942 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Next Steps' and properties: {'entity_id': 'Next Steps', 'entity_type': 'category', 'description': 'Next Steps refer to the follow-up actions after an interview, such as what the prospective employee should expect regarding the hiring process.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,948 - lightrag - DEBUG - [falkordb_impl.py:703] Upserted node with entity_id 'Review Process' and properties: {'entity_id': 'Review Process', 'entity_type': 'event', 'description': 'The Review Process involves evaluating the interview performance and determining whether the candidate will proceed in the hiring process.', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,970 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Interview Questions' to 'Organization'with properties: {'weight': 10.0, 'description': 'Interview Questions aim to assess candidates for potential roles within an organization, focusing on fit and qualifications.', 'keywords': 'candidate assessment,organizational fit', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:36,989 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Career Advancement' to 'Organization'with properties: {'weight': 8.0, 'description': 'Career Advancement discussions help candidates understand potential growth within the organization they are applying to.', 'keywords': 'growth opportunities,organizational culture', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:37,009 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Interview Questions' to 'Self Awareness'with properties: {'weight': 9.0, 'description': 'Self Awareness plays a crucial role in interviews, as candidates must articulate their strengths and weaknesses.', 'keywords': 'interview performance,personal insight', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792876}
+2025-06-13 00:34:37,029 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Organization' to 'Values'with properties: {'weight': 7.0, 'description': 'Values alignment is important for candidates to assess whether they fit within the organizational culture.', 'keywords': 'cultural fit,employee values', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,049 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Interview Questions' to 'Knowledge of the Organization'with properties: {'weight': 8.0, 'description': 'Knowledge of the Organization is vital for candidates to demonstrate their interest and suitability in an interview.', 'keywords': 'organizational interest,preparedness', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,070 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Experience' to 'Interview Questions'with properties: {'weight': 10.0, 'description': "Experience is often a focal point of interview questions, as it provides insight into a candidate's ability to perform tasks.", 'keywords': 'practical knowledge,skills assessment', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,085 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Education' to 'Interview Questions'with properties: {'weight': 9.0, 'description': "Education is referenced in interview questions to evaluate how a candidate's background supports their qualifications.", 'keywords': 'academic background,job fit', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,103 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Interview Questions' to 'Stress Questions'with properties: {'weight': 8.0, 'description': "Stress Questions evaluate a candidate's ability to manage pressure and their responses during interviews.", 'keywords': 'character assessment,pressure handling', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,120 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Sample Interview Questions' to 'Self Awareness Questions'with properties: {'weight': 9.0, 'description': "Self Awareness Questions are part of Sample Interview Questions designed to assess a candidate's self-perception and motivations.", 'keywords': 'interview structure,self-assessment', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,135 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Sample Interview Questions' to 'Weaknesses/Negatives Questions'with properties: {'weight': 8.0, 'description': 'Weaknesses/Negatives Questions are included in Sample Interview Questions to evaluate how candidates handle challenges and their willingness to improve.', 'keywords': 'candidate evaluation,self-improvement', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,153 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Sample Interview Questions' to 'Skills/Abilities/Qualifications Questions'with properties: {'weight': 10.0, 'description': 'Skills/Abilities/Qualifications Questions also form a part of Sample Interview Questions to assess candidate suitability for the role.', 'keywords': 'job fit,skills assessment', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,167 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Knowledge of the Organization Questions' to 'Sample Interview Questions'with properties: {'weight': 8.0, 'description': 'Knowledge of the Organization Questions are included to evaluate how well candidates understand the organizations they want to join.', 'keywords': 'interview preparation,organizational understanding', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,181 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Sample Interview Questions' to 'Values Questions'with properties: {'weight': 7.0, 'description': "Values Questions help assess the alignment between candidates' values and those of the organization during interviews.", 'keywords': 'cultural fit,values alignment', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,195 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Experience Questions' to 'Sample Interview Questions'with properties: {'weight': 9.0, 'description': "Experience Questions are designed to evaluate the relevance and applicability of a candidate's previous work history.", 'keywords': 'candidate relevance,work history', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,210 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Goals/Objectives Questions' to 'Sample Interview Questions'with properties: {'weight': 8.0, 'description': 'Goals/Objectives Questions provide insight into where candidates see themselves in the future and how that fits with the organization.', 'keywords': 'alignment,career aspirations', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,223 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Education Questions' to 'Sample Interview Questions'with properties: {'weight': 8.0, 'description': "Education Questions assess how a candidate's educational background prepares them for the position they are applying for.", 'keywords': 'academic qualifications,job fit', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,239 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Interests Questions' to 'Sample Interview Questions'with properties: {'weight': 7.0, 'description': 'Interests Questions can help interviewers gauge the personality and cultural fit of a candidate within the organization.', 'keywords': 'cultural fit,personality assessment', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,254 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Sample Interview Questions' to 'Stress Questions'with properties: {'weight': 8.0, 'description': 'Stress Questions are part of Sample Interview Questions to understand how candidates cope with pressure during challenging situations.', 'keywords': 'candidate resilience,pressure handling', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,269 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Brain Teasers' to 'Sample Interview Questions'with properties: {'weight': 8.0, 'description': "Brain Teasers are included in Sample Interview Questions to evaluate a candidate's critical thinking and problem-solving abilities.", 'keywords': 'adaptability,critical thinking', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,283 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Interview Environment Questions' to 'Sample Interview Questions'with properties: {'weight': 7.0, 'description': 'Interview Environment Questions are aimed at understanding the preferred working conditions of candidates as part of Sample Interview Questions.', 'keywords': 'candidate preferences,work environment', 'source_id': 'chunk-2a9d89cb9fc9a3524eecf7dd322d78c8', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,303 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Employee' to 'Employer'with properties: {'weight': 8.0, 'description': 'The Employee interacts with the Employer during the Interview Process to assess if the organization is a good fit for them.', 'keywords': 'job search,organizational fit', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,318 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Department' to 'Employee'with properties: {'weight': 7.0, 'description': "The Employee will inquire about the Department's challenges and support of corporate mission during the interview.", 'keywords': 'department inquiry,job readiness', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,332 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Employer' to 'Interview Process'with properties: {'weight': 9.0, 'description': 'The Employer sets the rules and expectations for the Interview Process when evaluating prospective candidates.', 'keywords': 'hiring process,interview dynamics', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,346 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Department' to 'Interview Process'with properties: {'weight': 6.0, 'description': 'The Department has specific challenges and missions that relate to the context of the Interview Process.', 'keywords': 'interview context,organizational challenges', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,361 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Customer Service' to 'Employee'with properties: {'weight': 7.0, 'description': 'The Employee must understand how their role supports the Customer Service mission of the organization during the interview.', 'keywords': 'customer focus,role understanding', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,375 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Employee' to 'Research'with properties: {'weight': 8.0, 'description': "The Employee is expected to conduct Research about the organization's mission prior to the interview, showcasing preparedness.", 'keywords': 'organizational knowledge,preparation', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,390 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Challenges' to 'Employee'with properties: {'weight': 8.0, 'description': 'The Employee inquiries about the Challenges faced by the department during the interview to assess fit and expectations.', 'keywords': 'department challenges,job fit', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,405 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Employee' to 'Next Steps'with properties: {'weight': 9.0, 'description': 'The Employee is advised to discuss Next Steps in the hiring process as part of the closing of the interview.', 'keywords': 'follow-up,interview closure', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,419 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Employer' to 'Review Process'with properties: {'weight': 8.0, 'description': "The Employer conducts a Review Process to evaluate the Employee's fit for the position based on the interview performance.", 'keywords': 'evaluation,hiring decision', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,433 - lightrag - DEBUG - [falkordb_impl.py:748] Upserted edge from 'Business Cards' to 'Employer'with properties: {'weight': 7.0, 'description': 'The Employer encourages the exchange of Business Cards to facilitate better communication post-interview.', 'keywords': 'networking,professional exchange', 'source_id': 'chunk-5ce14b0a607bc050121fbc6d9398eb29', 'file_path': 'unknown_source', 'created_at': 1749792877}
+2025-06-13 00:34:37,433 - lightrag - INFO - [operate.py:596] Updating 32 entities  1/1: unknown_source
+2025-06-13 00:34:37,433 - lightrag - DEBUG - [postgres_impl.py:684] Inserting 32 to entities
+2025-06-13 00:34:39,190 - lightrag - INFO - [operate.py:617] Updating 30 relations 1/1: unknown_source
+2025-06-13 00:34:39,190 - lightrag - DEBUG - [postgres_impl.py:684] Inserting 30 to relationships
+2025-06-13 00:34:40,820 - lightrag - DEBUG - [postgres_impl.py:1034] Inserting 1 to doc_status
+2025-06-13 00:34:40,827 - lightrag - INFO - [lightrag.py:1222] In memory DB persist to disk
+2025-06-13 00:34:40,827 - lightrag - INFO - [lightrag.py:1092] Completed processing file 1/1: unknown_source
+2025-06-13 00:34:40,827 - lightrag - INFO - [lightrag.py:1176] Document processing pipeline completed
+2025-06-13 00:34:40,831 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:local type:query)
+2025-06-13 00:34:40,833 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:local type:keywords)
+2025-06-13 00:34:40,835 - lightrag - DEBUG - [operate.py:1083] [kg_query]Prompt Tokens: 422
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [utils.py:91] Query: ---Role---
+
+You are a helpful assistant tasked with identifying both high-level and low-level...
+2025-06-13 00:34:40,900 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:43,040 - lightrag - DEBUG - [openai.py:306] Response content len: 126
+2025-06-13 00:34:43,041 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrLlRxQo9YwfbbfS9bFT2Au8Wsts', choices=[Choice(finish_reason=...
+2025-06-13 00:34:43,048 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: 764f8e933e0ad1b8cf032ba5c71e3110
+2025-06-13 00:34:43,048 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:43,059 - lightrag - DEBUG - [operate.py:894] High-level keywords: ['Document theme', 'Conciseness']
+2025-06-13 00:34:43,060 - lightrag - DEBUG - [operate.py:895] Low-level  keywords: ['Main idea', 'Key points', 'Summary']
+2025-06-13 00:34:43,060 - lightrag - INFO - [operate.py:1224] Process 396568 building query context...
+2025-06-13 00:34:43,060 - lightrag - INFO - [operate.py:1348] Query nodes: Main idea, Key points, Summary, top_k: 60, cosine: 0.2
+2025-06-13 00:34:43,718 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Weaknesses/Negatives Questions': 1, 'Next Steps': 1, 'Values': 1, 'Experience Questions': 1, 'Goals/Objectives Questions': 1, 'Knowledge of the Organization Questions': 1, 'Self Awareness Questions': 1, 'Values Questions': 1, 'Sample Interview Questions': 12, 'Interview Process': 2, 'Knowledge of the Organization': 1, 'Education Questions': 1, 'Skills/Abilities/Qualifications Questions': 1, 'Stress Questions': 2}
+2025-06-13 00:34:43,743 - lightrag - DEBUG - [operate.py:1569] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:34:43,767 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Self Awareness Questions': 1, 'Stress Questions': 2, 'Interview Environment Questions': 1, 'Education Questions': 1, 'Interview Process': 2, 'Employer': 4, 'Department': 2, 'Skills/Abilities/Qualifications Questions': 1, 'Knowledge of the Organization': 1, 'Experience Questions': 1, 'Organization': 3, 'Goals/Objectives Questions': 1, 'Employee': 6, 'Weaknesses/Negatives Questions': 1, 'Sample Interview Questions': 12, 'Interests Questions': 1, 'Brain Teasers': 1, 'Next Steps': 1, 'Interview Questions': 6, 'Knowledge of the Organization Questions': 1, 'Values': 1, 'Values Questions': 1}
+2025-06-13 00:34:43,768 - lightrag - DEBUG - [operate.py:1637] Truncate relations from 18 to 18 (max tokens:4000)
+2025-06-13 00:34:43,769 - lightrag - DEBUG - [operate.py:1406] Truncate entities from 14 to 14 (max tokens:4000)
+2025-06-13 00:34:43,769 - lightrag - INFO - [operate.py:1410] Local query uses 14 entites, 18 relations, 2 chunks
+2025-06-13 00:34:43,778 - lightrag - DEBUG - [operate.py:960] [kg_query]Prompt Tokens: 4804
+2025-06-13 00:34:43,842 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:34:43,842 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:34:43,842 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {'stream': False}
+2025-06-13 00:34:43,842 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:34:43,842 - lightrag - DEBUG - [utils.py:91] System prompt: ---Role---
+
+You are a helpful assistant responding to user query about Knowledge Grap...
+2025-06-13 00:34:43,843 - lightrag - DEBUG - [utils.py:91] Query: What is the main concise theme o f the docuent?
+2025-06-13 00:34:43,843 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:50,121 - lightrag - DEBUG - [openai.py:306] Response content len: 1069
+2025-06-13 00:34:50,122 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrLoCp8jYqp5CpTb4NiaBPqNx56z', choices=[Choice(finish_reason=...
+2025-06-13 00:34:50,127 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving local: b439f9e89d82930a7bfc45d3ae63c99e
+2025-06-13 00:34:50,128 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:50,143 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:global type:query)
+2025-06-13 00:34:50,148 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:global type:keywords)
+2025-06-13 00:34:50,150 - lightrag - DEBUG - [operate.py:1083] [kg_query]Prompt Tokens: 422
+2025-06-13 00:34:50,219 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:34:50,219 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:34:50,219 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:34:50,219 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:34:50,220 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:34:50,220 - lightrag - DEBUG - [utils.py:91] Query: ---Role---
+
+You are a helpful assistant tasked with identifying both high-level and low-level...
+2025-06-13 00:34:50,220 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:53,079 - lightrag - DEBUG - [openai.py:306] Response content len: 160
+2025-06-13 00:34:53,080 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrLufod5igJDnLbmXGAFGkRRhHzS', choices=[Choice(finish_reason=...
+2025-06-13 00:34:53,089 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 1dcc093359240dd981c5280e78c19e7c
+2025-06-13 00:34:53,090 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:53,155 - lightrag - DEBUG - [operate.py:894] High-level keywords: ['Document theme', 'Conciseness', 'Main idea']
+2025-06-13 00:34:53,163 - lightrag - DEBUG - [operate.py:895] Low-level  keywords: ['Content', 'Summary', 'Key points', 'Message', 'Analysis']
+2025-06-13 00:34:53,163 - lightrag - INFO - [operate.py:1224] Process 396568 building query context...
+2025-06-13 00:34:53,164 - lightrag - INFO - [operate.py:1651] Query edges: Document theme, Conciseness, Main idea, top_k: 60, cosine: 0.2
+2025-06-13 00:34:53,730 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Experience': 1, 'Self Awareness Questions': 1, 'Interview Environment Questions': 1, 'Interview Process': 2, 'Department': 2, 'Employer': 4, 'Knowledge of the Organization': 1, 'Self Awareness': 1, 'Experience Questions': 1, 'Customer Service': 1, 'Employee': 6, 'Challenges': 1, 'Weaknesses/Negatives Questions': 1, 'Sample Interview Questions': 12, 'Research': 1, 'Brain Teasers': 1, 'Business Cards': 1, 'Next Steps': 1, 'Interview Questions': 6}
+2025-06-13 00:34:53,758 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Sample Interview Questions': 12, 'Self Awareness Questions': 1, 'Experience Questions': 1, 'Brain Teasers': 1, 'Weaknesses/Negatives Questions': 1, 'Interview Environment Questions': 1, 'Department': 2, 'Employee': 6, 'Experience': 1, 'Interview Questions': 6, 'Next Steps': 1, 'Self Awareness': 1, 'Research': 1, 'Knowledge of the Organization': 1, 'Challenges': 1, 'Customer Service': 1, 'Business Cards': 1, 'Employer': 4, 'Interview Process': 2}
+2025-06-13 00:34:53,767 - lightrag - DEBUG - [operate.py:1823] Truncate entities from 19 to 19 (max tokens:4000)
+2025-06-13 00:34:54,359 - lightrag - DEBUG - [operate.py:1884] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:34:54,359 - lightrag - INFO - [operate.py:1719] Global query uses 19 entites, 15 relations, 2 chunks
+2025-06-13 00:34:54,369 - lightrag - DEBUG - [operate.py:960] [kg_query]Prompt Tokens: 4886
+2025-06-13 00:34:54,441 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:34:54,441 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:34:54,442 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {'stream': False}
+2025-06-13 00:34:54,442 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:34:54,442 - lightrag - DEBUG - [utils.py:91] System prompt: ---Role---
+
+You are a helpful assistant responding to user query about Knowledge Grap...
+2025-06-13 00:34:54,442 - lightrag - DEBUG - [utils.py:91] Query: What is the main concise theme o f the docuent?
+2025-06-13 00:34:54,442 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:58,508 - lightrag - DEBUG - [openai.py:306] Response content len: 1066
+2025-06-13 00:34:58,508 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrLyJA51MfWesLSEDrJTJxmLiWDU', choices=[Choice(finish_reason=...
+2025-06-13 00:34:58,518 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving global: 9b06d1ced3047db7c7b50091b9364676
+2025-06-13 00:34:58,519 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:58,546 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:hybrid type:query)
+2025-06-13 00:34:58,552 - lightrag - DEBUG - [utils.py:979] Non-embedding cached missed(mode:hybrid type:keywords)
+2025-06-13 00:34:58,554 - lightrag - DEBUG - [operate.py:1083] [kg_query]Prompt Tokens: 422
+2025-06-13 00:34:58,626 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:34:58,627 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:34:58,627 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {}
+2025-06-13 00:34:58,627 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:34:58,627 - lightrag - DEBUG - [utils.py:91] System prompt: None
+2025-06-13 00:34:58,627 - lightrag - DEBUG - [utils.py:91] Query: ---Role---
+
+You are a helpful assistant tasked with identifying both high-level and low-level...
+2025-06-13 00:34:58,627 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:34:59,634 - lightrag - DEBUG - [openai.py:306] Response content len: 112
+2025-06-13 00:34:59,635 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrM2CJDNoea2lKJjBEz9ArgQPBZA', choices=[Choice(finish_reason=...
+2025-06-13 00:34:59,642 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: df5f1175a42fd2654b464d47a682bf15
+2025-06-13 00:34:59,642 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:34:59,653 - lightrag - DEBUG - [operate.py:894] High-level keywords: ['Document theme', 'Conciseness']
+2025-06-13 00:34:59,654 - lightrag - DEBUG - [operate.py:895] Low-level  keywords: ['Main idea', 'Summary']
+2025-06-13 00:34:59,654 - lightrag - INFO - [operate.py:1224] Process 396568 building query context...
+2025-06-13 00:34:59,655 - lightrag - INFO - [operate.py:1348] Query nodes: Main idea, Summary, top_k: 60, cosine: 0.2
+2025-06-13 00:35:00,153 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Values': 1, 'Experience Questions': 1, 'Goals/Objectives Questions': 1, 'Department': 2, 'Weaknesses/Negatives Questions': 1}
+2025-06-13 00:35:00,179 - lightrag - DEBUG - [operate.py:1569] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:35:00,190 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Employee': 6, 'Weaknesses/Negatives Questions': 1, 'Sample Interview Questions': 12, 'Interview Process': 2, 'Department': 2, 'Experience Questions': 1, 'Organization': 3, 'Values': 1, 'Goals/Objectives Questions': 1}
+2025-06-13 00:35:00,191 - lightrag - DEBUG - [operate.py:1637] Truncate relations from 6 to 6 (max tokens:4000)
+2025-06-13 00:35:00,191 - lightrag - DEBUG - [operate.py:1406] Truncate entities from 5 to 5 (max tokens:4000)
+2025-06-13 00:35:00,191 - lightrag - INFO - [operate.py:1410] Local query uses 5 entites, 6 relations, 2 chunks
+2025-06-13 00:35:00,191 - lightrag - INFO - [operate.py:1651] Query edges: Document theme, Conciseness, top_k: 60, cosine: 0.2
+2025-06-13 00:35:00,605 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Employee': 6, 'Sample Interview Questions': 12, 'Research': 1, 'Interview Environment Questions': 1, 'Interview Process': 2, 'Department': 2, 'Employer': 4, 'Next Steps': 1, 'Business Cards': 1, 'Self Awareness': 1, 'Interview Questions': 6, 'Customer Service': 1}
+2025-06-13 00:35:00,616 - lightrag - DEBUG - [falkordb_impl.py:361] FalkorDB batch node degree query returned: {'Interview Environment Questions': 1, 'Sample Interview Questions': 12, 'Employee': 6, 'Next Steps': 1, 'Interview Questions': 6, 'Self Awareness': 1, 'Research': 1, 'Customer Service': 1, 'Business Cards': 1, 'Employer': 4, 'Department': 2, 'Interview Process': 2}
+2025-06-13 00:35:00,622 - lightrag - DEBUG - [operate.py:1884] Truncate chunks from 2 to 2 (max tokens:4000)
+2025-06-13 00:35:00,623 - lightrag - DEBUG - [operate.py:1823] Truncate entities from 12 to 12 (max tokens:4000)
+2025-06-13 00:35:00,624 - lightrag - INFO - [operate.py:1719] Global query uses 12 entites, 7 relations, 2 chunks
+2025-06-13 00:35:00,632 - lightrag - DEBUG - [operate.py:960] [kg_query]Prompt Tokens: 4422
+2025-06-13 00:35:00,693 - lightrag - DEBUG - [openai.py:164] ===== Entering func of LLM =====
+2025-06-13 00:35:00,693 - lightrag - DEBUG - [openai.py:165] Model: gpt-4o-mini   Base URL: None
+2025-06-13 00:35:00,694 - lightrag - DEBUG - [openai.py:166] Additional kwargs: {'stream': False}
+2025-06-13 00:35:00,694 - lightrag - DEBUG - [openai.py:167] Num of history messages: 0
+2025-06-13 00:35:00,694 - lightrag - DEBUG - [utils.py:91] System prompt: ---Role---
+
+You are a helpful assistant responding to user query about Knowledge Grap...
+2025-06-13 00:35:00,694 - lightrag - DEBUG - [utils.py:91] Query: What is the main concise theme o f the docuent?
+2025-06-13 00:35:00,694 - lightrag - DEBUG - [openai.py:170] ===== Sending Query to LLM =====
+2025-06-13 00:35:05,573 - lightrag - DEBUG - [openai.py:306] Response content len: 1137
+2025-06-13 00:35:05,574 - lightrag - DEBUG - [utils.py:91] Response: ChatCompletion(id='chatcmpl-BhrM4RUlomCYrq6ghgKpM7VPaG68z', choices=[Choice(finish_reason=...
+2025-06-13 00:35:05,583 - lightrag - INFO - [utils.py:1044]  == LLM cache == saving hybrid: eb72892433279ba0709a56b9f1dcab85
+2025-06-13 00:35:05,584 - lightrag - DEBUG - [postgres_impl.py:475] Inserting 1 to llm_response_cache
+2025-06-13 00:35:05,600 - lightrag - DEBUG - [lightrag.py:520] Finalized Storages
+2025-06-13 00:35:05,602 - lightrag - INFO - [lightrag.py:464] Storage Finalization completed!
+2025-06-13 00:35:05,602 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,603 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,604 - lightrag - DEBUG - [utils.py:423] limit_async: Health check task exiting
+2025-06-13 00:35:05,604 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,605 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,605 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,606 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,606 - lightrag - DEBUG - [utils.py:423] limit_async: Health check task exiting
+2025-06-13 00:35:05,607 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,607 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,608 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,608 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,609 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,610 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,610 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,610 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,611 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,611 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,611 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,612 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,612 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:05,612 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:46,539 - lightrag - DEBUG - [lightrag.py:347] LightRAG init with param:
+  working_dir = ./testing,
+  kv_storage = PGKVStorage,
+  vector_storage = PGVectorStorage,
+  graph_storage = FalkorDBStorage,
+  doc_status_storage = PGDocStatusStorage,
+  log_level = None,
+  log_file_path = None,
+  entity_extract_max_gleaning = 1,
+  summary_to_max_tokens = 500,
+  force_llm_summary_on_merge = 6,
+  chunk_token_size = 1200,
+  chunk_overlap_token_size = 100,
+  tokenizer = <lightrag.utils.TiktokenTokenizer object at 0x7f04ccf10250>,
+  tiktoken_model_name = gpt-4o-mini,
+  chunking_func = <function chunking_by_token_size at 0x7f04cdfbae80>,
+  embedding_func = {'embedding_dim': 1536, 'max_token_size': 8192, 'func': <function openai_embed at 0x7f04cd0caca0>},
+  embedding_batch_num = 32,
+  embedding_func_max_async = 16,
+  embedding_cache_config = {'enabled': False, 'similarity_threshold': 0.95, 'use_llm_check': False},
+  llm_model_func = <function gpt_4o_mini_complete at 0x7f04cd0ca660>,
+  llm_model_name = gpt-4o-mini,
+  llm_model_max_token_size = 32768,
+  llm_model_max_async = 4,
+  llm_model_kwargs = {},
+  vector_db_storage_cls_kwargs = {'cosine_better_than_threshold': 0.2},
+  namespace_prefix = ,
+  enable_llm_cache = True,
+  enable_llm_cache_for_entity_extract = True,
+  max_parallel_insert = 2,
+  addon_params = {'language': 'English'},
+  auto_manage_storages_states = True,
+  convert_response_to_json_func = <function convert_response_to_json at 0x7f04cecbae80>,
+  cosine_better_than_threshold = 0.2,
+  _storages_status = StoragesStatus.NOT_CREATED
+
+2025-06-13 00:35:46,863 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:35:46,863 - lightrag - INFO - [falkordb_impl.py:89] Connected to FalkorDB graph chunk-entity-relation at localhost:6379
+2025-06-13 00:35:46,915 - lightrag - INFO - [postgres_impl.py:77] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-13 00:35:46,989 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-13 00:35:47,001 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-13 00:35:47,009 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-13 00:35:47,017 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-13 00:35:47,026 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-13 00:35:47,034 - lightrag - INFO - [postgres_impl.py:139] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-13 00:35:47,034 - lightrag - DEBUG - [lightrag.py:497] Initialized Storages
+2025-06-13 00:35:47,035 - lightrag - INFO - [utils.py:474] limit_async: 16 new workers initialized
+2025-06-13 00:35:47,468 - lightrag - DEBUG - [lightrag.py:497] Initialized Storages
+2025-06-13 00:35:47,468 - lightrag - INFO - [lightrag.py:464] Storage Initialization completed!
+2025-06-13 00:35:47,914 - lightrag - INFO - [lightrag.py:804] No new unique documents were found.
+2025-06-13 00:35:48,029 - lightrag - INFO - [lightrag.py:847] No documents to process
+2025-06-13 00:35:48,034 - lightrag - DEBUG - [utils.py:976] Non-embedding cached hit(mode:local type:query)
+2025-06-13 00:35:48,037 - lightrag - DEBUG - [utils.py:976] Non-embedding cached hit(mode:global type:query)
+2025-06-13 00:35:48,040 - lightrag - DEBUG - [utils.py:976] Non-embedding cached hit(mode:hybrid type:query)
+2025-06-13 00:35:48,040 - lightrag - DEBUG - [lightrag.py:520] Finalized Storages
+2025-06-13 00:35:48,041 - lightrag - INFO - [lightrag.py:464] Storage Finalization completed!
+2025-06-13 00:35:48,042 - lightrag - DEBUG - [utils.py:423] limit_async: Health check task exiting
+2025-06-13 00:35:48,042 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,042 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,043 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,043 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,043 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,043 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,044 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,044 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,044 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,044 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,045 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,045 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,045 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,045 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,045 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting
+2025-06-13 00:35:48,046 - lightrag - DEBUG - [utils.py:390] limit_async: Worker exiting

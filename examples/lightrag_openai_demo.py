@@ -7,7 +7,6 @@ from lightrag.llm.openai import gpt_4o_mini_complete, openai_embed
 from lightrag.kg.shared_storage import initialize_pipeline_status
 from lightrag.utils import logger, set_verbose_debug
 
-WORKING_DIR = "./dickens"
 
 
 def configure_logging():
@@ -21,13 +20,13 @@ def configure_logging():
 
     # Get log directory path from environment variable or use current directory
     log_dir = os.getenv("LOG_DIR", os.getcwd())
-    log_file_path = os.path.abspath(os.path.join(log_dir, "lightrag_demo.log"))
+    log_file_path = os.path.abspath(os.path.join(log_dir, "coreflow_1.log"))
 
     print(f"\nLightRAG demo log file: {log_file_path}\n")
     os.makedirs(os.path.dirname(log_dir), exist_ok=True)
 
     # Get log file max size and backup count from environment variables
-    log_max_bytes = int(os.getenv("LOG_MAX_BYTES", 10485760))  # Default 10MB
+    log_max_bytes = int(os.getenv("LOG_MAX_BYTES", 5242880))  # Default 5MB
     log_backup_count = int(os.getenv("LOG_BACKUP_COUNT", 5))  # Default 5 backups
 
     logging.config.dictConfig(
@@ -36,10 +35,10 @@ def configure_logging():
             "disable_existing_loggers": False,
             "formatters": {
                 "default": {
-                    "format": "%(levelname)s: %(message)s",
+                    "format": "%(levelname)s: %(filename)s:%(lineno)d: - %(message)s",
                 },
                 "detailed": {
-                    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+                    "format": "%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] %(message)s",
                 },
             },
             "handlers": {
@@ -68,10 +67,12 @@ def configure_logging():
     )
 
     # Set the logger level to INFO
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     # Enable verbose debug if needed
     set_verbose_debug(os.getenv("VERBOSE_DEBUG", "false").lower() == "true")
 
+
+WORKING_DIR = "./testing"
 
 if not os.path.exists(WORKING_DIR):
     os.mkdir(WORKING_DIR)
@@ -91,14 +92,6 @@ async def initialize_rag():
 
 
 async def main():
-    # Check if OPENAI_API_KEY environment variable exists
-    if not os.getenv("OPENAI_API_KEY"):
-        print(
-            "Error: OPENAI_API_KEY environment variable is not set. Please set this variable before running the program."
-        )
-        print("You can set the environment variable by running:")
-        print("  export OPENAI_API_KEY='your-openai-api-key'")
-        return  # Exit the async function
 
     try:
         # Clear old data files
@@ -125,24 +118,13 @@ async def main():
         test_text = ["This is a test string for embedding."]
         embedding = await rag.embedding_func(test_text)
         embedding_dim = embedding.shape[1]
-        print("\n=======================")
         print("Test embedding function")
-        print("========================")
         print(f"Test dict: {test_text}")
         print(f"Detected embedding dimension: {embedding_dim}\n\n")
 
-        with open("./book.txt", "r", encoding="utf-8") as f:
+        with open("./data/sample.txt", "r", encoding="utf-8") as f:
             await rag.ainsert(f.read())
 
-        # Perform naive search
-        print("\n=====================")
-        print("Query mode: naive")
-        print("=====================")
-        print(
-            await rag.aquery(
-                "What are the top themes in this story?", param=QueryParam(mode="naive")
-            )
-        )
 
         # Perform local search
         print("\n=====================")
@@ -150,7 +132,7 @@ async def main():
         print("=====================")
         print(
             await rag.aquery(
-                "What are the top themes in this story?", param=QueryParam(mode="local")
+                "What is the main concise theme o f the docuent?", param=QueryParam(mode="local")
             )
         )
 
@@ -160,7 +142,7 @@ async def main():
         print("=====================")
         print(
             await rag.aquery(
-                "What are the top themes in this story?",
+                "What is the main concise theme o f the docuent?",
                 param=QueryParam(mode="global"),
             )
         )
@@ -171,7 +153,7 @@ async def main():
         print("=====================")
         print(
             await rag.aquery(
-                "What are the top themes in this story?",
+                "What is the main concise theme o f the docuent?",
                 param=QueryParam(mode="hybrid"),
             )
         )

@@ -7,11 +7,6 @@ if sys.version_info < (3, 9):
     from typing import AsyncIterator
 else:
     from collections.abc import AsyncIterator
-import pipmaster as pm  # Pipmaster for dynamic library install
-
-# install specific modules
-if not pm.is_installed("openai"):
-    pm.install("openai")
 
 from openai import (
     AsyncOpenAI,
@@ -32,7 +27,6 @@ from lightrag.utils import (
     logger,
 )
 from lightrag.types import GPTKeywordExtractionFormat
-from lightrag.api import __api_version__
 
 import numpy as np
 from typing import Any, Union
@@ -72,7 +66,6 @@ def create_openai_async_client(
         api_key = os.environ["OPENAI_API_KEY"]
 
     default_headers = {
-        "User-Agent": f"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_8) LightRAG/{__api_version__}",
         "Content-Type": "application/json",
     }
 
@@ -383,27 +376,6 @@ async def gpt_4o_mini_complete(
     )
 
 
-async def nvidia_openai_complete(
-    prompt,
-    system_prompt=None,
-    history_messages=None,
-    keyword_extraction=False,
-    **kwargs,
-) -> str:
-    if history_messages is None:
-        history_messages = []
-    keyword_extraction = kwargs.pop("keyword_extraction", None)
-    result = await openai_complete_if_cache(
-        "nvidia/llama-3.1-nemotron-70b-instruct",  # context length 128k
-        prompt,
-        system_prompt=system_prompt,
-        history_messages=history_messages,
-        base_url="https://integrate.api.nvidia.com/v1",
-        **kwargs,
-    )
-    if keyword_extraction:  # TODO: use JSON API
-        return locate_json_string_body_from_string(result)
-    return result
 
 
 @wrap_embedding_func_with_attrs(embedding_dim=1536, max_token_size=8192)

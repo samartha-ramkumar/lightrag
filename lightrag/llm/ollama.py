@@ -24,7 +24,6 @@ from lightrag.exceptions import (
     RateLimitError,
     APITimeoutError,
 )
-from lightrag.api import __api_version__
 
 import numpy as np
 from typing import Union
@@ -55,7 +54,6 @@ async def _ollama_model_if_cache(
     api_key = kwargs.pop("api_key", None)
     headers = {
         "Content-Type": "application/json",
-        "User-Agent": f"LightRAG/{__api_version__}",
     }
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
@@ -140,7 +138,6 @@ async def ollama_embed(texts: list[str], embed_model, **kwargs) -> np.ndarray:
     api_key = kwargs.pop("api_key", None)
     headers = {
         "Content-Type": "application/json",
-        "User-Agent": f"LightRAG/{__api_version__}",
     }
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"

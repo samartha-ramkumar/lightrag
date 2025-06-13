@@ -101,16 +101,16 @@ class LightRAG:
     # Storage
     # ---
 
-    kv_storage: str = field(default="JsonKVStorage")
+    kv_storage: str = field(default=get_env_value("LIGHTRAG_KV_STORAGE", "JsonKVStorage"))
     """Storage backend for key-value data."""
 
-    vector_storage: str = field(default="NanoVectorDBStorage")
+    vector_storage: str = field(default=get_env_value("LIGHTRAG_VECTOR_STORAGE", "NanoVectorDBStorage"))
     """Storage backend for vector embeddings."""
 
-    graph_storage: str = field(default="NetworkXStorage")
+    graph_storage: str = field(default=get_env_value("LIGHTRAG_GRAPH_STORAGE", "NetworkXStorage"))
     """Storage backend for knowledge graphs."""
 
-    doc_status_storage: str = field(default="JsonDocStatusStorage")
+    doc_status_storage: str = field(default=get_env_value("LIGHTRAG_DOC_STATUS_STORAGE", "JsonDocStatusStorage"))
     """Storage type for tracking document processing statuses."""
 
     # Logging (Deprecated, use setup_logger in utils.py instead)
