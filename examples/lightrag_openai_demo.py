@@ -122,7 +122,7 @@ async def main():
         print(f"Test dict: {test_text}")
         print(f"Detected embedding dimension: {embedding_dim}\n\n")
 
-        with open("./data/sample.txt", "r", encoding="utf-8") as f:
+        with open("./data/test.txt", "r", encoding="utf-8") as f:
             await rag.ainsert(f.read())
 
 

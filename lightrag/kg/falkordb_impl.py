@@ -18,6 +18,12 @@ from ..utils import logger
 from ..base import BaseGraphStorage
 from ..types import KnowledgeGraph, KnowledgeGraphNode, KnowledgeGraphEdge
 
+import pipmaster as pm
+
+if not pm.is_installed("networkx"):
+    pm.install("networkx")
+
+import networkx as nx
 
 
 import asyncio
@@ -52,6 +58,33 @@ class FalkorDBStorage(BaseGraphStorage):
             embedding_func=embedding_func,
         )
         self._driver = None
+        self._graphml_xml_file = os.path.join(
+            self.global_config["working_dir"], f"graph_{self.namespace}_falkordb_export.graphml"
+        )
+
+    @staticmethod
+    def _knowledge_graph_to_nx(kg: KnowledgeGraph) -> nx.Graph:
+        """Converts a KnowledgeGraph object to a networkx.Graph object."""
+        nx_graph = nx.Graph()
+        for node in kg.nodes:
+            # Ensure properties are suitable for networkx attributes
+            props = {k: str(v) if v is not None else "" for k, v in node.properties.items()}
+            nx_graph.add_node(node.id, **props)
+        for edge in kg.edges:
+            props = {k: str(v) if v is not None else "" for k, v in edge.properties.items()}
+            nx_graph.add_edge(edge.source, edge.target, **props)
+        return nx_graph
+
+    @staticmethod
+    def write_nx_graph(graph: nx.Graph, file_name: str):
+        """Writes a networkx.Graph to a .graphml file."""
+        logger.info(
+            f"Writing graph to {file_name} with {graph.number_of_nodes()} nodes, {graph.number_of_edges()} edges"
+        )
+        try:
+            nx.write_graphml(graph, file_name)
+        except Exception as e:
+            logger.error(f"Error writing graph to {file_name}: {e}")
 
     async def initialize(self):
         REDIS_HOST = os.environ.get("REDIS_HOST", config.get("falkordb", "host", fallback="localhost"))
@@ -129,7 +162,23 @@ class FalkorDBStorage(BaseGraphStorage):
 
     async def index_done_callback(self) -> None:
         # FalkorDB handles persistence automatically
-        pass
+        # Additionally, save a snapshot to GraphML
+        logger.info(f"FalkorDB index_done_callback: Exporting graph {self.namespace} to GraphML.")
+        try:
+            # Fetch the entire graph
+            # Using MAX_GRAPH_NODES to be consistent with get_knowledge_graph behavior
+            kg_snapshot = await self.get_knowledge_graph(node_label="*", max_nodes=MAX_GRAPH_NODES)
+            
+            if kg_snapshot and (kg_snapshot.nodes or kg_snapshot.edges):
+                # Convert to networkx.Graph
+                nx_graph = FalkorDBStorage._knowledge_graph_to_nx(kg_snapshot)
+                # Write to .graphml file
+                FalkorDBStorage.write_nx_graph(nx_graph, self._graphml_xml_file)
+                logger.info(f"Successfully exported graph {self.namespace} to {self._graphml_xml_file}")
+            else:
+                logger.info(f"Graph {self.namespace} is empty or could not be fetched. Skipping GraphML export.")
+        except Exception as e:
+            logger.error(f"Error during GraphML export in index_done_callback for {self.namespace}: {e}")
 
     async def has_node(self, node_id: str) -> bool:
         """
@@ -1144,7 +1193,8 @@ class FalkorDBStorage(BaseGraphStorage):
     async def drop(self) -> dict[str, str]:
         """Drop all data from storage and clean up resources
 
-        This method will delete all nodes and relationships in the FalkorDB graph.
+        This method will delete all nodes and relationships in the FalkorDB graph
+        and also remove the exported .graphml file.
 
         Returns:
             dict[str, str]: Operation status and message
@@ -1156,6 +1206,11 @@ class FalkorDBStorage(BaseGraphStorage):
             # Delete all nodes and relationships
             query = "MATCH (n) DETACH DELETE n"
             await graph.query(query)
+            
+            # Remove the exported .graphml file if it exists
+            if os.path.exists(self._graphml_xml_file):
+                os.remove(self._graphml_xml_file)
+                logger.info(f"Removed exported GraphML file: {self._graphml_xml_file}")
             
             logger.info(f"Process {os.getpid()} drop FalkorDB graph {self._DATABASE}")
             return {"status": "success", "message": "data dropped"}
