@@ -8,7 +8,6 @@ from lightrag.utils import logger
 import aiofiles
 import shutil
 import traceback
-import pipmaster as pm
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Literal
@@ -213,8 +212,6 @@ async def pipeline_enqueue_file(rag: LightRAG, file_path: Path) -> bool:
                     )
             case ".pptx":
                 try:
-                    if not pm.is_installed("python-pptx"):  # type: ignore
-                        pm.install("pptx")
                     from pptx import Presentation  # type: ignore
                     from io import BytesIO
 
@@ -380,49 +377,12 @@ async def save_temp_file(input_dir: Path, file: UploadFile = File(...)) -> Path:
     return temp_path
 
 
-async def run_scanning_process(rag: LightRAG, doc_manager: DocumentManager):
-    """Background task to scan and index documents"""
-    try:
-        new_files = doc_manager.scan_directory_for_new_files()
-        total_files = len(new_files)
-        logger.info(f"Found {total_files} new files to index.")
-
-        if not new_files:
-            return
-
-        # Process all files at once
-        await pipeline_index_files(rag, new_files)
-        logger.info(f"Scanning process completed: {total_files} files Processed.")
-
-    except Exception as e:
-        logger.error(f"Error during scanning process: {str(e)}")
-        logger.error(traceback.format_exc())
 
 
 def create_document_routes(
-    rag: LightRAG, doc_manager: DocumentManager, api_key: Optional[str] = None
+    rag: LightRAG, doc_manager: DocumentManager
 ):
 
-    @router.post(
-        "/scan", response_model=ScanResponse
-    )
-    async def scan_for_new_documents(background_tasks: BackgroundTasks):
-        """
-        Trigger the scanning process for new documents.
-
-        This endpoint initiates a background task that scans the input directory for new documents
-        and processes them. If a scanning process is already running, it returns a status indicating
-        that fact.
-
-        Returns:
-            ScanResponse: A response object containing the scanning status
-        """
-        # Start the scanning process in the background
-        background_tasks.add_task(run_scanning_process, rag, doc_manager)
-        return ScanResponse(
-            status="scanning_started",
-            message="Scanning process has been initiated in the background",
-        )
 
     @router.post(
         "/upload", response_model=InsertResponse
@@ -478,83 +438,8 @@ def create_document_routes(
             logger.error(traceback.format_exc())
             raise HTTPException(status_code=500, detail=str(e))
 
-    @router.post(
-        "/text", response_model=InsertResponse,
-    )
-    async def insert_text(
-        request: InsertTextRequest, background_tasks: BackgroundTasks
-    ):
-        """
-        Insert text into the RAG system.
 
-        This endpoint allows you to insert text data into the RAG system for later retrieval
-        and use in generating responses.
-
-        Args:
-            request (InsertTextRequest): The request body containing the text to be inserted.
-            background_tasks: FastAPI BackgroundTasks for async processing
-
-        Returns:
-            InsertResponse: A response object containing the status of the operation.
-
-        Raises:
-            HTTPException: If an error occurs during text processing (500).
-        """
-        try:
-            background_tasks.add_task(
-                pipeline_index_texts,
-                rag,
-                [request.text],
-                file_sources=[request.file_source],
-            )
-            return InsertResponse(
-                status="success",
-                message="Text successfully received. Processing will continue in background.",
-            )
-        except Exception as e:
-            logger.error(f"Error /documents/text: {str(e)}")
-            logger.error(traceback.format_exc())
-            raise HTTPException(status_code=500, detail=str(e))
-
-    @router.post(
-        "/texts",
-        response_model=InsertResponse,
-    )
-    async def insert_texts(
-        request: InsertTextsRequest, background_tasks: BackgroundTasks
-    ):
-        """
-        Insert multiple texts into the RAG system.
-
-        This endpoint allows you to insert multiple text entries into the RAG system
-        in a single request.
-
-        Args:
-            request (InsertTextsRequest): The request body containing the list of texts.
-            background_tasks: FastAPI BackgroundTasks for async processing
-
-        Returns:
-            InsertResponse: A response object containing the status of the operation.
-
-        Raises:
-            HTTPException: If an error occurs during text processing (500).
-        """
-        try:
-            background_tasks.add_task(
-                pipeline_index_texts,
-                rag,
-                request.texts,
-                file_sources=request.file_sources,
-            )
-            return InsertResponse(
-                status="success",
-                message="Text successfully received. Processing will continue in background.",
-            )
-        except Exception as e:
-            logger.error(f"Error /documents/text: {str(e)}")
-            logger.error(traceback.format_exc())
-            raise HTTPException(status_code=500, detail=str(e))
-
+    
     # TODO: deprecated, use /upload instead
     @router.post(
         "/file", response_model=InsertResponse
@@ -663,7 +548,7 @@ def create_document_routes(
             raise HTTPException(status_code=500, detail=str(e))
 
     @router.delete(
-        "", response_model=ClearDocumentsResponse
+        "/delete-all", response_model=ClearDocumentsResponse
     )
     async def clear_documents():
         """

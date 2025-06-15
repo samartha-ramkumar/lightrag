@@ -45,7 +45,8 @@ from settings import global_args, update_uvicorn_mode_config
 # the OS environment variables take precedence over the .env file
 load_dotenv(dotenv_path=".env", override=False)
 
-
+# Add this new global variable to hold the app instance
+app = None
 
 def create_app(args):
     # Setup logging
@@ -68,6 +69,7 @@ def create_app(args):
 
     rag = LightRAG(
         working_dir=args.working_dir,
+        workspace=args.workspace,
         llm_model_func= llm_provider.generate_text,
         llm_model_name=args.llm_model,
         llm_model_max_async=args.max_async,
@@ -251,23 +253,22 @@ def configure_logging():
 
 
 def main():
-
     from multiprocessing import freeze_support
     
-
     freeze_support()
 
     # Configure logging before parsing args
     configure_logging()
     update_uvicorn_mode_config()
 
+    # When running directly, create the app and run using import string
     # Create application instance directly instead of using factory function
+    global app
     app = create_app(global_args)
 
     uvicorn.run(app=app, 
                 host=global_args.host,
                 port=global_args.port, 
-                log_level=global_args.log_level, 
                 workers=global_args.workers, 
                 timeout_keep_alive=global_args.timeout)
 
