@@ -22,10 +22,10 @@ load_dotenv(dotenv_path=".env", override=False)
 
 
 class DefaultRAGStorageConfig:
-    KV_STORAGE = "JsonKVStorage"
-    VECTOR_STORAGE = "NanoVectorDBStorage"
-    GRAPH_STORAGE = "NetworkXStorage"
-    DOC_STATUS_STORAGE = "JsonDocStatusStorage"
+    KV_STORAGE = "PGKVStorage"
+    VECTOR_STORAGE = "PGVectorStorage"
+    GRAPH_STORAGE = "FalkorDBStorage"
+    DOC_STATUS_STORAGE = "PGDocStatusStorage"
 
 
 def parse_args() -> argparse.Namespace:

@@ -11,324 +11,236 @@
 <key id="d2" for="node" attr.name="description" attr.type="string"/>
 <key id="d1" for="node" attr.name="entity_type" attr.type="string"/>
 <key id="d0" for="node" attr.name="entity_id" attr.type="string"/>
-<graph edgedefault="undirected"><node id="SAMPLE INTERVIEW QUESTIONS">
-  <data key="d0">SAMPLE INTERVIEW QUESTIONS</data>
-  <data key="d1">event</data>
-  <data key="d2">The SAMPLE INTERVIEW QUESTIONS provide various inquiries used during job interviews to assess candidates' qualifications, skills, and fit for the organization.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951334</data>
-</node>
-<node id="Organization">
-  <data key="d0">Organization</data>
-  <data key="d1">organization</data>
-  <data key="d2">The organization refers to the company or institution offering the position and is the subject of various inquiries to understand its values and goals.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951334</data>
-</node>
-<node id="Skills/Abilities/Qualifications">
+<graph edgedefault="undirected"><node id="Skills/Abilities/Qualifications">
   <data key="d0">Skills/Abilities/Qualifications</data>
   <data key="d1">category</data>
-  <data key="d2">Skills/Abilities/Qualifications focus on inquiries regarding the candidate’s relevant skills, experiences, and how those relate to the job they are applying for.</data>
+  <data key="d2">Skills/Abilities/Qualifications includes questions assessing a candidate's competencies, strengths, and relevant accomplishments.</data>
   <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Career Advancement">
-  <data key="d0">Career Advancement</data>
-  <data key="d1">category</data>
-  <data key="d2">Career Advancement encompasses inquiries about growth opportunities, conditions for success, and the long-term career path within the organization.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951334</data>
-</node>
-<node id="Things to Avoid">
-  <data key="d0">Things to Avoid</data>
-  <data key="d1">category</data>
-  <data key="d2">Things to Avoid refers to common pitfalls candidates should steer clear of during an interview process, such as discussing salary too early.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Self Awareness Questions">
-  <data key="d0">Self Awareness Questions</data>
-  <data key="d1">category</data>
-  <data key="d2">Self Awareness Questions are designed to help candidates reflect on their personalities, work preferences, and career choices during the interview process.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Why Did You Decide to Apply for This Position?">
-  <data key="d0">Why Did You Decide to Apply for This Position?</data>
-  <data key="d1">category</data>
-  <data key="d2">This question encourages candidates to articulate their motivations for applying and to showcase their qualifications for the specific position.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Goals/Objectives">
-  <data key="d0">Goals/Objectives</data>
-  <data key="d1">category</data>
-  <data key="d2">Goals/Objectives inquiries are used to understand the candidates' career aspirations and how they align with the organization's opportunities.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Tell Me About Yourself">
-  <data key="d0">Tell Me About Yourself</data>
-  <data key="d1">category</data>
-  <data key="d2">'Tell Me About Yourself' is a common interview question aimed at prompting candidates to provide a summary of their background and qualifications.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Brain Teasers">
-  <data key="d0">Brain Teasers</data>
-  <data key="d1">category</data>
-  <data key="d2">Brain Teasers are unconventional questions that evaluate candidates' problem-solving abilities and creativity in thinking.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Skills/Abilities/Qualifications Questions">
-  <data key="d0">Skills/Abilities/Qualifications Questions</data>
-  <data key="d1">category</data>
-  <data key="d2">These questions focus on the specific skills and experiences that make candidates suitable for the job they are applying for.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Interests">
-  <data key="d0">Interests</data>
-  <data key="d1">category</data>
-  <data key="d2">Interests questions aim to learn about candidates' hobbies and pursuits outside of work, providing insight into their personality.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Education">
-  <data key="d0">Education</data>
-  <data key="d1">category</data>
-  <data key="d2">Education questions assess how well the candidates' academic background prepares them for the job.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Stress Questions">
-  <data key="d0">Stress Questions</data>
-  <data key="d1">category</data>
-  <data key="d2">Stress Questions are designed to test candidates' reactions in difficult situations and assess their ability to handle pressure.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="[subject x]">
-  <data key="d0">[subject x]</data>
-  <data key="d1">category</data>
-  <data key="d2">[subject x] serves as a placeholder for particular fields or areas of focus relevant to the role being applied for, indicating the importance of candidates' contributions to specific sectors.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951334</data>
-</node>
-<node id="Values">
-  <data key="d0">Values</data>
-  <data key="d1">category</data>
-  <data key="d2">Values questions explore what candidates find most important in their work environment, helping assess cultural fit.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Self Awareness">
-  <data key="d0">Self Awareness</data>
-  <data key="d1">category</data>
-  <data key="d2">Self Awareness includes questions aimed at understanding a candidate's perception of themselves, strengths, weaknesses, and working style.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951334</data>
-</node>
-<node id="Knowledge of the Organization">
-  <data key="d0">Knowledge of the Organization</data>
-  <data key="d1">category</data>
-  <data key="d2">Knowledge of the Organization concerns inquiries about what candidates know regarding the organization they are applying to and its operations.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Weaknesses/Negatives">
-  <data key="d0">Weaknesses/Negatives</data>
-  <data key="d1">category</data>
-  <data key="d2">Weaknesses/Negatives include questions that prompt candidates to discuss their shortcomings and how they have developed from past challenges.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
-</node>
-<node id="Experience">
-  <data key="d0">Experience</data>
-  <data key="d1">category</data>
-  <data key="d2">Experience questions gauge candidates' past job performance and their ability to work effectively in teams and resolve conflicts.</data>
-  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
+  <data key="d5">1749968920</data>
 </node>
 <node id="Questions for the Interviewer">
   <data key="d0">Questions for the Interviewer</data>
   <data key="d1">category</data>
-  <data key="d2">Questions for the Interviewer are topics that candidates can ask during an interview to better understand the organization and position.</data>
+  <data key="d2">Questions for the Interviewer includes inquiries that candidates can ask to understand more about the organization and the role.</data>
   <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d4">unknown_source</data>
-  <data key="d5">1749951335</data>
+  <data key="d5">1749968920</data>
 </node>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="[subject x]">
+<node id="Subject X">
+  <data key="d0">Subject X</data>
+  <data key="d1">category</data>
+  <data key="d2">Subject X represents a field of study or specialization that the program focuses on, relevant to the candidate's qualifications and contributions.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Organization">
+  <data key="d0">Organization</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Organization refers to the company or institution where the job position is located, which is the subject of the interview.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Experience">
+  <data key="d0">Experience</data>
+  <data key="d1">category</data>
+  <data key="d2">Experience refers to questions that delve into a candidate's prior job roles and the lessons learned from them.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Weaknesses/Negatives">
+  <data key="d0">Weaknesses/Negatives</data>
+  <data key="d1">category</data>
+  <data key="d2">Weaknesses/Negatives encompasses interview questions that explore a candidate's challenges, mistakes, and areas for improvement.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Interview Questions">
+  <data key="d0">Interview Questions</data>
+  <data key="d1">event</data>
+  <data key="d2">Interview Questions are a set of inquiries designed to assess a candidate's suitability for a position, covering various topics such as qualifications, experience, and personal attributes.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Interests">
+  <data key="d0">Interests</data>
+  <data key="d1">category</data>
+  <data key="d2">Interests refers to inquiries into a candidate's personal hobbies and preferences outside of professional obligations.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Knowledge of the Organization">
+  <data key="d0">Knowledge of the Organization</data>
+  <data key="d1">category</data>
+  <data key="d2">Knowledge of the Organization signifies questions aimed at understanding a candidate’s awareness of the company’s mission, values, and operations.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Stress Questions">
+  <data key="d0">Stress Questions</data>
+  <data key="d1">category</data>
+  <data key="d2">Stress Questions encompass inquiries aimed at evaluating how a candidate handles pressure and difficult situations.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Brain Teasers">
+  <data key="d0">Brain Teasers</data>
+  <data key="d1">category</data>
+  <data key="d2">Brain Teasers refers to special questions designed to evaluate a candidate's problem-solving and critical thinking skills.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Values">
+  <data key="d0">Values</data>
+  <data key="d1">category</data>
+  <data key="d2">Values represents the interview questions that explore what is important to a candidate in their career and work environment.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Goals/Objectives">
+  <data key="d0">Goals/Objectives</data>
+  <data key="d1">category</data>
+  <data key="d2">Goals/Objectives pertains to questions focused on a candidate's short and long-term career aspirations.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Self Awareness">
+  <data key="d0">Self Awareness</data>
+  <data key="d1">category</data>
+  <data key="d2">Self Awareness refers to a category of interview questions aimed at evaluating a candidate's understanding of themselves, their career choices, and working style.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Things to Avoid">
+  <data key="d0">Things to Avoid</data>
+  <data key="d1">category</data>
+  <data key="d2">Things to Avoid identifies inappropriate questions or topics to steer clear of during an interview process.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Education">
+  <data key="d0">Education</data>
+  <data key="d1">category</data>
+  <data key="d2">Education encompasses questions that address a candidate's academic background and ongoing learning plans.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<node id="Noah Carter">
+  <data key="d0">Noah Carter</data>
+  <data key="d1">person</data>
+  <data key="d2">While not explicitly mentioned for this specific interview context, Noah Carter is a representative athlete who might be referenced in a similar context, showcasing exemplary achievements or qualifications.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1749968920</data>
+</node>
+<edge source="Skills/Abilities/Qualifications" target="Self Awareness">
   <data key="d6">8.0</data>
-  <data key="d7">These SAMPLE INTERVIEW QUESTIONS detail various areas of inquiry, including [subject x], to assess candidates in a structured manner.</data>
-  <data key="d8">candidate assessment,structured inquiry</data>
+  <data key="d7">Self Awareness questions often lead to discussions about a candidate's skills and qualifications, revealing their self-perception and capabilities.</data>
+  <data key="d8">competency,self-reflection</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Organization">
+<edge source="Skills/Abilities/Qualifications" target="Weaknesses/Negatives">
+  <data key="d6">7.0</data>
+  <data key="d7">Weaknesses/Negatives inquiries help assess the candidate's ability to recognize and improve upon their skills and qualifications.</data>
+  <data key="d8">competency,personal growth</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1749968920</data>
+</edge>
+<edge source="Skills/Abilities/Qualifications" target="Brain Teasers">
+  <data key="d6">10.0</data>
+  <data key="d7">Brain Teasers challenge candidates to showcase their critical thinking skills, which relates directly to their qualifications for the role.</data>
+  <data key="d8">cognitive skills,problem solving</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1749968920</data>
+</edge>
+<edge source="Questions for the Interviewer" target="Knowledge of the Organization">
   <data key="d6">9.0</data>
-  <data key="d7">The SAMPLE INTERVIEW QUESTIONS are designed specifically to evaluate candidates for positions within an organization.</data>
-  <data key="d8">evaluation,hiring process</data>
+  <data key="d7">Candidates inquire about the organization to demonstrate their knowledge and interest, reflecting their knowledge of the organization.</data>
+  <data key="d8">engagement,organizational knowledge</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Tell Me About Yourself">
+<edge source="Questions for the Interviewer" target="Things to Avoid">
+  <data key="d6">8.0</data>
+  <data key="d7">Understanding what to avoid helps candidates formulate appropriate questions, ensuring they maintain professionalism in their interactions.</data>
+  <data key="d8">interview strategy,professional conduct</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1749968920</data>
+</edge>
+<edge source="Subject X" target="Interview Questions">
+  <data key="d6">7.0</data>
+  <data key="d7">Interview Questions often include inquiries about the candidate's knowledge and contributions related to Subject X.</data>
+  <data key="d8">candidate assessment,expertise</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1749968920</data>
+</edge>
+<edge source="Subject X" target="Organization">
+  <data key="d6">8.0</data>
+  <data key="d7">The program's focus on Subject X is directly relevant to the candidate's potential contributions to the Organization’s objectives.</data>
+  <data key="d8">organizational goals,specific field</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1749968920</data>
+</edge>
+<edge source="Organization" target="Interview Questions">
   <data key="d6">9.0</data>
-  <data key="d7">The interview question 'Tell Me About Yourself' is part of the SAMPLE INTERVIEW QUESTIONS designed for candidate evaluation.</data>
-  <data key="d8">candidate evaluation,interview process</data>
+  <data key="d7">Interview Questions aim to understand how a candidate aligns with the goals and values of the Organization they are applying to.</data>
+  <data key="d8">job application process,organizational fit</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Why Did You Decide to Apply for This Position?">
-  <data key="d6">8.0</data>
-  <data key="d7">The question 'Why Did You Decide to Apply for This Position?' is included within the SAMPLE INTERVIEW QUESTIONS to assess candidate motivation.</data>
-  <data key="d8">applicant motivation,evaluation</data>
+<edge source="Experience" target="Values">
+  <data key="d6">6.0</data>
+  <data key="d7">Values questions can uncover how prior experiences have shaped a candidate's beliefs and work preferences.</data>
+  <data key="d8">personal values,work history</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Self Awareness Questions">
+<edge source="Experience" target="Interests">
   <data key="d6">7.0</data>
-  <data key="d7">Self Awareness Questions are part of the SAMPLE INTERVIEW QUESTIONS aimed at understanding candidates' self-perception.</data>
-  <data key="d8">candidate assessment,self-reflection</data>
+  <data key="d7">Interests questions may lead to insights about the types of experiences candidates find most fulfilling, combining personal and professional realms.</data>
+  <data key="d8">"personal fulfillment,career"&gt;</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Weaknesses/Negatives">
-  <data key="d6">8.0</data>
-  <data key="d7">Weaknesses/Negatives are incorporated into the SAMPLE INTERVIEW QUESTIONS to explore candidates' ability to confront challenges.</data>
-  <data key="d8">candidate honesty,challenge assessment</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Skills/Abilities/Qualifications Questions">
+<edge source="Weaknesses/Negatives" target="Stress Questions">
   <data key="d6">9.0</data>
-  <data key="d7">Skills/Abilities/Qualifications Questions are part of the SAMPLE INTERVIEW QUESTIONS aimed at identifying candidates' relevant qualifications.</data>
-  <data key="d8">qualification assessment,skills inventory</data>
+  <data key="d7">Stress Questions can reveal how candidates perceive their own weaknesses and how they manage pressure in difficult situations.</data>
+  <data key="d8">self-awareness,stress management</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Knowledge of the Organization">
+<edge source="Goals/Objectives" target="Education">
   <data key="d6">8.0</data>
-  <data key="d7">Knowledge of the Organization questions are included in the SAMPLE INTERVIEW QUESTIONS to gauge candidates' understanding of the company.</data>
-  <data key="d8">candidate evaluation,organizational awareness</data>
+  <data key="d7">Education questions often reveal how candidates’ academic experiences align with their career goals and aspirations.</data>
+  <data key="d8">academic alignment,career planning</data>
   <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
   <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Values">
-  <data key="d6">7.0</data>
-  <data key="d7">Values questions within the SAMPLE INTERVIEW QUESTIONS assess what candidates value most in their work environment and align with organization culture.</data>
-  <data key="d8">cultural fit,values alignment</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Experience">
-  <data key="d6">8.0</data>
-  <data key="d7">Experience questions are part of the SAMPLE INTERVIEW QUESTIONS to help evaluate past performance and teamwork skills.</data>
-  <data key="d8">performance evaluation,teamwork</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Goals/Objectives">
-  <data key="d6">7.0</data>
-  <data key="d7">Goals/Objectives questions are included in the SAMPLE INTERVIEW QUESTIONS to align candidates' aspirations with the organization's direction.</data>
-  <data key="d8">alignment,career planning</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Education">
-  <data key="d6">8.0</data>
-  <data key="d7">Education questions within the SAMPLE INTERVIEW QUESTIONS assess candidates' academic preparedness for the role being applied for.</data>
-  <data key="d8">education assessment,job readiness</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Interests">
-  <data key="d6">7.0</data>
-  <data key="d7">Interests questions are part of the SAMPLE INTERVIEW QUESTIONS to provide additional insight into candidates' personalities.</data>
-  <data key="d8">candidate profile,personal insight</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Stress Questions">
-  <data key="d6">9.0</data>
-  <data key="d7">Stress Questions help gauge how candidates handle pressure and are included in the SAMPLE INTERVIEW QUESTIONS.</data>
-  <data key="d8">candidate resilience,stress management</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Brain Teasers">
-  <data key="d6">8.0</data>
-  <data key="d7">Brain Teasers are included in the SAMPLE INTERVIEW QUESTIONS to assess candidates' problem-solving and creative thinking capabilities.</data>
-  <data key="d8">creative thinking,problem solving</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Questions for the Interviewer">
-  <data key="d6">8.0</data>
-  <data key="d7">Questions for the Interviewer allow candidates to engage in a two-way conversation within the SAMPLE INTERVIEW QUESTIONS context.</data>
-  <data key="d8">information gathering,interviewer engagement</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="SAMPLE INTERVIEW QUESTIONS" target="Things to Avoid">
-  <data key="d6">8.0</data>
-  <data key="d7">Things to Avoid provide guidance on pitfalls candidates should not engage in during the interview process.</data>
-  <data key="d8">interview strategy,pitfall avoidance</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="Organization" target="Skills/Abilities/Qualifications">
-  <data key="d6">8.0</data>
-  <data key="d7">Skills/Abilities/Qualifications inquiries seek to determine how candidates' qualifications align with the needs of the organization.</data>
-  <data key="d8">organizational fit,qualifications</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
-</edge>
-<edge source="Career Advancement" target="Self Awareness">
-  <data key="d6">7.0</data>
-  <data key="d7">Self Awareness questions help candidates reflect on their growth and potential fit for Career Advancement within the organization.</data>
-  <data key="d8">career trajectory,personal development</data>
-  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
-  <data key="d10">unknown_source</data>
-  <data key="d11">1749951335</data>
+  <data key="d11">1749968920</data>
 </edge>
 </graph></graphml>

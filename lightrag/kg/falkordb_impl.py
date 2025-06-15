@@ -18,10 +18,6 @@ from ..utils import logger
 from ..base import BaseGraphStorage
 from ..types import KnowledgeGraph, KnowledgeGraphNode, KnowledgeGraphEdge
 
-import pipmaster as pm
-
-if not pm.is_installed("networkx"):
-    pm.install("networkx")
 
 import networkx as nx
 
@@ -51,7 +47,7 @@ logging.getLogger("FalkorDB").setLevel(logging.ERROR)
 @final
 @dataclass
 class FalkorDBStorage(BaseGraphStorage):
-    def __init__(self, namespace, global_config, embedding_func):
+    def __init__(self, namespace, global_config, embedding_func, workspace=None):
         super().__init__(
             namespace=namespace,
             global_config=global_config,
@@ -61,6 +57,7 @@ class FalkorDBStorage(BaseGraphStorage):
         self._graphml_xml_file = os.path.join(
             self.global_config["working_dir"], f"graph_{self.namespace}_falkordb_export.graphml"
         )
+        self.workspace = workspace or global_config.get("workspace", "default")
 
     @staticmethod
     def _knowledge_graph_to_nx(kg: KnowledgeGraph) -> nx.Graph:
@@ -95,8 +92,9 @@ class FalkorDBStorage(BaseGraphStorage):
         REDIS_TIMEOUT = float(os.environ.get("REDIS_TIMEOUT", 
                                            config.get("falkordb", "timeout", fallback=30.0)))
         
-        # Use namespace as the graph name, sanitize it for FalkorDB compatibility
-        GRAPH_NAME = re.sub(r"[^a-zA-Z0-9-]", "-", self.namespace)
+        # Use workspace as the graph name, with fallback to namespace
+        # Sanitize workspace name for FalkorDB compatibility
+        GRAPH_NAME = re.sub(r"[^a-zA-Z0-9-]", "-", self.workspace)
         self._DATABASE = GRAPH_NAME
         
         try:
