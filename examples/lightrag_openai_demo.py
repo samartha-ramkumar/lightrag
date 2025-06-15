@@ -3,10 +3,11 @@ import asyncio
 import logging
 import logging.config
 from lightrag import LightRAG, QueryParam
-from lightrag.llm.openai import gpt_4o_mini_complete, openai_embed
+from lightrag.llm.provider import LLMService
+from lightrag.utils import EmbeddingFunc
 from lightrag.kg.shared_storage import initialize_pipeline_status
 from lightrag.utils import logger, set_verbose_debug
-
+from settings import global_args as args
 
 
 def configure_logging():
@@ -79,10 +80,42 @@ if not os.path.exists(WORKING_DIR):
 
 
 async def initialize_rag():
+    
+    llm_provider = LLMService(provider_name=args.llm_provider)
+
+    embedding_func = EmbeddingFunc(
+        embedding_dim=args.embedding_dim,
+        max_token_size=args.max_embed_tokens,
+        func=lambda texts: llm_provider.generate_embeddings(
+            texts,
+            model=args.embedding_model
+        ),
+    )
+
     rag = LightRAG(
-        working_dir=WORKING_DIR,
-        embedding_func=openai_embed,
-        llm_model_func=gpt_4o_mini_complete,
+        working_dir=args.working_dir,
+        llm_model_func= llm_provider.generate_text,
+        llm_model_name=args.llm_model,
+        llm_model_max_async=args.max_async,
+        llm_model_max_token_size=args.max_tokens,
+        chunk_token_size=int(args.chunk_size),
+        chunk_overlap_token_size=int(args.chunk_overlap_size),
+        # llm_model_kwargs={
+        #     "timeout": args.timeout,
+        #     "options": {"num_ctx": args.max_tokens},
+        # },
+        embedding_func=embedding_func,
+        kv_storage=args.kv_storage,
+        graph_storage=args.graph_storage,
+        vector_storage=args.vector_storage,
+        doc_status_storage=args.doc_status_storage,
+        vector_db_storage_cls_kwargs={
+            "cosine_better_than_threshold": args.cosine_threshold
+        },
+        enable_llm_cache_for_entity_extract=args.enable_llm_cache_for_extract,
+        enable_llm_cache=args.enable_llm_cache,
+        auto_manage_storages_states=False,
+        max_parallel_insert=args.max_parallel_insert,
     )
 
     await rag.initialize_storages()
@@ -122,19 +155,19 @@ async def main():
         print(f"Test dict: {test_text}")
         print(f"Detected embedding dimension: {embedding_dim}\n\n")
 
-        with open("./data/test.txt", "r", encoding="utf-8") as f:
-            await rag.ainsert(f.read())
+        with open("./data/sample.txt", "r", encoding="utf-8") as f:
+            await rag.ainsert(input=f.read(), ids=["doc_1"])
 
 
         # Perform local search
-        print("\n=====================")
-        print("Query mode: local")
-        print("=====================")
-        print(
-            await rag.aquery(
-                "What is the main concise theme o f the docuent?", param=QueryParam(mode="local")
-            )
-        )
+        # print("\n=====================")
+        # print("Query mode: local")
+        # print("=====================")
+        # print(
+        #     await rag.aquery(
+        #         "How should I prepare for interview", param=QueryParam(mode="local")
+        #     )
+        # )
 
         # Perform global search
         print("\n=====================")
@@ -142,7 +175,7 @@ async def main():
         print("=====================")
         print(
             await rag.aquery(
-                "What is the main concise theme o f the docuent?",
+                "How should I prepare for interview",
                 param=QueryParam(mode="global"),
             )
         )
@@ -153,7 +186,7 @@ async def main():
         print("=====================")
         print(
             await rag.aquery(
-                "What is the main concise theme o f the docuent?",
+                "How should I prepare for interview",
                 param=QueryParam(mode="hybrid"),
             )
         )

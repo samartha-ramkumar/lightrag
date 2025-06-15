@@ -218,7 +218,7 @@ class LightRAG:
     llm_model_func: Callable[..., object] | None = field(default=None)
     """Function for interacting with the large language model (LLM). Must be set before use."""
 
-    llm_model_name: str = field(default="gpt-4o-mini")
+    llm_model_name: str = field(default=get_env_value("LLM_MODEL_NAME", "gpt-4o-mini"))
     """Name of the LLM model used for generating responses."""
 
     llm_model_max_token_size: int = field(default=int(os.getenv("MAX_TOKENS", 32768)))
