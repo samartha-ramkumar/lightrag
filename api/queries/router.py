@@ -27,42 +27,42 @@ class QueryRequest(BaseModel):
     )
 
     only_need_context: Optional[bool] = Field(
-        default=None,
+        default=False,
         description="If True, only returns the retrieved context without generating a response.",
     )
 
     only_need_prompt: Optional[bool] = Field(
-        default=None,
+        default=False,
         description="If True, only returns the generated prompt without producing a response.",
     )
 
     response_type: Optional[str] = Field(
         min_length=1,
-        default=None,
+        default="Multiple Paragraphs",
         description="Defines the response format. Examples: 'Multiple Paragraphs', 'Single Paragraph', 'Bullet Points'.",
     )
 
     top_k: Optional[int] = Field(
         ge=1,
-        default=None,
+        default=60,
         description="Number of top items to retrieve. Represents entities in 'local' mode and relationships in 'global' mode.",
     )
 
     max_token_for_text_unit: Optional[int] = Field(
         gt=1,
-        default=None,
+        default=4000,
         description="Maximum number of tokens allowed for each retrieved text chunk.",
     )
 
     max_token_for_global_context: Optional[int] = Field(
         gt=1,
-        default=None,
+        default=4000,
         description="Maximum number of tokens allocated for relationship descriptions in global retrieval.",
     )
 
     max_token_for_local_context: Optional[int] = Field(
         gt=1,
-        default=None,
+        default=4000,
         description="Maximum number of tokens allocated for entity descriptions in local retrieval.",
     )
 
@@ -73,17 +73,12 @@ class QueryRequest(BaseModel):
 
     history_turns: Optional[int] = Field(
         ge=0,
-        default=None,
+        default=3,
         description="Number of complete conversation turns (user-assistant pairs) to consider in the response context.",
     )
 
     ids: list[str] | None = Field(
         default=None, description="List of ids to filter the results."
-    )
-
-    user_prompt: Optional[str] = Field(
-        default=None,
-        description="User-provided prompt for the query. If provided, this will be used instead of the default value from prompt template.",
     )
 
     @field_validator("query", mode="after")
@@ -108,11 +103,12 @@ class QueryRequest(BaseModel):
     def to_query_params(self, is_stream: bool) -> "QueryParam":
         """Converts a QueryRequest instance into a QueryParam instance."""
         # Use Pydantic's `.model_dump(exclude_none=True)` to remove None values automatically
-        request_data = self.model_dump(exclude_none=True, exclude={"query"})
+        request_data = self.model_dump(exclude_none=True, exclude={"query", })
 
         # Ensure `mode` and `stream` are set explicitly
         param = QueryParam(**request_data)
         param.stream = is_stream
+        print(f"QueryParam: {param}")
         return param
 
 

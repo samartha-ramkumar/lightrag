@@ -47,7 +47,7 @@ def parse_args() -> argparse.Namespace:
 
     # Directory configuration
     args.working_dir = get_env_value("WORKING_DIR", "./rag_storage")
-    args.input_dir = get_env_value("INPUT_DIR", "./dataval")
+    args.input_dir = get_env_value("INPUT_DIR", "./rag_storage/input")
 
     args.timeout = get_env_value("TIMEOUT", DEFAULT_TIMEOUT, int, special_none=True)
 
@@ -69,6 +69,7 @@ def parse_args() -> argparse.Namespace:
 
     # Namespace
     args.namespace_prefix = get_env_value("NAMESPACE_PREFIX", "")
+    args.workspace = get_env_value("WORKSPACE", "project_2")
 
     # Server workers configuration
     args.workers = get_env_value("WORKERS", DEFAULT_WOKERS, int)

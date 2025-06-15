@@ -33,7 +33,6 @@ from api.queries.router import create_query_routes
 from lightrag.utils import logger, set_verbose_debug
 from lightrag.kg.shared_storage import (
     get_namespace_data,
-    get_pipeline_status_lock,
     initialize_pipeline_status,
 )
 
@@ -45,7 +44,7 @@ from settings import global_args, update_uvicorn_mode_config
 # the OS environment variables take precedence over the .env file
 load_dotenv(dotenv_path=".env", override=False)
 
-# Add this new global variable to hold the app instance
+
 app = None
 
 def create_app(args):
