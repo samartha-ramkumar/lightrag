@@ -24,7 +24,7 @@ from lightrag.constants import (
     DEFAULT_LOG_BACKUP_COUNT,
     DEFAULT_LOG_FILENAME,
 )
-from api.documents.processor import (
+from api.documents.router import (
     DocumentManager,
     create_document_routes
 )

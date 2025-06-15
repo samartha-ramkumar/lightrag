@@ -47,7 +47,7 @@ def parse_args() -> argparse.Namespace:
 
     # Directory configuration
     args.working_dir = get_env_value("WORKING_DIR", "./rag_storage")
-    args.input_dir = get_env_value("INPUT_DIR", "./inputs")
+    args.input_dir = get_env_value("INPUT_DIR", "./dataval")
 
     args.timeout = get_env_value("TIMEOUT", DEFAULT_TIMEOUT, int, special_none=True)
 
