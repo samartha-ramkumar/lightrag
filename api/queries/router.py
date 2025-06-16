@@ -118,7 +118,7 @@ class QueryResponse(BaseModel):
     )
 
 
-def create_query_routes(rag, api_key: Optional[str] = None, top_k: int = 60):
+def create_query_routes(rag):
 
     @router.post(
         "/query", response_model=QueryResponse

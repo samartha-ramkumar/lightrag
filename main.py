@@ -142,7 +142,7 @@ def create_app(args):
 
     # Add routes
     app.include_router(create_document_routes(rag, doc_manager))
-    app.include_router(create_query_routes(rag, args.top_k))
+    app.include_router(create_query_routes(rag))
 
     @app.get("/")
     async def root():
