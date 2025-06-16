@@ -137,7 +137,7 @@ async def main():
         end = time.time()
         print(f"\nTotal time initialization: {end - start:.2f} seconds")
 
-        with open("./data/sample.txt", "r", encoding="utf-8") as f:
+        with open("./test_samples/sample.txt", "r", encoding="utf-8") as f:
             await rag.ainsert(input=f.read(), ids=["doc_1"])
 
 
@@ -145,7 +145,11 @@ async def main():
         print(
             await rag.aquery(
                 "Something unique about this document?",
-                param=QueryParam(mode="mix"),
+                param=QueryParam(mode="mix",
+                                 conversation_history=[
+                                     {"role": "user", "content": "What is this document about?"},
+                                     {"role": "assistant", "content": "This document is about interviews..."}
+                                 ]),
             )
         )
         
