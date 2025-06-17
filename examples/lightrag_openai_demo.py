@@ -149,7 +149,8 @@ async def main():
                                  conversation_history=[
                                      {"role": "user", "content": "What is this document about?"},
                                      {"role": "assistant", "content": "This document is about interviews..."}
-                                 ]),
+                                 ]), 
+                                 # conversation_id --- To be added as part of the new feature
             )
         )
         
