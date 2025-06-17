@@ -11,8 +11,9 @@ import os
 import re
 from dataclasses import dataclass
 from functools import wraps
+import functools # Add this import
 from hashlib import md5
-from typing import Any, Protocol, Callable, TYPE_CHECKING, List
+from typing import Any, Protocol, Callable, TYPE_CHECKING, List, Optional
 import numpy as np
 from lightrag.prompt import PROMPTS
 from dotenv import load_dotenv
@@ -237,7 +238,33 @@ class EmbeddingFunc:
     func: callable
     # concurrent_limit: int = 16
 
+    def __get__(self, instance, owner):
+        if instance is None:
+            # Called on the class, return the descriptor itself.
+            return self
+        # Called on an instance, return a bound method-like object.
+        # This bound_method will be called when doing instance.method(*args, **kwargs)
+        @functools.wraps(self.func)
+        async def bound_method(*args, **kwargs):
+            # self here is the EmbeddingFunc instance.
+            # instance is the instance of the class where the decorated method is defined.
+            return await self.func(instance, *args, **kwargs)
+
+        # Copy attributes from the EmbeddingFunc descriptor to the bound_method
+        # so they are accessible on the bound method object.
+        bound_method.embedding_dim = self.embedding_dim
+        bound_method.max_token_size = self.max_token_size
+        # If EmbeddingFunc had other attributes to expose, copy them here too.
+        # e.g., setattr(bound_method, 'some_other_attr', self.some_other_attr)
+        return bound_method
+
     async def __call__(self, *args, **kwargs) -> np.ndarray:
+        # This method is called if:
+        # 1. The EmbeddingFunc instance wraps a regular function (not an instance method)
+        #    and is called directly.
+        # 2. The descriptor is accessed on the class and then called,
+        #    e.g., ClassName.decorated_method(instance_arg, ...).
+        #    In this case, the first argument in *args should be the instance.
         return await self.func(*args, **kwargs)
 
 
@@ -1707,6 +1734,30 @@ def check_storage_env_vars(storage_name: str) -> None:
             f"environment variables: {', '.join(missing_vars)}"
         )
 
+from datetime import datetime, timezone
+# Function to format datetime to ISO format string with timezone information
+def format_datetime(dt: Any) -> Optional[str]:
+    """Format datetime to ISO format string with timezone information
+
+    Args:
+        dt: Datetime object, string, or None
+
+    Returns:
+        ISO format string with timezone information, or None if input is None
+    """
+    if dt is None:
+        return None
+    if isinstance(dt, str):
+        return dt
+
+    # Check if datetime object has timezone information
+    if isinstance(dt, datetime):
+        # If datetime object has no timezone info (naive datetime), add UTC timezone
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+
+    # Return ISO format string with timezone information
+    return dt.isoformat()
 
 class TokenTracker:
     """Track token usage for LLM calls."""

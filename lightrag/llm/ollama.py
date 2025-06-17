@@ -24,10 +24,9 @@ from lightrag.exceptions import (
     RateLimitError,
     APITimeoutError,
 )
-from lightrag.api import __api_version__
 
 import numpy as np
-from typing import Union
+from typing import Union, Any
 from lightrag.utils import logger
 
 
@@ -55,7 +54,6 @@ async def _ollama_model_if_cache(
     api_key = kwargs.pop("api_key", None)
     headers = {
         "Content-Type": "application/json",
-        "User-Agent": f"LightRAG/{__api_version__}",
     }
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
@@ -136,11 +134,15 @@ async def ollama_model_complete(
     )
 
 
-async def ollama_embed(texts: list[str], embed_model, **kwargs) -> np.ndarray:
+async def ollama_embed(texts: list[str],
+        model: str = "text-embedding-3-small",
+        base_url: str = None,
+        api_key: str = None,
+        client_configs: dict[str, Any] = None,
+        **kwargs) -> np.ndarray:
     api_key = kwargs.pop("api_key", None)
     headers = {
         "Content-Type": "application/json",
-        "User-Agent": f"LightRAG/{__api_version__}",
     }
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
@@ -151,7 +153,7 @@ async def ollama_embed(texts: list[str], embed_model, **kwargs) -> np.ndarray:
     ollama_client = ollama.AsyncClient(host=host, timeout=timeout, headers=headers)
 
     try:
-        data = await ollama_client.embed(model=embed_model, input=texts)
+        data = await ollama_client.embed(model=model, input=texts)
         return np.array(data["embeddings"])
     except Exception as e:
         logger.error(f"Error in ollama_embed: {str(e)}")

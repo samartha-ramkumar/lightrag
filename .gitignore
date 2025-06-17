@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+logs/*
+rag_storage/*
+
 # Distribution / packaging
 .Python
 build/

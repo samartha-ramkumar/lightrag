@@ -28,10 +28,6 @@ from ..base import (
 from ..namespace import NameSpace, is_namespace
 from ..utils import logger
 
-import pipmaster as pm
-
-if not pm.is_installed("asyncpg"):
-    pm.install("asyncpg")
 
 import asyncpg  # type: ignore
 from asyncpg import Pool  # type: ignore
@@ -285,9 +281,14 @@ class ClientManager:
     _lock = asyncio.Lock()
 
     @staticmethod
-    def get_config() -> dict[str, Any]:
+    def get_config(workspace: str | None = None) -> dict[str, Any]:
         config = configparser.ConfigParser()
         config.read("config.ini", "utf-8")
+
+        effective_workspace = workspace or os.environ.get(
+            "POSTGRES_WORKSPACE",
+            config.get("postgres", "workspace", fallback="default"),
+        )
 
         return {
             "host": os.environ.get(
@@ -308,10 +309,7 @@ class ClientManager:
                 "POSTGRES_DATABASE",
                 config.get("postgres", "database", fallback="postgres"),
             ),
-            "workspace": os.environ.get(
-                "POSTGRES_WORKSPACE",
-                config.get("postgres", "workspace", fallback="default"),
-            ),
+            "workspace": effective_workspace,
             "max_connections": os.environ.get(
                 "POSTGRES_MAX_CONNECTIONS",
                 config.get("postgres", "max_connections", fallback=20),
@@ -319,16 +317,22 @@ class ClientManager:
         }
 
     @classmethod
-    async def get_client(cls) -> PostgreSQLDB:
+    async def get_client(cls, workspace: str | None = None) -> PostgreSQLDB:
         async with cls._lock:
             if cls._instances["db"] is None:
-                config = ClientManager.get_config()
+                config = ClientManager.get_config(workspace)
                 db = PostgreSQLDB(config)
                 await db.initdb()
                 await db.check_tables()
                 cls._instances["db"] = db
                 cls._instances["ref_count"] = 0
             cls._instances["ref_count"] += 1
+
+            if workspace is not None:
+                cls._instances["db"].workspace = workspace
+            logger.info(
+                f"PostgreSQL database connection pool initialized for workspace: {cls._instances['db'].workspace}"
+            )
             return cls._instances["db"]
 
     @classmethod
@@ -349,13 +353,17 @@ class ClientManager:
 @dataclass
 class PGKVStorage(BaseKVStorage):
     db: PostgreSQLDB = field(default=None)
+    workspace: str = field(default=None)
 
     def __post_init__(self):
         self._max_batch_size = self.global_config["embedding_batch_num"]
 
+        if self.workspace is None:
+            self.workspace = self.global_config.get("workspace")
+
     async def initialize(self):
         if self.db is None:
-            self.db = await ClientManager.get_client()
+            self.db = await ClientManager.get_client(workspace=self.workspace)
 
     async def finalize(self):
         if self.db is not None:
@@ -590,6 +598,7 @@ class PGKVStorage(BaseKVStorage):
 @dataclass
 class PGVectorStorage(BaseVectorStorage):
     db: PostgreSQLDB | None = field(default=None)
+    workspace: str = field(default=None)
 
     def __post_init__(self):
         self._max_batch_size = self.global_config["embedding_batch_num"]
@@ -601,9 +610,12 @@ class PGVectorStorage(BaseVectorStorage):
             )
         self.cosine_better_than_threshold = cosine_threshold
 
+        if self.workspace is None:
+            self.workspace = self.global_config.get("workspace")
+
     async def initialize(self):
         if self.db is None:
-            self.db = await ClientManager.get_client()
+            self.db = await ClientManager.get_client(workspace=self.workspace)
 
     async def finalize(self):
         if self.db is not None:
@@ -881,10 +893,15 @@ class PGVectorStorage(BaseVectorStorage):
 @dataclass
 class PGDocStatusStorage(DocStatusStorage):
     db: PostgreSQLDB = field(default=None)
+    workspace: str = field(default=None)
+
+    def __post_init__(self):
+        if self.workspace is None:
+            self.workspace = self.global_config.get("workspace")
 
     async def initialize(self):
         if self.db is None:
-            self.db = await ClientManager.get_client()
+            self.db = await ClientManager.get_client(workspace=self.workspace)
 
     async def finalize(self):
         if self.db is not None:
@@ -905,8 +922,8 @@ class PGDocStatusStorage(DocStatusStorage):
             else:
                 exist_keys = []
             new_keys = set([s for s in keys if s not in exist_keys])
-            print(f"keys: {keys}")
-            print(f"new_keys: {new_keys}")
+            # print(f"keys: {keys}")
+            # print(f"new_keys: {new_keys}")
             return new_keys
         except Exception as e:
             logger.error(
@@ -1128,9 +1145,13 @@ class PGGraphQueryException(Exception):
 @final
 @dataclass
 class PGGraphStorage(BaseGraphStorage):
+    workspace: str = field(default=None)
+    
     def __post_init__(self):
         self.graph_name = self.namespace or os.environ.get("AGE_GRAPH_NAME", "lightrag")
         self.db: PostgreSQLDB | None = None
+        if self.workspace is None:
+            self.workspace = self.global_config.get("workspace")
 
     @staticmethod
     def _normalize_node_id(node_id: str) -> str:
