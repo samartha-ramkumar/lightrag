@@ -13,7 +13,7 @@ STORAGE_IMPLEMENTATIONS = {
         "implementations": [
             "NetworkXStorage",
             "Neo4JStorage",
-            "PGGraphStorage",
+            # "PGGraphStorage",
             "FalkorDBStorage"
             # "AGEStorage",
             # "MongoGraphStorage",
@@ -43,6 +43,10 @@ STORAGE_IMPLEMENTATIONS = {
         ],
         "required_methods": ["get_docs_by_status"],
     },
+    "CONVERSATION_STORAGE": {
+        "implementations": ["PGConversationStorage"],
+        "required_methods": ["get_conversation", "update_conversation", "create_conversation", "delete_conversation"],
+    },
 }
 
 # Storage implementation environment variable without default value
@@ -65,11 +69,11 @@ STORAGE_ENV_REQUIREMENTS: dict[str, list[str]] = {
         "AGE_POSTGRES_PASSWORD",
     ],
     # "GremlinStorage": ["GREMLIN_HOST", "GREMLIN_PORT", "GREMLIN_GRAPH"],
-    "PGGraphStorage": [
-        "POSTGRES_USER",
-        "POSTGRES_PASSWORD",
-        "POSTGRES_DATABASE",
-    ],
+    # "PGGraphStorage": [
+    #     "POSTGRES_USER",
+    #     "POSTGRES_PASSWORD",
+    #     "POSTGRES_DATABASE",
+    # ],
     # Vector Storage Implementations
     "NanoVectorDBStorage": [],
     "MilvusVectorDBStorage": [],
@@ -83,6 +87,8 @@ STORAGE_ENV_REQUIREMENTS: dict[str, list[str]] = {
     "JsonDocStatusStorage": [],
     "PGDocStatusStorage": ["POSTGRES_USER", "POSTGRES_PASSWORD", "POSTGRES_DATABASE"],
     "MongoDocStatusStorage": [],
+    # Conversation Storage Implementations
+    "PGConversationStorage": ["POSTGRES_USER", "POSTGRES_PASSWORD", "POSTGRES_DATABASE"],
 }
 
 # Storage implementation module mapping
@@ -106,9 +112,10 @@ STORAGES = {
     "PGKVStorage": ".kg.postgres_impl",
     "PGVectorStorage": ".kg.postgres_impl",
     "AGEStorage": ".kg.age_impl",
-    "PGGraphStorage": ".kg.postgres_impl",
+    # "PGGraphStorage": ".kg.postgres_impl",
     # "GremlinStorage": ".kg.gremlin_impl",
     "PGDocStatusStorage": ".kg.postgres_impl",
+    "PGConversationStorage": ".kg.postgres_impl",
     "FaissVectorDBStorage": ".kg.faiss_impl",
     "QdrantVectorDBStorage": ".kg.qdrant_impl",
 }

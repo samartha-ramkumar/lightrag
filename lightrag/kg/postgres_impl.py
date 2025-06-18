@@ -192,6 +192,25 @@ class PostgreSQLDB:
                     f"PostgreSQL, Failed to create index on table {k}, Got: {e}"
                 )
 
+            # Create composite index for (workspace, id) - better for your query patterns
+            try:
+                index_name = f"idx_{k.lower()}_workspace_id"
+                check_index_sql = f"""
+                SELECT 1 FROM pg_indexes
+                WHERE indexname = '{index_name}'
+                AND tablename = '{k.lower()}'
+                """
+                index_exists = await self.query(check_index_sql)
+
+                if not index_exists:
+                    create_index_sql = f"CREATE INDEX {index_name} ON {k}(workspace, id)"
+                    logger.info(f"PostgreSQL, Creating composite index {index_name} on table {k}")
+                    await self.execute(create_index_sql)
+            except Exception as e:
+                logger.error(
+                    f"PostgreSQL, Failed to create composite index on table {k}, Got: {e}"
+                )
+
         # After all tables are created, attempt to migrate timestamp fields
         try:
             await self._migrate_timestamp_columns()
@@ -1124,1177 +1143,255 @@ class PGDocStatusStorage(DocStatusStorage):
             return {"status": "error", "message": str(e)}
 
 
-class PGGraphQueryException(Exception):
-    """Exception for the AGE queries."""
-
-    def __init__(self, exception: Union[str, dict[str, Any]]) -> None:
-        if isinstance(exception, dict):
-            self.message = exception["message"] if "message" in exception else "unknown"
-            self.details = exception["details"] if "details" in exception else "unknown"
-        else:
-            self.message = exception
-            self.details = "unknown"
-
-    def get_message(self) -> str:
-        return self.message
-
-    def get_details(self) -> Any:
-        return self.details
-
-
 @final
 @dataclass
-class PGGraphStorage(BaseGraphStorage):
+class PGConversationStorage(BaseKVStorage):
+    db: PostgreSQLDB = field(default=None)
     workspace: str = field(default=None)
-    
+
     def __post_init__(self):
-        self.graph_name = self.namespace or os.environ.get("AGE_GRAPH_NAME", "lightrag")
-        self.db: PostgreSQLDB | None = None
         if self.workspace is None:
             self.workspace = self.global_config.get("workspace")
 
-    @staticmethod
-    def _normalize_node_id(node_id: str) -> str:
-        """
-        Normalize node ID to ensure special characters are properly handled in Cypher queries.
-
-        Args:
-            node_id: The original node ID
-
-        Returns:
-            Normalized node ID suitable for Cypher queries
-        """
-        # Escape backslashes
-        normalized_id = node_id
-        normalized_id = normalized_id.replace("\\", "\\\\")
-        normalized_id = normalized_id.replace('"', '\\"')
-        return normalized_id
-
     async def initialize(self):
         if self.db is None:
-            self.db = await ClientManager.get_client()
-
-        # Execute each statement separately and ignore errors
-        queries = [
-            f"SELECT create_graph('{self.graph_name}')",
-            f"SELECT create_vlabel('{self.graph_name}', 'base');",
-            f"SELECT create_elabel('{self.graph_name}', 'DIRECTED');",
-            # f'CREATE INDEX CONCURRENTLY vertex_p_idx ON {self.graph_name}."_ag_label_vertex" (id)',
-            f'CREATE INDEX CONCURRENTLY vertex_idx_node_id ON {self.graph_name}."_ag_label_vertex" (ag_catalog.agtype_access_operator(properties, \'"entity_id"\'::agtype))',
-            # f'CREATE INDEX CONCURRENTLY edge_p_idx ON {self.graph_name}."_ag_label_edge" (id)',
-            f'CREATE INDEX CONCURRENTLY edge_sid_idx ON {self.graph_name}."_ag_label_edge" (start_id)',
-            f'CREATE INDEX CONCURRENTLY edge_eid_idx ON {self.graph_name}."_ag_label_edge" (end_id)',
-            f'CREATE INDEX CONCURRENTLY edge_seid_idx ON {self.graph_name}."_ag_label_edge" (start_id,end_id)',
-            f'CREATE INDEX CONCURRENTLY directed_p_idx ON {self.graph_name}."DIRECTED" (id)',
-            f'CREATE INDEX CONCURRENTLY directed_eid_idx ON {self.graph_name}."DIRECTED" (end_id)',
-            f'CREATE INDEX CONCURRENTLY directed_sid_idx ON {self.graph_name}."DIRECTED" (start_id)',
-            f'CREATE INDEX CONCURRENTLY directed_seid_idx ON {self.graph_name}."DIRECTED" (start_id,end_id)',
-            f'CREATE INDEX CONCURRENTLY entity_p_idx ON {self.graph_name}."base" (id)',
-            f'CREATE INDEX CONCURRENTLY entity_idx_node_id ON {self.graph_name}."base" (ag_catalog.agtype_access_operator(properties, \'"entity_id"\'::agtype))',
-            f'CREATE INDEX CONCURRENTLY entity_node_id_gin_idx ON {self.graph_name}."base" using gin(properties)',
-            f'ALTER TABLE {self.graph_name}."DIRECTED" CLUSTER ON directed_sid_idx',
-        ]
-
-        for query in queries:
-            try:
-                await self.db.execute(
-                    query,
-                    upsert=True,
-                    with_age=True,
-                    graph_name=self.graph_name,
-                )
-                # logger.info(f"Successfully executed: {query}")
-            except Exception:
-                continue
+            self.db = await ClientManager.get_client(workspace=self.workspace)
 
     async def finalize(self):
         if self.db is not None:
             await ClientManager.release_client(self.db)
             self.db = None
 
+    async def get_conversation(self, conversation_id: str) -> dict[str, Any] | None:
+        """Get conversation by ID"""
+        sql = "SELECT * FROM LIGHTRAG_CONVERSATIONS WHERE workspace=$1 AND id=$2"
+        params = {"workspace": self.db.workspace, "id": conversation_id}
+        result = await self.db.query(sql, params)
+        
+        if result:
+            # Parse messages if it's a string
+            if isinstance(result["messages"], str):
+                result["messages"] = json.loads(result["messages"])
+            # Parse metadata if it's a string
+            if isinstance(result["metadata"], str):
+                result["metadata"] = json.loads(result["metadata"])
+                
+        return result
+
+    async def create_conversation(self, conversation_id: str | None = None, metadata: dict[str, Any] = None) -> str:
+        """Create a new conversation and return its ID"""
+        import uuid
+        
+        if conversation_id is None:
+            conversation_id = str(uuid.uuid4())
+        
+        current_time = datetime.datetime.now(datetime.timezone.utc)
+        
+        sql = """INSERT INTO LIGHTRAG_CONVERSATIONS (workspace, id, messages, created_at, updated_at, metadata)
+                 VALUES ($1, $2, $3, $4, $5, $6)
+                 ON CONFLICT (workspace, id) DO NOTHING"""
+        
+        params = {
+            "workspace": self.db.workspace,
+            "id": conversation_id,
+            "messages": json.dumps([]),
+            "created_at": current_time,
+            "updated_at": current_time,
+            "metadata": json.dumps(metadata or {})
+        }
+        
+        await self.db.execute(sql, params)
+        return conversation_id
+
+    async def update_conversation(self, conversation_id: str, messages: list[dict[str, str]], metadata: dict[str, Any] = None):
+        """Update conversation messages"""
+        current_time = datetime.datetime.now(datetime.timezone.utc)
+        
+        if metadata is not None:
+            sql = """UPDATE LIGHTRAG_CONVERSATIONS 
+                     SET messages=$1, updated_at=$2, metadata=$3 
+                     WHERE workspace=$4 AND id=$5"""
+            params = {
+                "messages": json.dumps(messages),
+                "updated_at": current_time,
+                "metadata": json.dumps(metadata),
+                "workspace": self.db.workspace,
+                "id": conversation_id
+            }
+        else:
+            sql = """UPDATE LIGHTRAG_CONVERSATIONS 
+                     SET messages=$1, updated_at=$2 
+                     WHERE workspace=$3 AND id=$4"""
+            params = {
+                "messages": json.dumps(messages),
+                "updated_at": current_time,
+                "workspace": self.db.workspace,
+                "id": conversation_id
+            }
+        
+        await self.db.execute(sql, params)
+
+    async def append_to_conversation(self, conversation_id: str, role: str, content: str):
+        """Append a message to conversation"""
+        # Get current conversation
+        conversation = await self.get_conversation(conversation_id)
+        if not conversation:
+            # Create new conversation if it doesn't exist
+            await self.create_conversation(conversation_id)
+            messages = []
+        else:
+            messages = conversation["messages"]
+        
+        # Append new message
+        messages.append({"role": role, "content": content})
+        
+        # Update conversation
+        await self.update_conversation(conversation_id, messages)
+
+    async def get_conversation_messages(self, conversation_id: str) -> list[dict[str, str]]:
+        """Get messages from conversation"""
+        conversation = await self.get_conversation(conversation_id)
+        if not conversation:
+            return []
+        
+        return conversation.get("messages", [])
+
+    async def delete_conversation(self, conversation_id: str):
+        """Delete a conversation"""
+        sql = "DELETE FROM LIGHTRAG_CONVERSATIONS WHERE workspace=$1 AND id=$2"
+        params = {"workspace": self.db.workspace, "id": conversation_id}
+        await self.db.execute(sql, params)
+
+    async def list_conversations(self, limit: int = 50, offset: int = 0) -> list[dict[str, Any]]:
+        """List conversations with pagination"""
+        sql = """SELECT id, created_at, updated_at, metadata,
+                        jsonb_array_length(messages) as message_count
+                 FROM LIGHTRAG_CONVERSATIONS 
+                 WHERE workspace=$1 
+                 ORDER BY updated_at DESC 
+                 LIMIT $2 OFFSET $3"""
+        
+        params = {
+            "workspace": self.db.workspace,
+            "limit": limit,
+            "offset": offset
+        }
+        
+        results = await self.db.query(sql, params, multirows=True)
+        
+        if results:
+            for result in results:
+                # Parse metadata if it's a string
+                if isinstance(result.get("metadata"), str):
+                    result["metadata"] = json.loads(result["metadata"])
+        
+        return results or []
+
+    # Implement required BaseKVStorage methods
+    async def get_all(self) -> dict[str, Any]:
+        """Get all conversations"""
+        sql = "SELECT * FROM LIGHTRAG_CONVERSATIONS WHERE workspace=$1"
+        params = {"workspace": self.db.workspace}
+        results = await self.db.query(sql, params, multirows=True)
+        
+        if results:
+            conversations = {}
+            for row in results:
+                # Parse JSON fields
+                if isinstance(row["messages"], str):
+                    row["messages"] = json.loads(row["messages"])
+                if isinstance(row["metadata"], str):
+                    row["metadata"] = json.loads(row["metadata"])
+                conversations[row["id"]] = row
+            return conversations
+        return {}
+
+    async def get_by_id(self, id: str) -> dict[str, Any] | None:
+        """Get conversation by ID"""
+        return await self.get_conversation(id)
+
+    async def get_by_ids(self, ids: list[str]) -> list[dict[str, Any]]:
+        """Get conversations by IDs"""
+        if not ids:
+            return []
+        
+        ids_str = ",".join([f"'{id}'" for id in ids])
+        sql = f"SELECT * FROM LIGHTRAG_CONVERSATIONS WHERE workspace=$1 AND id IN ({ids_str})"
+        params = {"workspace": self.db.workspace}
+        results = await self.db.query(sql, params, multirows=True)
+        
+        if results:
+            for result in results:
+                # Parse JSON fields
+                if isinstance(result["messages"], str):
+                    result["messages"] = json.loads(result["messages"])
+                if isinstance(result["metadata"], str):
+                    result["metadata"] = json.loads(result["metadata"])
+        
+        return results or []
+
+    async def filter_keys(self, keys: set[str]) -> set[str]:
+        """Filter out existing conversation IDs"""
+        if not keys:
+            return set()
+        
+        ids_str = ",".join([f"'{id}'" for id in keys])
+        sql = f"SELECT id FROM LIGHTRAG_CONVERSATIONS WHERE workspace=$1 AND id IN ({ids_str})"
+        params = {"workspace": self.db.workspace}
+        results = await self.db.query(sql, params, multirows=True)
+        
+        existing_keys = {row["id"] for row in results} if results else set()
+        return keys - existing_keys
+
+    async def upsert(self, data: dict[str, dict[str, Any]]) -> None:
+        """Upsert conversations"""
+        if not data:
+            return
+        
+        current_time = datetime.datetime.now(datetime.timezone.utc)
+        
+        for conversation_id, conversation_data in data.items():
+            sql = """INSERT INTO LIGHTRAG_CONVERSATIONS (workspace, id, messages, created_at, updated_at, metadata)
+                     VALUES ($1, $2, $3, $4, $5, $6)
+                     ON CONFLICT (workspace, id) DO UPDATE SET
+                     messages = EXCLUDED.messages,
+                     updated_at = EXCLUDED.updated_at,
+                     metadata = EXCLUDED.metadata"""
+            
+            params = {
+                "workspace": self.db.workspace,
+                "id": conversation_id,
+                "messages": json.dumps(conversation_data.get("messages", [])),
+                "created_at": conversation_data.get("created_at", current_time),
+                "updated_at": current_time,
+                "metadata": json.dumps(conversation_data.get("metadata", {}))
+            }
+            
+            await self.db.execute(sql, params)
+
+    async def delete(self, ids: list[str]) -> None:
+        """Delete conversations by IDs"""
+        if not ids:
+            return
+        
+        for conversation_id in ids:
+            await self.delete_conversation(conversation_id)
+
     async def index_done_callback(self) -> None:
-        # PG handles persistence automatically
+        """Handle index completion callback - PostgreSQL handles persistence automatically"""
         pass
 
-    @staticmethod
-    def _record_to_dict(record: asyncpg.Record) -> dict[str, Any]:
-        """
-        Convert a record returned from an age query to a dictionary
-
-        Args:
-            record (): a record from an age query result
-
-        Returns:
-            dict[str, Any]: a dictionary representation of the record where
-                the dictionary key is the field name and the value is the
-                value converted to a python type
-        """
-        # result holder
-        d = {}
-
-        # prebuild a mapping of vertex_id to vertex mappings to be used
-        # later to build edges
-        vertices = {}
-        for k in record.keys():
-            v = record[k]
-            # agtype comes back '{key: value}::type' which must be parsed
-            if isinstance(v, str) and "::" in v:
-                if v.startswith("[") and v.endswith("]"):
-                    if "::vertex" not in v:
-                        continue
-                    v = v.replace("::vertex", "")
-                    vertexes = json.loads(v)
-                    for vertex in vertexes:
-                        vertices[vertex["id"]] = vertex.get("properties")
-                else:
-                    dtype = v.split("::")[-1]
-                    v = v.split("::")[0]
-                    if dtype == "vertex":
-                        vertex = json.loads(v)
-                        vertices[vertex["id"]] = vertex.get("properties")
-
-        # iterate returned fields and parse appropriately
-        for k in record.keys():
-            v = record[k]
-            if isinstance(v, str) and "::" in v:
-                if v.startswith("[") and v.endswith("]"):
-                    if "::vertex" in v:
-                        v = v.replace("::vertex", "")
-                        d[k] = json.loads(v)
-
-                    elif "::edge" in v:
-                        v = v.replace("::edge", "")
-                        d[k] = json.loads(v)
-                    else:
-                        print("WARNING: unsupported type")
-                        continue
-
-                else:
-                    dtype = v.split("::")[-1]
-                    v = v.split("::")[0]
-                    if dtype == "vertex":
-                        d[k] = json.loads(v)
-                    elif dtype == "edge":
-                        d[k] = json.loads(v)
-            else:
-                d[k] = v  # Keep as string
-
-        return d
-
-    @staticmethod
-    def _format_properties(
-        properties: dict[str, Any], _id: Union[str, None] = None
-    ) -> str:
-        """
-        Convert a dictionary of properties to a string representation that
-        can be used in a cypher query insert/merge statement.
-
-        Args:
-            properties (dict[str,str]): a dictionary containing node/edge properties
-            _id (Union[str, None]): the id of the node or None if none exists
-
-        Returns:
-            str: the properties dictionary as a properly formatted string
-        """
-        props = []
-        # wrap property key in backticks to escape
-        for k, v in properties.items():
-            prop = f"`{k}`: {json.dumps(v)}"
-            props.append(prop)
-        if _id is not None and "id" not in properties:
-            props.append(
-                f"id: {json.dumps(_id)}" if isinstance(_id, str) else f"id: {_id}"
-            )
-        return "{" + ", ".join(props) + "}"
-
-    async def _query(
-        self,
-        query: str,
-        readonly: bool = True,
-        upsert: bool = False,
-    ) -> list[dict[str, Any]]:
-        """
-        Query the graph by taking a cypher query, converting it to an
-        age compatible query, executing it and converting the result
-
-        Args:
-            query (str): a cypher query to be executed
-
-        Returns:
-            list[dict[str, Any]]: a list of dictionaries containing the result set
-        """
-        try:
-            if readonly:
-                data = await self.db.query(
-                    query,
-                    multirows=True,
-                    with_age=True,
-                    graph_name=self.graph_name,
-                )
-            else:
-                data = await self.db.execute(
-                    query,
-                    upsert=upsert,
-                    with_age=True,
-                    graph_name=self.graph_name,
-                )
-
-        except Exception as e:
-            raise PGGraphQueryException(
-                {
-                    "message": f"Error executing graph query: {query}",
-                    "wrapped": query,
-                    "detail": str(e),
-                }
-            ) from e
-
-        if data is None:
-            result = []
-        # decode records
-        else:
-            result = [self._record_to_dict(d) for d in data]
-
-        return result
-
-    async def has_node(self, node_id: str) -> bool:
-        entity_name_label = self._normalize_node_id(node_id)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (n:base {entity_id: "%s"})
-                     RETURN count(n) > 0 AS node_exists
-                   $$) AS (node_exists bool)""" % (self.graph_name, entity_name_label)
-
-        single_result = (await self._query(query))[0]
-
-        return single_result["node_exists"]
-
-    async def has_edge(self, source_node_id: str, target_node_id: str) -> bool:
-        src_label = self._normalize_node_id(source_node_id)
-        tgt_label = self._normalize_node_id(target_node_id)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (a:base {entity_id: "%s"})-[r]-(b:base {entity_id: "%s"})
-                     RETURN COUNT(r) > 0 AS edge_exists
-                   $$) AS (edge_exists bool)""" % (
-            self.graph_name,
-            src_label,
-            tgt_label,
-        )
-
-        single_result = (await self._query(query))[0]
-
-        return single_result["edge_exists"]
-
-    async def get_node(self, node_id: str) -> dict[str, str] | None:
-        """Get node by its label identifier, return only node properties"""
-
-        label = self._normalize_node_id(node_id)
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (n:base {entity_id: "%s"})
-                     RETURN n
-                   $$) AS (n agtype)""" % (self.graph_name, label)
-        record = await self._query(query)
-        if record:
-            node = record[0]
-            node_dict = node["n"]["properties"]
-
-            # Process string result, parse it to JSON dictionary
-            if isinstance(node_dict, str):
-                try:
-                    import json
-
-                    node_dict = json.loads(node_dict)
-                except json.JSONDecodeError:
-                    logger.warning(f"Failed to parse node string: {node_dict}")
-
-            return node_dict
-        return None
-
-    async def node_degree(self, node_id: str) -> int:
-        label = self._normalize_node_id(node_id)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (n:base {entity_id: "%s"})-[r]-()
-                     RETURN count(r) AS total_edge_count
-                   $$) AS (total_edge_count integer)""" % (self.graph_name, label)
-        record = (await self._query(query))[0]
-        if record:
-            edge_count = int(record["total_edge_count"])
-            return edge_count
-
-    async def edge_degree(self, src_id: str, tgt_id: str) -> int:
-        src_degree = await self.node_degree(src_id)
-        trg_degree = await self.node_degree(tgt_id)
-
-        # Convert None to 0 for addition
-        src_degree = 0 if src_degree is None else src_degree
-        trg_degree = 0 if trg_degree is None else trg_degree
-
-        degrees = int(src_degree) + int(trg_degree)
-
-        return degrees
-
-    async def get_edge(
-        self, source_node_id: str, target_node_id: str
-    ) -> dict[str, str] | None:
-        """Get edge properties between two nodes"""
-
-        src_label = self._normalize_node_id(source_node_id)
-        tgt_label = self._normalize_node_id(target_node_id)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (a:base {entity_id: "%s"})-[r]-(b:base {entity_id: "%s"})
-                     RETURN properties(r) as edge_properties
-                     LIMIT 1
-                   $$) AS (edge_properties agtype)""" % (
-            self.graph_name,
-            src_label,
-            tgt_label,
-        )
-        record = await self._query(query)
-        if record and record[0] and record[0]["edge_properties"]:
-            result = record[0]["edge_properties"]
-
-            # Process string result, parse it to JSON dictionary
-            if isinstance(result, str):
-                try:
-                    import json
-
-                    result = json.loads(result)
-                except json.JSONDecodeError:
-                    logger.warning(f"Failed to parse edge string: {result}")
-
-            return result
-
-    async def get_node_edges(self, source_node_id: str) -> list[tuple[str, str]] | None:
-        """
-        Retrieves all edges (relationships) for a particular node identified by its label.
-        :return: list of dictionaries containing edge information
-        """
-        label = self._normalize_node_id(source_node_id)
-
-        query = """SELECT * FROM cypher('%s', $$
-                      MATCH (n:base {entity_id: "%s"})
-                      OPTIONAL MATCH (n)-[]-(connected:base)
-                      RETURN n.entity_id AS source_id, connected.entity_id AS connected_id
-                    $$) AS (source_id text, connected_id text)""" % (
-            self.graph_name,
-            label,
-        )
-
-        results = await self._query(query)
-        edges = []
-        for record in results:
-            source_id = record["source_id"]
-            connected_id = record["connected_id"]
-
-            if source_id and connected_id:
-                edges.append((source_id, connected_id))
-
-        return edges
-
-    @retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(multiplier=1, min=4, max=10),
-        retry=retry_if_exception_type((PGGraphQueryException,)),
-    )
-    async def upsert_node(self, node_id: str, node_data: dict[str, str]) -> None:
-        """
-        Upsert a node in the Neo4j database.
-
-        Args:
-            node_id: The unique identifier for the node (used as label)
-            node_data: Dictionary of node properties
-        """
-        if "entity_id" not in node_data:
-            raise ValueError(
-                "PostgreSQL: node properties must contain an 'entity_id' field"
-            )
-
-        label = self._normalize_node_id(node_id)
-        properties = self._format_properties(node_data)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MERGE (n:base {entity_id: "%s"})
-                     SET n += %s
-                     RETURN n
-                   $$) AS (n agtype)""" % (
-            self.graph_name,
-            label,
-            properties,
-        )
-
-        try:
-            await self._query(query, readonly=False, upsert=True)
-
-        except Exception:
-            logger.error(f"POSTGRES, upsert_node error on node_id: `{node_id}`")
-            raise
-
-    @retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(multiplier=1, min=4, max=10),
-        retry=retry_if_exception_type((PGGraphQueryException,)),
-    )
-    async def upsert_edge(
-        self, source_node_id: str, target_node_id: str, edge_data: dict[str, str]
-    ) -> None:
-        """
-        Upsert an edge and its properties between two nodes identified by their labels.
-
-        Args:
-            source_node_id (str): Label of the source node (used as identifier)
-            target_node_id (str): Label of the target node (used as identifier)
-            edge_data (dict): dictionary of properties to set on the edge
-        """
-        src_label = self._normalize_node_id(source_node_id)
-        tgt_label = self._normalize_node_id(target_node_id)
-        edge_properties = self._format_properties(edge_data)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (source:base {entity_id: "%s"})
-                     WITH source
-                     MATCH (target:base {entity_id: "%s"})
-                     MERGE (source)-[r:DIRECTED]-(target)
-                     SET r += %s
-                     SET r += %s
-                     RETURN r
-                   $$) AS (r agtype)""" % (
-            self.graph_name,
-            src_label,
-            tgt_label,
-            edge_properties,
-            edge_properties,  # https://github.com/HKUDS/LightRAG/issues/1438#issuecomment-2826000195
-        )
-
-        try:
-            await self._query(query, readonly=False, upsert=True)
-
-        except Exception:
-            logger.error(
-                f"POSTGRES, upsert_edge error on edge: `{source_node_id}`-`{target_node_id}`"
-            )
-            raise
-
-    async def delete_node(self, node_id: str) -> None:
-        """
-        Delete a node from the graph.
-
-        Args:
-            node_id (str): The ID of the node to delete.
-        """
-        label = self._normalize_node_id(node_id)
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (n:base {entity_id: "%s"})
-                     DETACH DELETE n
-                   $$) AS (n agtype)""" % (self.graph_name, label)
-
-        try:
-            await self._query(query, readonly=False)
-        except Exception as e:
-            logger.error("Error during node deletion: {%s}", e)
-            raise
-
-    async def remove_nodes(self, node_ids: list[str]) -> None:
-        """
-        Remove multiple nodes from the graph.
-
-        Args:
-            node_ids (list[str]): A list of node IDs to remove.
-        """
-        node_ids = [self._normalize_node_id(node_id) for node_id in node_ids]
-        node_id_list = ", ".join([f'"{node_id}"' for node_id in node_ids])
-
-        query = """SELECT * FROM cypher('%s', $$
-                     MATCH (n:base)
-                     WHERE n.entity_id IN [%s]
-                     DETACH DELETE n
-                   $$) AS (n agtype)""" % (self.graph_name, node_id_list)
-
-        try:
-            await self._query(query, readonly=False)
-        except Exception as e:
-            logger.error("Error during node removal: {%s}", e)
-            raise
-
-    async def remove_edges(self, edges: list[tuple[str, str]]) -> None:
-        """
-        Remove multiple edges from the graph.
-
-        Args:
-            edges (list[tuple[str, str]]): A list of edges to remove, where each edge is a tuple of (source_node_id, target_node_id).
-        """
-        for source, target in edges:
-            src_label = self._normalize_node_id(source)
-            tgt_label = self._normalize_node_id(target)
-
-            query = """SELECT * FROM cypher('%s', $$
-                         MATCH (a:base {entity_id: "%s"})-[r]-(b:base {entity_id: "%s"})
-                         DELETE r
-                       $$) AS (r agtype)""" % (self.graph_name, src_label, tgt_label)
-
-            try:
-                await self._query(query, readonly=False)
-                logger.debug(f"Deleted edge from '{source}' to '{target}'")
-            except Exception as e:
-                logger.error(f"Error during edge deletion: {str(e)}")
-                raise
-
-    async def get_nodes_batch(self, node_ids: list[str]) -> dict[str, dict]:
-        """
-        Retrieve multiple nodes in one query using UNWIND.
-
-        Args:
-            node_ids: List of node entity IDs to fetch.
-
-        Returns:
-            A dictionary mapping each node_id to its node data (or None if not found).
-        """
-        if not node_ids:
-            return {}
-
-        # Format node IDs for the query
-        formatted_ids = ", ".join(
-            ['"' + self._normalize_node_id(node_id) + '"' for node_id in node_ids]
-        )
-
-        query = """SELECT * FROM cypher('%s', $$
-                     UNWIND [%s] AS node_id
-                     MATCH (n:base {entity_id: node_id})
-                     RETURN node_id, n
-                   $$) AS (node_id text, n agtype)""" % (self.graph_name, formatted_ids)
-
-        results = await self._query(query)
-
-        # Build result dictionary
-        nodes_dict = {}
-        for result in results:
-            if result["node_id"] and result["n"]:
-                node_dict = result["n"]["properties"]
-
-                # Process string result, parse it to JSON dictionary
-                if isinstance(node_dict, str):
-                    try:
-                        import json
-
-                        node_dict = json.loads(node_dict)
-                    except json.JSONDecodeError:
-                        logger.warning(
-                            f"Failed to parse node string in batch: {node_dict}"
-                        )
-
-                # Remove the 'base' label if present in a 'labels' property
-                if "labels" in node_dict:
-                    node_dict["labels"] = [
-                        label for label in node_dict["labels"] if label != "base"
-                    ]
-                nodes_dict[result["node_id"]] = node_dict
-
-        return nodes_dict
-
-    async def node_degrees_batch(self, node_ids: list[str]) -> dict[str, int]:
-        """
-        Retrieve the degree for multiple nodes in a single query using UNWIND.
-        Calculates the total degree by counting distinct relationships.
-        Uses separate queries for outgoing and incoming edges.
-
-        Args:
-            node_ids: List of node labels (entity_id values) to look up.
-
-        Returns:
-            A dictionary mapping each node_id to its degree (total number of relationships).
-            If a node is not found, its degree will be set to 0.
-        """
-        if not node_ids:
-            return {}
-
-        # Format node IDs for the query
-        formatted_ids = ", ".join(
-            ['"' + self._normalize_node_id(node_id) + '"' for node_id in node_ids]
-        )
-
-        outgoing_query = """SELECT * FROM cypher('%s', $$
-                     UNWIND [%s] AS node_id
-                     MATCH (n:base {entity_id: node_id})
-                     OPTIONAL MATCH (n)-[r]->(a)
-                     RETURN node_id, count(a) AS out_degree
-                   $$) AS (node_id text, out_degree bigint)""" % (
-            self.graph_name,
-            formatted_ids,
-        )
-
-        incoming_query = """SELECT * FROM cypher('%s', $$
-                     UNWIND [%s] AS node_id
-                     MATCH (n:base {entity_id: node_id})
-                     OPTIONAL MATCH (n)<-[r]-(b)
-                     RETURN node_id, count(b) AS in_degree
-                   $$) AS (node_id text, in_degree bigint)""" % (
-            self.graph_name,
-            formatted_ids,
-        )
-
-        outgoing_results = await self._query(outgoing_query)
-        incoming_results = await self._query(incoming_query)
-
-        out_degrees = {}
-        in_degrees = {}
-
-        for result in outgoing_results:
-            if result["node_id"] is not None:
-                out_degrees[result["node_id"]] = int(result["out_degree"])
-
-        for result in incoming_results:
-            if result["node_id"] is not None:
-                in_degrees[result["node_id"]] = int(result["in_degree"])
-
-        degrees_dict = {}
-        for node_id in node_ids:
-            out_degree = out_degrees.get(node_id, 0)
-            in_degree = in_degrees.get(node_id, 0)
-            degrees_dict[node_id] = out_degree + in_degree
-
-        return degrees_dict
-
-    async def edge_degrees_batch(
-        self, edges: list[tuple[str, str]]
-    ) -> dict[tuple[str, str], int]:
-        """
-        Calculate the combined degree for each edge (sum of the source and target node degrees)
-        in batch using the already implemented node_degrees_batch.
-
-        Args:
-            edges: List of (source_node_id, target_node_id) tuples
-
-        Returns:
-            Dictionary mapping edge tuples to their combined degrees
-        """
-        if not edges:
-            return {}
-
-        # Use node_degrees_batch to get all node degrees efficiently
-        all_nodes = set()
-        for src, tgt in edges:
-            all_nodes.add(src)
-            all_nodes.add(tgt)
-
-        node_degrees = await self.node_degrees_batch(list(all_nodes))
-
-        # Calculate edge degrees
-        edge_degrees_dict = {}
-        for src, tgt in edges:
-            src_degree = node_degrees.get(src, 0)
-            tgt_degree = node_degrees.get(tgt, 0)
-            edge_degrees_dict[(src, tgt)] = src_degree + tgt_degree
-
-        return edge_degrees_dict
-
-    async def get_edges_batch(
-        self, pairs: list[dict[str, str]]
-    ) -> dict[tuple[str, str], dict]:
-        """
-        Retrieve edge properties for multiple (src, tgt) pairs in one query.
-        Get forward and backward edges seperately and merge them before return
-
-        Args:
-            pairs: List of dictionaries, e.g. [{"src": "node1", "tgt": "node2"}, ...]
-
-        Returns:
-            A dictionary mapping (src, tgt) tuples to their edge properties.
-        """
-        if not pairs:
-            return {}
-
-        src_nodes = []
-        tgt_nodes = []
-        for pair in pairs:
-            src_nodes.append(self._normalize_node_id(pair["src"]))
-            tgt_nodes.append(self._normalize_node_id(pair["tgt"]))
-
-        src_array = ", ".join([f'"{src}"' for src in src_nodes])
-        tgt_array = ", ".join([f'"{tgt}"' for tgt in tgt_nodes])
-
-        forward_query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                     WITH [{src_array}] AS sources, [{tgt_array}] AS targets
-                     UNWIND range(0, size(sources)-1) AS i
-                     MATCH (a:base {{entity_id: sources[i]}})-[r:DIRECTED]->(b:base {{entity_id: targets[i]}})
-                     RETURN sources[i] AS source, targets[i] AS target, properties(r) AS edge_properties
-                   $$) AS (source text, target text, edge_properties agtype)"""
-
-        backward_query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                     WITH [{src_array}] AS sources, [{tgt_array}] AS targets
-                     UNWIND range(0, size(sources)-1) AS i
-                     MATCH (a:base {{entity_id: sources[i]}})<-[r:DIRECTED]-(b:base {{entity_id: targets[i]}})
-                     RETURN sources[i] AS source, targets[i] AS target, properties(r) AS edge_properties
-                   $$) AS (source text, target text, edge_properties agtype)"""
-
-        forward_results = await self._query(forward_query)
-        backward_results = await self._query(backward_query)
-
-        edges_dict = {}
-
-        for result in forward_results:
-            if result["source"] and result["target"] and result["edge_properties"]:
-                edge_props = result["edge_properties"]
-
-                # Process string result, parse it to JSON dictionary
-                if isinstance(edge_props, str):
-                    try:
-                        import json
-
-                        edge_props = json.loads(edge_props)
-                    except json.JSONDecodeError:
-                        logger.warning(
-                            f"Failed to parse edge properties string: {edge_props}"
-                        )
-                        continue
-
-                edges_dict[(result["source"], result["target"])] = edge_props
-
-        for result in backward_results:
-            if result["source"] and result["target"] and result["edge_properties"]:
-                edge_props = result["edge_properties"]
-
-                # Process string result, parse it to JSON dictionary
-                if isinstance(edge_props, str):
-                    try:
-                        import json
-
-                        edge_props = json.loads(edge_props)
-                    except json.JSONDecodeError:
-                        logger.warning(
-                            f"Failed to parse edge properties string: {edge_props}"
-                        )
-                        continue
-
-                edges_dict[(result["source"], result["target"])] = edge_props
-
-        return edges_dict
-
-    async def get_nodes_edges_batch(
-        self, node_ids: list[str]
-    ) -> dict[str, list[tuple[str, str]]]:
-        """
-        Get all edges (both outgoing and incoming) for multiple nodes in a single batch operation.
-
-        Args:
-            node_ids: List of node IDs to get edges for
-
-        Returns:
-            Dictionary mapping node IDs to lists of (source, target) edge tuples
-        """
-        if not node_ids:
-            return {}
-
-        # Format node IDs for the query
-        formatted_ids = ", ".join(
-            ['"' + self._normalize_node_id(node_id) + '"' for node_id in node_ids]
-        )
-
-        outgoing_query = """SELECT * FROM cypher('%s', $$
-                     UNWIND [%s] AS node_id
-                     MATCH (n:base {entity_id: node_id})
-                     OPTIONAL MATCH (n:base)-[]->(connected:base)
-                     RETURN node_id, connected.entity_id AS connected_id
-                   $$) AS (node_id text, connected_id text)""" % (
-            self.graph_name,
-            formatted_ids,
-        )
-
-        incoming_query = """SELECT * FROM cypher('%s', $$
-                     UNWIND [%s] AS node_id
-                     MATCH (n:base {entity_id: node_id})
-                     OPTIONAL MATCH (n:base)<-[]-(connected:base)
-                     RETURN node_id, connected.entity_id AS connected_id
-                   $$) AS (node_id text, connected_id text)""" % (
-            self.graph_name,
-            formatted_ids,
-        )
-
-        outgoing_results = await self._query(outgoing_query)
-        incoming_results = await self._query(incoming_query)
-
-        nodes_edges_dict = {node_id: [] for node_id in node_ids}
-
-        for result in outgoing_results:
-            if result["node_id"] and result["connected_id"]:
-                nodes_edges_dict[result["node_id"]].append(
-                    (result["node_id"], result["connected_id"])
-                )
-
-        for result in incoming_results:
-            if result["node_id"] and result["connected_id"]:
-                nodes_edges_dict[result["node_id"]].append(
-                    (result["connected_id"], result["node_id"])
-                )
-
-        return nodes_edges_dict
-
-    async def get_all_labels(self) -> list[str]:
-        """
-        Get all labels (node IDs) in the graph.
-
-        Returns:
-            list[str]: A list of all labels in the graph.
-        """
-        query = (
-            """SELECT * FROM cypher('%s', $$
-                     MATCH (n:base)
-                     WHERE n.entity_id IS NOT NULL
-                     RETURN DISTINCT n.entity_id AS label
-                     ORDER BY n.entity_id
-                   $$) AS (label text)"""
-            % self.graph_name
-        )
-
-        results = await self._query(query)
-        labels = []
-        for result in results:
-            if result and isinstance(result, dict) and "label" in result:
-                labels.append(result["label"])
-        return labels
-
-    async def _bfs_subgraph(
-        self, node_label: str, max_depth: int, max_nodes: int
-    ) -> KnowledgeGraph:
-        """
-        Implements a true breadth-first search algorithm for subgraph retrieval.
-        This method is used as a fallback when the standard Cypher query is too slow
-        or when we need to guarantee BFS ordering.
-
-        Args:
-            node_label: Label of the starting node
-            max_depth: Maximum depth of the subgraph
-            max_nodes: Maximum number of nodes to return
-
-        Returns:
-            KnowledgeGraph object containing nodes and edges
-        """
-        from collections import deque
-
-        result = KnowledgeGraph()
-        visited_nodes = set()
-        visited_node_ids = set()
-        visited_edges = set()
-        visited_edge_pairs = set()
-
-        # Get starting node data
-        label = self._normalize_node_id(node_label)
-        query = """SELECT * FROM cypher('%s', $$
-                    MATCH (n:base {entity_id: "%s"})
-                    RETURN id(n) as node_id, n
-                  $$) AS (node_id bigint, n agtype)""" % (self.graph_name, label)
-
-        node_result = await self._query(query)
-        if not node_result or not node_result[0].get("n"):
-            return result
-
-        # Create initial KnowledgeGraphNode
-        start_node_data = node_result[0]["n"]
-        entity_id = start_node_data["properties"]["entity_id"]
-        internal_id = str(start_node_data["id"])
-
-        start_node = KnowledgeGraphNode(
-            id=internal_id,
-            labels=[entity_id],
-            properties=start_node_data["properties"],
-        )
-
-        # Initialize BFS queue, each element is a tuple of (node, depth)
-        queue = deque([(start_node, 0)])
-
-        visited_nodes.add(entity_id)
-        visited_node_ids.add(internal_id)
-        result.nodes.append(start_node)
-
-        result.is_truncated = False
-
-        # BFS search main loop
-        while queue:
-            # Get all nodes at the current depth
-            current_level_nodes = []
-            current_depth = None
-
-            # Determine current depth
-            if queue:
-                current_depth = queue[0][1]
-
-            # Extract all nodes at current depth from the queue
-            while queue and queue[0][1] == current_depth:
-                node, depth = queue.popleft()
-                if depth > max_depth:
-                    continue
-                current_level_nodes.append(node)
-
-            if not current_level_nodes:
-                continue
-
-            # Check depth limit
-            if current_depth > max_depth:
-                continue
-
-            # Prepare node IDs list
-            node_ids = [node.labels[0] for node in current_level_nodes]
-            formatted_ids = ", ".join(
-                [f'"{self._normalize_node_id(node_id)}"' for node_id in node_ids]
-            )
-
-            # Construct batch query for outgoing edges
-            outgoing_query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                UNWIND [{formatted_ids}] AS node_id
-                MATCH (n:base {{entity_id: node_id}})
-                OPTIONAL MATCH (n)-[r]->(neighbor:base)
-                RETURN node_id AS current_id,
-                       id(n) AS current_internal_id,
-                       id(neighbor) AS neighbor_internal_id,
-                       neighbor.entity_id AS neighbor_id,
-                       id(r) AS edge_id,
-                       r,
-                       neighbor,
-                       true AS is_outgoing
-              $$) AS (current_id text, current_internal_id bigint, neighbor_internal_id bigint,
-                      neighbor_id text, edge_id bigint, r agtype, neighbor agtype, is_outgoing bool)"""
-
-            # Construct batch query for incoming edges
-            incoming_query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                UNWIND [{formatted_ids}] AS node_id
-                MATCH (n:base {{entity_id: node_id}})
-                OPTIONAL MATCH (n)<-[r]-(neighbor:base)
-                RETURN node_id AS current_id,
-                       id(n) AS current_internal_id,
-                       id(neighbor) AS neighbor_internal_id,
-                       neighbor.entity_id AS neighbor_id,
-                       id(r) AS edge_id,
-                       r,
-                       neighbor,
-                       false AS is_outgoing
-              $$) AS (current_id text, current_internal_id bigint, neighbor_internal_id bigint,
-                      neighbor_id text, edge_id bigint, r agtype, neighbor agtype, is_outgoing bool)"""
-
-            # Execute queries
-            outgoing_results = await self._query(outgoing_query)
-            incoming_results = await self._query(incoming_query)
-
-            # Combine results
-            neighbors = outgoing_results + incoming_results
-
-            # Create mapping from node ID to node object
-            node_map = {node.labels[0]: node for node in current_level_nodes}
-
-            # Process all results in a single loop
-            for record in neighbors:
-                if not record.get("neighbor") or not record.get("r"):
-                    continue
-
-                # Get current node information
-                current_entity_id = record["current_id"]
-                current_node = node_map[current_entity_id]
-
-                # Get neighbor node information
-                neighbor_entity_id = record["neighbor_id"]
-                neighbor_internal_id = str(record["neighbor_internal_id"])
-                is_outgoing = record["is_outgoing"]
-
-                # Determine edge direction
-                if is_outgoing:
-                    source_id = current_node.id
-                    target_id = neighbor_internal_id
-                else:
-                    source_id = neighbor_internal_id
-                    target_id = current_node.id
-
-                if not neighbor_entity_id:
-                    continue
-
-                # Get edge and node information
-                b_node = record["neighbor"]
-                rel = record["r"]
-                edge_id = str(record["edge_id"])
-
-                # Create neighbor node object
-                neighbor_node = KnowledgeGraphNode(
-                    id=neighbor_internal_id,
-                    labels=[neighbor_entity_id],
-                    properties=b_node["properties"],
-                )
-
-                # Sort entity_ids to ensure (A,B) and (B,A) are treated as the same edge
-                sorted_pair = tuple(sorted([current_entity_id, neighbor_entity_id]))
-
-                # Create edge object
-                edge = KnowledgeGraphEdge(
-                    id=edge_id,
-                    type=rel["label"],
-                    source=source_id,
-                    target=target_id,
-                    properties=rel["properties"],
-                )
-
-                if neighbor_internal_id in visited_node_ids:
-                    # Add backward edge if neighbor node is already visited
-                    if (
-                        edge_id not in visited_edges
-                        and sorted_pair not in visited_edge_pairs
-                    ):
-                        result.edges.append(edge)
-                        visited_edges.add(edge_id)
-                        visited_edge_pairs.add(sorted_pair)
-                else:
-                    if len(visited_node_ids) < max_nodes and current_depth < max_depth:
-                        # Add new node to result and queue
-                        result.nodes.append(neighbor_node)
-                        visited_nodes.add(neighbor_entity_id)
-                        visited_node_ids.add(neighbor_internal_id)
-
-                        # Add node to queue with incremented depth
-                        queue.append((neighbor_node, current_depth + 1))
-
-                        # Add forward edge
-                        if (
-                            edge_id not in visited_edges
-                            and sorted_pair not in visited_edge_pairs
-                        ):
-                            result.edges.append(edge)
-                            visited_edges.add(edge_id)
-                            visited_edge_pairs.add(sorted_pair)
-                    else:
-                        if current_depth < max_depth:
-                            result.is_truncated = True
-
-        return result
-
-    async def get_knowledge_graph(
-        self,
-        node_label: str,
-        max_depth: int = 3,
-        max_nodes: int = MAX_GRAPH_NODES,
-    ) -> KnowledgeGraph:
-        """
-        Retrieve a connected subgraph of nodes where the label includes the specified `node_label`.
-
-        Args:
-            node_label: Label of the starting node, * means all nodes
-            max_depth: Maximum depth of the subgraph, Defaults to 3
-            max_nodes: Maxiumu nodes to return, Defaults to 1000
-
-        Returns:
-            KnowledgeGraph object containing nodes and edges, with an is_truncated flag
-            indicating whether the graph was truncated due to max_nodes limit
-        """
-        kg = KnowledgeGraph()
-
-        # Handle wildcard query - get all nodes
-        if node_label == "*":
-            # First check total node count to determine if graph should be truncated
-            count_query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                    MATCH (n:base)
-                    RETURN count(distinct n) AS total_nodes
-                    $$) AS (total_nodes bigint)"""
-
-            count_result = await self._query(count_query)
-            total_nodes = count_result[0]["total_nodes"] if count_result else 0
-            is_truncated = total_nodes > max_nodes
-
-            # Get max_nodes with highest degrees
-            query_nodes = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                    MATCH (n:base)
-                    OPTIONAL MATCH (n)-[r]->()
-                    RETURN id(n) as node_id, count(r) as degree
-                $$) AS (node_id BIGINT, degree BIGINT)
-                ORDER BY degree DESC
-                LIMIT {max_nodes}"""
-            node_results = await self._query(query_nodes)
-
-            node_ids = [str(result["node_id"]) for result in node_results]
-
-            logger.info(f"Total nodes: {total_nodes}, Selected nodes: {len(node_ids)}")
-
-            if node_ids:
-                formatted_ids = ", ".join(node_ids)
-                # Construct batch query for subgraph within max_nodes
-                query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                        WITH [{formatted_ids}] AS node_ids
-                        MATCH (a)
-                        WHERE id(a) IN node_ids
-                        OPTIONAL MATCH (a)-[r]->(b)
-                            WHERE id(b) IN node_ids
-                        RETURN a, r, b
-                    $$) AS (a AGTYPE, r AGTYPE, b AGTYPE)"""
-                results = await self._query(query)
-
-                # Process query results, deduplicate nodes and edges
-                nodes_dict = {}
-                edges_dict = {}
-                for result in results:
-                    # Process node a
-                    if result.get("a") and isinstance(result["a"], dict):
-                        node_a = result["a"]
-                        node_id = str(node_a["id"])
-                        if node_id not in nodes_dict and "properties" in node_a:
-                            nodes_dict[node_id] = KnowledgeGraphNode(
-                                id=node_id,
-                                labels=[node_a["properties"]["entity_id"]],
-                                properties=node_a["properties"],
-                            )
-
-                    # Process node b
-                    if result.get("b") and isinstance(result["b"], dict):
-                        node_b = result["b"]
-                        node_id = str(node_b["id"])
-                        if node_id not in nodes_dict and "properties" in node_b:
-                            nodes_dict[node_id] = KnowledgeGraphNode(
-                                id=node_id,
-                                labels=[node_b["properties"]["entity_id"]],
-                                properties=node_b["properties"],
-                            )
-
-                    # Process edge r
-                    if result.get("r") and isinstance(result["r"], dict):
-                        edge = result["r"]
-                        edge_id = str(edge["id"])
-                        if edge_id not in edges_dict:
-                            edges_dict[edge_id] = KnowledgeGraphEdge(
-                                id=edge_id,
-                                type=edge["label"],
-                                source=str(edge["start_id"]),
-                                target=str(edge["end_id"]),
-                                properties=edge["properties"],
-                            )
-
-                kg = KnowledgeGraph(
-                    nodes=list(nodes_dict.values()),
-                    edges=list(edges_dict.values()),
-                    is_truncated=is_truncated,
-                )
-            else:
-                # For single node query, use BFS algorithm
-                kg = await self._bfs_subgraph(node_label, max_depth, max_nodes)
-
-            logger.info(
-                f"Subgraph query successful | Node count: {len(kg.nodes)} | Edge count: {len(kg.edges)}"
-            )
-        else:
-            # For non-wildcard queries, use the BFS algorithm
-            kg = await self._bfs_subgraph(node_label, max_depth, max_nodes)
-            logger.info(
-                f"Subgraph query for '{node_label}' successful | Node count: {len(kg.nodes)} | Edge count: {len(kg.edges)}"
-            )
-
-        return kg
-
     async def drop(self) -> dict[str, str]:
-        """Drop the storage"""
+        """Drop all conversations for workspace"""
         try:
-            drop_query = f"""SELECT * FROM cypher('{self.graph_name}', $$
-                              MATCH (n)
-                              DETACH DELETE n
-                            $$) AS (result agtype)"""
-
-            await self._query(drop_query, readonly=False)
-            return {"status": "success", "message": "graph data dropped"}
+            sql = "DELETE FROM LIGHTRAG_CONVERSATIONS WHERE workspace=$1"
+            params = {"workspace": self.db.workspace}
+            await self.db.execute(sql, params)
+            return {"status": "success", "message": "Conversations dropped successfully."}
+        
         except Exception as e:
-            logger.error(f"Error dropping graph: {e}")
             return {"status": "error", "message": str(e)}
+    
 
 
 NAMESPACE_TABLE_MAP = {
@@ -2305,6 +1402,7 @@ NAMESPACE_TABLE_MAP = {
     NameSpace.VECTOR_STORE_RELATIONSHIPS: "LIGHTRAG_VDB_RELATION",
     NameSpace.DOC_STATUS: "LIGHTRAG_DOC_STATUS",
     NameSpace.KV_STORE_LLM_RESPONSE_CACHE: "LIGHTRAG_LLM_CACHE",
+    NameSpace.CONVERSATIONS: "LIGHTRAG_CONVERSATIONS",
 }
 
 
@@ -2397,6 +1495,17 @@ TABLES = {
 	               updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NULL,
 	               CONSTRAINT LIGHTRAG_DOC_STATUS_PK PRIMARY KEY (workspace, id)
 	              )"""
+    },
+    "LIGHTRAG_CONVERSATIONS": {
+        "ddl": """CREATE TABLE IF NOT EXISTS LIGHTRAG_CONVERSATIONS (
+                    id VARCHAR(255),
+                    workspace VARCHAR(255),
+                    messages JSONB NOT NULL DEFAULT '[]'::jsonb,
+                    created_at TIMESTAMP(0) WITH TIME ZONE,
+                    updated_at TIMESTAMP(0) WITH TIME ZONE,
+                    metadata JSONB DEFAULT '{}'::jsonb,
+                    CONSTRAINT LIGHTRAG_CONVERSATIONS_PK PRIMARY KEY (workspace, id)
+                  )"""
     },
 }
 
