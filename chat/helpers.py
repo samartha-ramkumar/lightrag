@@ -76,6 +76,83 @@ async def create_new_chat_session():
 
     return session_id
 
+# New functions for LightRAG conversation management
+def validate_message_format(message):
+    """Validate that a message has the correct format"""
+    if not isinstance(message, dict):
+        return False
+    if "role" not in message or "content" not in message:
+        return False
+    if message["role"] not in ["user", "assistant", "system"]:
+        return False
+    if not isinstance(message["content"], str):
+        return False
+    return True
+
+def validate_conversation_messages(messages):
+    """Validate a list of conversation messages"""
+    if not isinstance(messages, list):
+        return False
+    return all(validate_message_format(msg) for msg in messages)
+
+def add_message_to_conversation(messages, role, content):
+    """Add a new message to conversation history"""
+    if role not in ["user", "assistant", "system"]:
+        raise ValueError(f"Invalid role: {role}. Must be 'user', 'assistant', or 'system'")
+    
+    new_messages = messages.copy()
+    message = {"role": role, "content": content}
+    new_messages.append(message)
+    return new_messages
+
+def get_chat_conversation_turns(conversation_history, max_turns=None):
+    """Convert conversation history to context string with optional turn limit"""
+    if not conversation_history:
+        return ""
+    
+    # If max_turns is specified, get only the last N turns
+    if max_turns and max_turns > 0:
+        conversation_history = conversation_history[-max_turns * 2:]  # 2 messages per turn (user + assistant)
+    
+    context_parts = []
+    for msg in conversation_history:
+        role = msg.get("role", "")
+        content = msg.get("content", "")
+        if role and content:
+            context_parts.append(f"{role.capitalize()}: {content}")
+    
+    return "\n".join(context_parts)
+
+def get_last_n_messages(messages, n):
+    """Get the last n messages from conversation"""
+    if n <= 0:
+        return []
+    return messages[-n:] if len(messages) > n else messages
+
+
+def conversation_to_openai_format(messages):
+    """Convert conversation messages to OpenAI API format"""
+    formatted_messages = []
+    
+    for message in messages:
+        if validate_message_format(message):
+            formatted_message = {
+                "role": message["role"],
+                "content": message["content"]
+            }
+            formatted_messages.append(formatted_message)
+    
+    return formatted_messages
+
+def merge_conversation_contexts(conversation_history, system_context=None):
+    """Merge conversation history with system context"""
+    messages = []
+    
+    if system_context:
+        messages.append({"role": "system", "content": system_context})
+    
+    messages.extend(conversation_history)
+    return messages
 
 ## EXAMPLE USAGE
 if __name__ == "__main__":
@@ -127,6 +204,39 @@ if __name__ == "__main__":
             await get_messages_for_session("non_existent_session_id")
         except HTTPException as e:
             print(f"   Error: {e.detail}")
+
+        # Test new LightRAG conversation functions
+        print("8. Testing LightRAG conversation functions...")
+        
+        # Test message validation
+        valid_msg = {"role": "user", "content": "Hello"}
+        invalid_msg = {"role": "invalid", "content": "Hello"}
+        
+        print(f"   Valid message validation: {validate_message_format(valid_msg)}")
+        print(f"   Invalid message validation: {validate_message_format(invalid_msg)}")
+        
+        # Test adding messages
+        conv_messages = []
+        conv_messages = add_message_to_conversation(conv_messages, "user", "Hello")
+        conv_messages = add_message_to_conversation(conv_messages, "assistant", "Hi there!")
+        
+        print(f"   Conversation after adding messages: {len(conv_messages)} messages")
+        
+        # Test getting last n messages
+        last_2 = get_last_n_messages(conv_messages, 2)
+        print(f"   Last 2 messages: {len(last_2)} messages")
+        
+        # Test conversation to OpenAI format
+        openai_format = conversation_to_openai_format(conv_messages)
+        print(f"   OpenAI format: {openai_format}")
+        
+        # Test merging conversation contexts
+        merged_context = merge_conversation_contexts(conv_messages, "You are a helpful assistant.")
+        print(f"   Merged context: {merged_context}")
+        
+        # Test getting conversation turns
+        turns = get_chat_conversation_turns(conv_messages, max_turns=1)
+        print(f"   Conversation turns: {turns}")
     
     # Run the example
     asyncio.run(test_chat_helpers())

@@ -60,15 +60,15 @@ def configure_logging():
             "loggers": {
                 "lightrag": {
                     "handlers": ["console", "file"],
-                    "level": "ERROR",
+                    "level": "INFO",
                     "propagate": False,
                 },
             },
         }
     )
 
-    # Set the logger level to ERROR
-    logger.setLevel(logging.ERROR)
+    # Set the logger level to INFO
+    logger.setLevel(logging.INFO)
     # Enable verbose debug if needed
     set_verbose_debug(os.getenv("VERBOSE_DEBUG", "false").lower() == "true")
 
@@ -117,7 +117,7 @@ async def initialize_rag(workspace_name: str | None = None):
         enable_llm_cache=args.enable_llm_cache,
         auto_manage_storages_states=False,
         max_parallel_insert=args.max_parallel_insert,
-        log_level="ERROR"
+        log_level="INFO"
     )
 
     await rag.initialize_storages()
@@ -140,24 +140,45 @@ async def main():
         with open("./test_samples/sample.txt", "r", encoding="utf-8") as f:
             await rag.ainsert(input=f.read(), ids=["doc_1"])
 
-
         print("=====================")
-        print(
-            await rag.aquery(
-                "Something unique about this document?",
-                param=QueryParam(mode="mix",
-                                 conversation_history=[
-                                     {"role": "user", "content": "What is this document about?"},
-                                     {"role": "assistant", "content": "This document is about interviews..."}
-                                 ]), 
-                                 # conversation_id --- To be added as part of the new feature
-            )
+        
+        # Example 1: Using chat method with automatic conversation management
+        # response, conversation_id = await rag.achat(
+        #     "What is this document about?",
+        #     param=QueryParam(mode="mix")
+        # )
+        # print(f"Conversation ID: {conversation_id}")
+        # print(f"Response: {response}")
+        
+        # Continue the conversation
+        conversation_id = "c7bb9a0f-72c1-41e7-8dc7-9db495865692"
+        response2, _ = await rag.achat(
+            "I understand ..but what you gave is too much...Can you answer my question in less than 50-60 words?",
+            conversation_id=conversation_id,
+            param=QueryParam(mode="mix")
         )
+        print(f"Follow-up response: {response2}")
+        print(f"Conversation ID: {_}")
+        
+        # Example 2: Manual conversation history (original approach still works)
+        # print("\n=== Manual Conversation History ===")
+        # print(
+        #     await rag.aquery(
+        #         "Something unique about this document?",
+        #         param=QueryParam(mode="mix",
+        #                          conversation_history=[
+        #                              {"role": "user", "content": "What is this document about?"},
+        #                              {"role": "assistant", "content": "This document is about interviews..."}
+        #                          ])
+        #     )
+        # )
         
     except Exception as e:
         print(f"An error occurred: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
-        if rag:
+        if 'rag' in locals():
             await rag.finalize_storages()
 
 

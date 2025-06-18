@@ -15,6 +15,7 @@ class NameSpace:
     GRAPH_STORE_CHUNK_ENTITY_RELATION = "chunk_entity_relation"
 
     DOC_STATUS = "doc_status"
+    CONVERSATIONS = "conversations"
 
 
 def make_namespace(prefix: str, base_namespace: str):

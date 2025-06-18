@@ -7026,3 +7026,93 @@ You are a helpful assistant responding to user query about Knowledge Grap...
 2025-06-15 01:40:54,863 - lightrag - DEBUG - [utils.py:1003] Non-embedding cached hit(mode:mix type:query)
 2025-06-15 01:40:54,870 - lightrag - INFO - [postgres_impl.py:350] Closed PostgreSQL database connection pool
 2025-06-15 01:40:54,871 - lightrag - DEBUG - [lightrag.py:530] Finalized Storages
+2025-06-17 19:28:15,346 - lightrag - ERROR - [postgres_impl.py:263] PostgreSQL database, error:relation "lightrag_conversations" does not exist
+2025-06-17 19:37:23,482 - lightrag - INFO - [falkordb_impl.py:120] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-17 19:37:23,536 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-17 19:37:23,652 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-17 19:37:23,663 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-17 19:37:23,672 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-17 19:37:23,680 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-17 19:37:23,687 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-17 19:37:23,695 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-17 19:37:23,695 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,696 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:37:23,701 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-17 19:37:23,819 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-17 19:37:23,838 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-17 19:37:25,889 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 7a5b47cc3e6324b973887352673e5ff8
+2025-06-17 19:37:25,902 - lightrag - INFO - [operate.py:1224] Process 364851 building query context...
+2025-06-17 19:37:25,902 - lightrag - INFO - [operate.py:1348] Query nodes: Question categories, General Questions, Self Awareness Questions, Weaknesses Questions, Values Questions, Brain Teasers, Candidate engagement, Avoidance guidelines, top_k: 60, cosine: 0.2
+2025-06-17 19:37:25,904 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-17 19:37:25,905 - lightrag - INFO - [provider.py:322] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-17 19:37:26,671 - lightrag - INFO - [operate.py:1410] Local query uses 21 entites, 27 relations, 1 chunks
+2025-06-17 19:37:26,671 - lightrag - INFO - [operate.py:1651] Query edges: Interview document, Interview questions, Candidate assessment, top_k: 60, cosine: 0.2
+2025-06-17 19:37:26,672 - lightrag - INFO - [provider.py:322] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-17 19:37:27,843 - lightrag - INFO - [operate.py:1719] Global query uses 21 entites, 27 relations, 1 chunks
+2025-06-17 19:37:27,844 - lightrag - INFO - [provider.py:322] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-17 19:37:28,313 - lightrag - INFO - [operate.py:1186] Vector query: 1 chunks, top_k: 60
+2025-06-17 19:37:30,047 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: c421d7fcd81aa449164f692d4a3acd3f
+2025-06-17 19:37:30,095 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-17 19:53:17,338 - lightrag - INFO - [falkordb_impl.py:120] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-17 19:53:17,389 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-17 19:53:17,500 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:17,509 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:17,517 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:17,525 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:17,533 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:17,542 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:17,542 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,542 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,542 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,543 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,543 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,543 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,543 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,544 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:17,548 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-17 19:53:17,664 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-17 19:53:17,695 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-17 19:53:28,023 - lightrag - INFO - [falkordb_impl.py:120] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-17 19:53:28,084 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-17 19:53:28,197 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:28,205 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:28,214 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:28,222 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:28,231 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:28,239 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:28,239 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,239 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,239 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,240 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,240 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,240 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,240 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,240 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:28,245 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-17 19:53:28,358 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-17 19:53:28,389 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-17 19:53:43,226 - lightrag - INFO - [falkordb_impl.py:120] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-17 19:53:43,279 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-17 19:53:43,391 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:43,399 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:43,408 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:43,416 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:43,425 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-17 19:53:43,433 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-17 19:53:43,434 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,434 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,434 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,434 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,434 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,435 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,435 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,435 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-17 19:53:43,439 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-17 19:53:43,553 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-17 19:53:43,578 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool

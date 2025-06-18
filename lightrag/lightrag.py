@@ -21,6 +21,7 @@ from typing import (
     List,
     Dict,
 )
+from dotenv import load_dotenv  # Add missing import
 from lightrag.constants import (
     DEFAULT_MAX_TOKEN_SUMMARY,
     DEFAULT_FORCE_LLM_SUMMARY_ON_MERGE,
@@ -36,7 +37,10 @@ from lightrag.kg.shared_storage import (
     get_namespace_data,
     get_pipeline_status_lock,
 )
-
+from chat.helpers import (
+    add_message_to_conversation,
+    validate_conversation_messages
+)
 from .base import (
     BaseGraphStorage,
     BaseKVStorage,
@@ -73,7 +77,6 @@ from .utils import (
     logger,
 )
 from .types import KnowledgeGraph
-from dotenv import load_dotenv
 
 # use the .env that is inside the current folder
 # allows to use different .env file for each lightrag instance
@@ -112,6 +115,9 @@ class LightRAG:
 
     doc_status_storage: str = field(default=get_env_value("LIGHTRAG_DOC_STATUS_STORAGE", "PGDocStatusStorage"))
     """Storage type for tracking document processing statuses."""
+
+    conversation_storage: str = field(default=get_env_value("LIGHTRAG_CONVERSATION_STORAGE", "PGConversationStorage"))
+    """ Storage type for managing conversations and chat sessions."""
 
     workspace: str = field(default=get_env_value("POSTGRES_WORKSPACE", "default"))
 
@@ -321,6 +327,7 @@ class LightRAG:
             ("VECTOR_STORAGE", self.vector_storage),
             ("GRAPH_STORAGE", self.graph_storage),
             ("DOC_STATUS_STORAGE", self.doc_status_storage),
+            ("CONVERSATION_STORAGE", self.conversation_storage),
         ]
 
         for storage_type, storage_name in storage_configs:
@@ -376,6 +383,9 @@ class LightRAG:
         # Initialize document status storage
         self.doc_status_storage_cls = self._get_storage_class(self.doc_status_storage)
 
+        # Initialize conversation storage class
+        self.conversation_storage_cls = self._get_storage_class(self.conversation_storage)
+
         self.llm_response_cache: BaseKVStorage = self.key_string_value_json_storage_cls(  # type: ignore
             namespace=make_namespace(
                 self.namespace_prefix, NameSpace.KV_STORE_LLM_RESPONSE_CACHE
@@ -410,7 +420,6 @@ class LightRAG:
             embedding_func=self.embedding_func,
             workspace=self.workspace,
         )
-
         self.entities_vdb: BaseVectorStorage = self.vector_db_storage_cls(  # type: ignore
             namespace=make_namespace(
                 self.namespace_prefix, NameSpace.VECTOR_STORE_ENTITIES
@@ -455,6 +464,16 @@ class LightRAG:
             )
         )
 
+        # Initialize conversation storage with specialized class
+        self.conversations: BaseKVStorage = self.conversation_storage_cls(
+            namespace=make_namespace(
+                self.namespace_prefix, NameSpace.CONVERSATIONS
+            ),
+            global_config=asdict(self),
+            embedding_func=None,
+            workspace=self.workspace,
+        )
+
         self._storages_status = StoragesStatus.CREATED
 
         if self.auto_manage_storages_states:
@@ -497,6 +516,7 @@ class LightRAG:
                 self.chunk_entity_relation_graph,
                 self.llm_response_cache,
                 self.doc_status,
+                self.conversations,  # Add conversations storage
             ):
                 if storage:
                     tasks.append(storage.initialize())
@@ -520,6 +540,7 @@ class LightRAG:
                 self.chunk_entity_relation_graph,
                 self.llm_response_cache,
                 self.doc_status,
+                self.conversations,  # Add conversations storage
             ):
                 if storage:
                     tasks.append(storage.finalize())
@@ -1190,6 +1211,181 @@ class LightRAG:
                 pipeline_status["latest_message"] = log_message
                 pipeline_status["history_messages"].append(log_message)
 
+    # Conversation Management Methods
+    async def acreate_conversation(self, conversation_id: str = None, metadata: dict[str, Any] = None) -> str:
+        """Create a new conversation and return its ID"""
+        if hasattr(self.conversations, 'create_conversation'):
+            return await self.conversations.create_conversation(conversation_id, metadata)
+        else:
+            # Fallback for generic storage
+            import uuid
+            if conversation_id is None:
+                conversation_id = str(uuid.uuid4())
+            
+            conversation_data = {
+                "messages": [],
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+                "metadata": metadata or {}
+            }
+            
+            await self.conversations.upsert({conversation_id: conversation_data})
+            return conversation_id
+
+    def create_conversation(self, conversation_id: str = None, metadata: dict[str, Any] = None) -> str:
+        """Sync version of create_conversation"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.acreate_conversation(conversation_id, metadata))
+
+    async def aget_conversation(self, conversation_id: str) -> dict[str, Any] | None:
+        """Get conversation by ID"""
+        if hasattr(self.conversations, 'get_conversation'):
+            return await self.conversations.get_conversation(conversation_id)
+        else:
+            return await self.conversations.get_by_id(conversation_id)
+
+    def get_conversation(self, conversation_id: str) -> dict[str, Any] | None:
+        """Sync version of get_conversation"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.aget_conversation(conversation_id))
+
+    async def aget_conversation_messages(self, conversation_id: str) -> list[dict[str, str]]:
+        """Get messages from conversation"""
+        if hasattr(self.conversations, 'get_conversation_messages'):
+            return await self.conversations.get_conversation_messages(conversation_id)
+        else:
+            conversation = await self.conversations.get_by_id(conversation_id)
+            if not conversation:
+                return []
+            return conversation.get("messages", [])
+
+    def get_conversation_messages(self, conversation_id: str) -> list[dict[str, str]]:
+        """Sync version of get_conversation_messages"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.aget_conversation_messages(conversation_id))
+
+    async def aupdate_conversation(self, conversation_id: str, messages: list[dict[str, str]], metadata: dict[str, Any] = None):
+        """Update conversation with new messages"""
+        if hasattr(self.conversations, 'update_conversation'):
+            await self.conversations.update_conversation(conversation_id, messages, metadata)
+        else:
+            conversation_data = {
+                "messages": messages,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }
+            if metadata is not None:
+                conversation_data["metadata"] = metadata
+            
+            await self.conversations.upsert({conversation_id: conversation_data})
+
+    def update_conversation(self, conversation_id: str, messages: list[dict[str, str]], metadata: dict[str, Any] = None):
+        """Sync version of update_conversation"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.aupdate_conversation(conversation_id, messages, metadata))
+
+    async def achat(
+        self, 
+        query: str, 
+        conversation_id: str = None,
+        param: QueryParam = None,
+        system_prompt: str = None,
+        auto_create_conversation: bool = True
+    ) -> tuple[str | AsyncIterator[str], str]:
+        """
+        Chat with LightRAG using conversation history
+        
+        Args:
+            query: User's message/query
+            conversation_id: ID of existing conversation, or None to create new one
+            param: Query parameters
+            system_prompt: Custom system prompt
+            auto_create_conversation: Whether to auto-create conversation if not found
+            
+        Returns:
+            Tuple of (response, conversation_id)
+        """
+        if param is None:
+            param = QueryParam()
+        
+        # Handle conversation
+        if conversation_id is None and auto_create_conversation:
+            conversation_id = await self.acreate_conversation()
+        
+        # Get existing conversation history
+        conversation_history = []
+        if conversation_id:
+            conversation_history = await self.aget_conversation_messages(conversation_id)
+            if not conversation_history and not auto_create_conversation:
+                raise ValueError(f"Conversation {conversation_id} not found")
+        
+        # Add user message to conversation history
+        conversation_history = add_message_to_conversation(conversation_history, "user", query)
+        
+        # Set conversation history in query param
+        param.conversation_history = conversation_history
+        
+        # Get response from LightRAG
+        response = await self.aquery(query, param, system_prompt)
+        
+        # Add assistant response to conversation history
+        if isinstance(response, str):
+            conversation_history = add_message_to_conversation(conversation_history, "assistant", response)
+        else:
+            # For streaming responses, we'll need to collect the full response
+            # This is a simplified approach - in practice, you might want to handle streaming differently
+            full_response = ""
+            async for chunk in response:
+                full_response += chunk
+            response = full_response
+            conversation_history = add_message_to_conversation(conversation_history, "assistant", response)
+        
+        # Update conversation in storage
+        if conversation_id:
+            await self.aupdate_conversation(conversation_id, conversation_history)
+        
+        return response, conversation_id
+
+    def chat(
+        self, 
+        query: str, 
+        conversation_id: str = None,
+        param: QueryParam = None,
+        system_prompt: str = None,
+        auto_create_conversation: bool = True
+    ) -> tuple[str | Iterator[str], str]:
+        """Sync version of chat"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.achat(query, conversation_id, param, system_prompt, auto_create_conversation))
+
+    async def alist_conversations(self, limit: int = 50, offset: int = 0) -> list[dict[str, Any]]:
+        """List conversations with pagination"""
+        if hasattr(self.conversations, 'list_conversations'):
+            return await self.conversations.list_conversations(limit, offset)
+        else:
+            # Fallback for generic storage
+            all_conversations = await self.conversations.get_all()
+            conversations_list = list(all_conversations.values())
+            # Sort by updated_at if available
+            conversations_list.sort(key=lambda x: x.get("updated_at", ""), reverse=True)
+            return conversations_list[offset:offset + limit]
+
+    def list_conversations(self, limit: int = 50, offset: int = 0) -> list[dict[str, Any]]:
+        """Sync version of list_conversations"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.alist_conversations(limit, offset))
+
+    async def adelete_conversation(self, conversation_id: str):
+        """Delete a conversation"""
+        if hasattr(self.conversations, 'delete_conversation'):
+            await self.conversations.delete_conversation(conversation_id)
+        else:
+            await self.conversations.delete([conversation_id])
+
+    def delete_conversation(self, conversation_id: str):
+        """Sync version of delete_conversation"""
+        loop = always_get_an_event_loop()
+        return loop.run_until_complete(self.adelete_conversation(conversation_id))
+
     async def _process_entity_relation_graph(
         self, chunk: dict[str, Any], pipeline_status=None, pipeline_status_lock=None
     ) -> list:
@@ -1223,6 +1419,7 @@ class LightRAG:
                 self.relationships_vdb,
                 self.chunks_vdb,
                 self.chunk_entity_relation_graph,
+                self.conversations,  # Add conversations storage
             ]
             if storage_inst is not None
         ]
@@ -1894,7 +2091,7 @@ class LightRAG:
                                     item_id
                                 ].get("content") or (
                                     item.get("entity_name", "")
-                                    + (item.get("description") or "")
+                                                                       + (item.get("description") or "")
                                 )
                             else:  # relationships
                                 data_for_vdb[item_id]["content"] = data_for_vdb[
