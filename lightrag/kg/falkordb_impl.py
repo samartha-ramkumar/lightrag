@@ -54,10 +54,11 @@ class FalkorDBStorage(BaseGraphStorage):
             embedding_func=embedding_func,
         )
         self._driver = None
-        self._graphml_xml_file = os.path.join(
-            self.global_config["working_dir"], f"graph_{self.namespace}_falkordb_export.graphml"
-        )
         self.workspace = workspace or global_config.get("workspace", "default")
+        self._graphml_xml_file = os.path.join(
+            self.global_config["working_dir"], f"graph_{self.workspace}_falkordb_export.graphml"
+        )
+        
 
     @staticmethod
     def _knowledge_graph_to_nx(kg: KnowledgeGraph) -> nx.Graph:

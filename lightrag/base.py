@@ -76,6 +76,10 @@ class QueryParam:
     ll_keywords: list[str] = field(default_factory=list)
     """List of low-level keywords to refine retrieval focus."""
 
+    conversation_id: str | None = None
+    """ID of the conversation for continuing an existing chat.
+    If not provided, a new conversation will be created.
+    """
     conversation_history: list[dict[str, str]] = field(default_factory=list)
     """Stores past conversation history to maintain context.
     Format: [{"role": "user/assistant", "content": "message"}].

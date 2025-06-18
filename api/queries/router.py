@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Literal, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from lightrag.base import QueryParam
 from pydantic import BaseModel, Field, field_validator
-
+from lightrag import LightRAG
 from ascii_colors import trace_exception
 
 router = APIRouter(tags=["query"])
@@ -22,18 +22,18 @@ class QueryRequest(BaseModel):
     )
 
     mode: Literal["local", "global", "hybrid", "naive", "mix", "bypass"] = Field(
-        default="hybrid",
+        default="mix",
         description="Query mode",
+    )
+
+    conversation_id: Optional[str] = Field(
+        default=None,
+        description="Conversation ID for continuing an existing chat. If not provided, a new conversation will be created.",
     )
 
     only_need_context: Optional[bool] = Field(
         default=False,
         description="If True, only returns the retrieved context without generating a response.",
-    )
-
-    only_need_prompt: Optional[bool] = Field(
-        default=False,
-        description="If True, only returns the generated prompt without producing a response.",
     )
 
     response_type: Optional[str] = Field(
@@ -48,28 +48,10 @@ class QueryRequest(BaseModel):
         description="Number of top items to retrieve. Represents entities in 'local' mode and relationships in 'global' mode.",
     )
 
-    max_token_for_text_unit: Optional[int] = Field(
-        gt=1,
-        default=4000,
-        description="Maximum number of tokens allowed for each retrieved text chunk.",
-    )
-
-    max_token_for_global_context: Optional[int] = Field(
-        gt=1,
-        default=4000,
-        description="Maximum number of tokens allocated for relationship descriptions in global retrieval.",
-    )
-
-    max_token_for_local_context: Optional[int] = Field(
-        gt=1,
-        default=4000,
-        description="Maximum number of tokens allocated for entity descriptions in local retrieval.",
-    )
-
-    conversation_history: Optional[List[Dict[str, Any]]] = Field(
-        default=None,
-        description="Stores past conversation history to maintain context. Format: [{'role': 'user/assistant', 'content': 'message'}].",
-    )
+    # conversation_history: Optional[List[Dict[str, Any]]] = Field(
+    #     default=None,
+    #     description="Stores past conversation history to maintain context. Format: [{'role': 'user/assistant', 'content': 'message'}].",
+    # )
 
     history_turns: Optional[int] = Field(
         ge=0,
@@ -86,19 +68,19 @@ class QueryRequest(BaseModel):
     def query_strip_after(cls, query: str) -> str:
         return query.strip()
 
-    @field_validator("conversation_history", mode="after")
-    @classmethod
-    def conversation_history_role_check(
-        cls, conversation_history: List[Dict[str, Any]] | None
-    ) -> List[Dict[str, Any]] | None:
-        if conversation_history is None:
-            return None
-        for msg in conversation_history:
-            if "role" not in msg or msg["role"] not in {"user", "assistant"}:
-                raise ValueError(
-                    "Each message must have a 'role' key with value 'user' or 'assistant'."
-                )
-        return conversation_history
+    # @field_validator("conversation_history", mode="after")
+    # @classmethod
+    # def conversation_history_role_check(
+    #     cls, conversation_history: List[Dict[str, Any]] | None
+    # ) -> List[Dict[str, Any]] | None:
+    #     if conversation_history is None:
+    #         return None
+    #     for msg in conversation_history:
+    #         if "role" not in msg or msg["role"] not in {"user", "assistant"}:
+    #             raise ValueError(
+    #                 "Each message must have a 'role' key with value 'user' or 'assistant'."
+    #             )
+    #     return conversation_history
 
     def to_query_params(self, is_stream: bool) -> "QueryParam":
         """Converts a QueryRequest instance into a QueryParam instance."""
@@ -116,23 +98,24 @@ class QueryResponse(BaseModel):
     response: str = Field(
         description="The generated response",
     )
+    conversation_id: str = Field(
+        description="The conversation ID for this chat session",
+    )
 
 
-def create_query_routes(rag):
+def create_query_routes(rag: LightRAG):
 
     @router.post(
         "/query", response_model=QueryResponse
     )
     async def query_text(request: QueryRequest):
         """
-        Handle a POST request at the /query endpoint to process user queries using RAG capabilities.
+        Handle a POST request at the /query endpoint to process user queries using RAG chat capabilities.
 
         Parameters:
             request (QueryRequest): The request object containing the query parameters.
         Returns:
-            QueryResponse: A Pydantic model containing the result of the query processing.
-                       If a string is returned (e.g., cache hit), it's directly returned.
-                       Otherwise, an async generator may be used to build the response.
+            QueryResponse: A Pydantic model containing the response and conversation ID.
 
         Raises:
             HTTPException: Raised when an error occurs during the request handling process,
@@ -140,17 +123,23 @@ def create_query_routes(rag):
         """
         try:
             param = request.to_query_params(False)
-            response = await rag.aquery(request.query, param=param)
-
-            # If response is a string (e.g. cache hit), return directly
-            if isinstance(response, str):
-                return QueryResponse(response=response)
-
-            if isinstance(response, dict):
-                result = json.dumps(response, indent=2)
-                return QueryResponse(response=result)
+            
+            # Use achat for conversation management
+            if request.conversation_id:
+                # Continue existing conversation
+                response, conversation_id = await rag.achat(
+                    request.query, 
+                    conversation_id=request.conversation_id,
+                    param=param
+                )
             else:
-                return QueryResponse(response=str(response))
+                # Start new conversation
+                response, conversation_id = await rag.achat(
+                    request.query,
+                    param=param
+                )
+
+            return QueryResponse(response=response, conversation_id=conversation_id)
         except Exception as e:
             trace_exception(e)
             raise HTTPException(status_code=500, detail=str(e))
