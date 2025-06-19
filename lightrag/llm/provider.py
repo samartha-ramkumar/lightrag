@@ -1,4 +1,3 @@
-
 import asyncio
 import re
 import time
@@ -6,8 +5,9 @@ from abc import ABC, abstractmethod
 from functools import wraps
 from typing import Any, Dict, List, Optional, Union, AsyncIterator
 from lightrag.llm.openai import OpenAIProvider
+from lightrag.llm.azure_openai import AzureOpenAIProvider
 # from lightrag.llm.ollama import OllamaProvider
-# from lightrag.llm.restapi import RestApiProvider
+from lightrag.llm.restapi import RestApiProvider
 from lightrag.utils import logger
 from lightrag.utils import get_env_value
 
@@ -84,10 +84,12 @@ class LLMServiceFactory:
         
         if provider_name == "openai":
             return OpenAIProvider()
+        elif provider_name == "azure_openai" or provider_name == "azure-openai":
+            return AzureOpenAIProvider()
         # elif provider_name == "ollama":
         #     return OllamaProvider()
-        # elif provider_name == "restapi":
-        #     return RestApiProvider()
+        elif provider_name == "restapi":
+            return RestApiProvider()
 
         else:
             # Log warning and default to OpenAI if provider is unrecognized
