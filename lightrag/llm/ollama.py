@@ -15,13 +15,13 @@ from lightrag.exceptions import (
     RateLimitError,
     APITimeoutError,
 )
-
+from lightrag.llm.base import BaseLLMProvider
 import numpy as np
 from typing import Union, Any, Optional, List
 from lightrag.utils import logger
 
 
-class OllamaProvider:
+class OllamaProvider(BaseLLMProvider):
     """Ollama provider class for handling Ollama API interactions."""
 
     def __init__(self, host: str = None, api_key: str = None):

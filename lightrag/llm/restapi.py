@@ -10,10 +10,11 @@ from lightrag.utils import (
     wrap_embedding_func_with_attrs,
     safe_unicode_decode,
     logger,
+    get_env_value
 )
-from lightrag.utils import logger
-from lightrag.utils import get_env_value
 from collections.abc import AsyncIterator
+from lightrag.llm.base import BaseLLMProvider
+
 
 def llm_error_handler(func):
     """Decorator for consistent error handling in LLM operations"""
@@ -41,13 +42,13 @@ def llm_error_handler(func):
     return wrapper
 
 
-class RestApiProvider:
+class RestApiProvider(BaseLLMProvider):
     """OpenAI provider class for handling Rest API interactions."""
 
     def __init__(self):
         """Initialize the REST API provider"""
         self.base_url = get_env_value("API_BASE_URL", "http://host.docker.internal:2100")
-        self.app_id = get_env_value("APP_ID", "Research-12345")
+        self.app_id = get_env_value("APP_ID", "kyc-onboarding-234666")
         self.session = None
         
         # Map of task types to model categories
@@ -211,7 +212,7 @@ class RestApiProvider:
                 "input": [item.get("content", "") for item in texts]
             }
         # If input is str or List[str], directly use it
-        elif isinstance(texts, str) or (isinstance(texts, List) and all(isinstance(item, str) for item in text)):
+        elif isinstance(texts, str) or (isinstance(texts, List) and all(isinstance(item, str) for item in texts)):
             payload = {
                 "input": texts
             }
@@ -219,17 +220,21 @@ class RestApiProvider:
         if model:
             payload["model"] = model
         
-        headers = {"app-id": self.app_id, "Content-Type": "application/json"}
-        async with self._session_context() as session:
-            async with session.post(endpoint, json=payload, headers=headers) as response:
-                if response.status != 200:
-                    error_text = await response.text()
-                    logger.error(f"API embedding error: {response.status} - {error_text}")
-                    return []
-                
-                result = await response.json()
-                embeddings = [item.get("embedding", []) for item in result.get("data", [])]
-                return embeddings
+        try:
+            headers = {"app-id": self.app_id, "Content-Type": "application/json"}
+            async with self._session_context() as session:
+                async with session.post(endpoint, json=payload, headers=headers) as response:
+                    if response.status != 200:
+                        error_text = await response.text()
+                        logger.error(f"API embedding error: {response.status} - {error_text}")
+                        return []
+                    
+                    result = await response.json()
+                    embeddings = [item.get("embedding", []) for item in result.get("data", [])]
+                    return embeddings
+        except Exception as e:
+            logger.error(f"Exception during embedding generation: {str(e)}", exc_info=True)
+            return []
             
     async def cleanup(self) -> None:
         """Clean up resources"""

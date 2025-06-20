@@ -22,10 +22,10 @@ from lightrag.utils import (
     logger,
     get_env_value
 )
+from lightrag.llm.base import BaseLLMProvider
 
 
-
-class AzureOpenAIProvider:
+class AzureOpenAIProvider(BaseLLMProvider):
     """Azure OpenAI provider class for handling Azure OpenAI API interactions."""
 
     def __init__(self, api_key: str | None = None, base_url: str | None = None, api_version: str | None = None):

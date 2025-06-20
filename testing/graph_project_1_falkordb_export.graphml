@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d11" for="edge" attr.name="created_at" attr.type="string"/>
+<key id="d10" for="edge" attr.name="file_path" attr.type="string"/>
+<key id="d9" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d8" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d7" for="edge" attr.name="description" attr.type="string"/>
+<key id="d6" for="edge" attr.name="weight" attr.type="string"/>
+<key id="d5" for="node" attr.name="created_at" attr.type="string"/>
+<key id="d4" for="node" attr.name="file_path" attr.type="string"/>
+<key id="d3" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d2" for="node" attr.name="description" attr.type="string"/>
+<key id="d1" for="node" attr.name="entity_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_id" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Interview">
+  <data key="d0">Interview</data>
+  <data key="d1">event</data>
+  <data key="d2">An interview is a formal meeting in which one or more persons question, consult, or evaluate another person, often for a job position.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Experience">
+  <data key="d0">Experience</data>
+  <data key="d1">category</data>
+  <data key="d2">Experience encompasses the knowledge or skill acquired by a person through involvement in or exposure to events or activities.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Stress Questions">
+  <data key="d0">Stress Questions</data>
+  <data key="d1">category</data>
+  <data key="d2">Stress questions are designed to assess how a person handles pressure and difficult situations during an interview.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Values">
+  <data key="d0">Values</data>
+  <data key="d1">category</data>
+  <data key="d2">Values refer to the principles or standards of behavior that are important to an individual, influencing their decisions and actions.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Organization">
+  <data key="d0">Organization</data>
+  <data key="d1">organization</data>
+  <data key="d2">An organization is a structured group of people with a particular purpose, such as a business or government department.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Goals/Objectives">
+  <data key="d0">Goals/Objectives</data>
+  <data key="d1">category</data>
+  <data key="d2">Goals and objectives are the desired outcomes or targets that a person aims to achieve in their career or personal life.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Interests">
+  <data key="d0">Interests</data>
+  <data key="d1">category</data>
+  <data key="d2">Interests are activities or subjects that a person enjoys or is curious about, often pursued in their free time.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Self Awareness">
+  <data key="d0">Self Awareness</data>
+  <data key="d1">category</data>
+  <data key="d2">Self awareness involves understanding one's own personality, strengths, weaknesses, and motivations.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Skills/Abilities/Qualifications">
+  <data key="d0">Skills/Abilities/Qualifications</data>
+  <data key="d1">category</data>
+  <data key="d2">This category involves the specific skills, abilities, and qualifications that a person possesses, relevant to job performance.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Brain Teasers">
+  <data key="d0">Brain Teasers</data>
+  <data key="d1">category</data>
+  <data key="d2">Brain teasers are questions or puzzles that require creative thinking and problem-solving skills, often used in interviews to assess cognitive abilities.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Education">
+  <data key="d0">Education</data>
+  <data key="d1">category</data>
+  <data key="d2">Education refers to the process of receiving or giving systematic instruction, especially at a school or university, and its impact on career preparation.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<node id="Portland, Oregon">
+  <data key="d0">Portland, Oregon</data>
+  <data key="d1">geo</data>
+  <data key="d2">Portland is a city in the state of Oregon, USA, mentioned in the context of a brain teaser question.</data>
+  <data key="d3">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d4">unknown_source</data>
+  <data key="d5">1750462451</data>
+</node>
+<edge source="Interview" target="Organization">
+  <data key="d6">9.0</data>
+  <data key="d7">The interview is a process where candidates are evaluated by an organization for potential employment.</data>
+  <data key="d8">candidate evaluation,employment process</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462451</data>
+</edge>
+<edge source="Interview" target="Self Awareness">
+  <data key="d6">8.0</data>
+  <data key="d7">Self awareness is assessed during an interview to understand a candidate's personality and suitability for a role.</data>
+  <data key="d8">candidate evaluation,personal insight</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462451</data>
+</edge>
+<edge source="Interview" target="Skills/Abilities/Qualifications">
+  <data key="d6">9.0</data>
+  <data key="d7">An interview evaluates a candidate's skills, abilities, and qualifications for a job position.</data>
+  <data key="d8">competency assessment,job suitability</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Values">
+  <data key="d6">7.0</data>
+  <data key="d7">Values are discussed in an interview to determine if a candidate's principles align with the organization's culture.</data>
+  <data key="d8">cultural fit,personal principles</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Experience">
+  <data key="d6">8.0</data>
+  <data key="d7">Experience is a key topic in interviews to assess a candidate's past roles and achievements.</data>
+  <data key="d8">career history,job performance</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Goals/Objectives">
+  <data key="d6">7.0</data>
+  <data key="d7">Interviews explore a candidate's goals and objectives to understand their career aspirations.</data>
+  <data key="d8">career planning,future aspirations</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Education">
+  <data key="d6">8.0</data>
+  <data key="d7">Education is discussed in interviews to evaluate how well a candidate's academic background prepares them for the role.</data>
+  <data key="d8">academic preparation,job relevance</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Interests">
+  <data key="d6">6.0</data>
+  <data key="d7">Interests are explored in interviews to gain insight into a candidate's personality and potential cultural fit.</data>
+  <data key="d8">cultural fit,personal interests</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Stress Questions">
+  <data key="d6">8.0</data>
+  <data key="d7">Stress questions are used in interviews to evaluate how candidates handle pressure and challenging situations.</data>
+  <data key="d8">pressure handling,problem-solving</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+<edge source="Interview" target="Brain Teasers">
+  <data key="d6">7.0</data>
+  <data key="d7">Brain teasers in interviews assess a candidate's problem-solving skills and ability to think on their feet.</data>
+  <data key="d8">cognitive abilities,creative thinking</data>
+  <data key="d9">chunk-df3c664f43fb3a1781a35617ff7f455f</data>
+  <data key="d10">unknown_source</data>
+  <data key="d11">1750462452</data>
+</edge>
+</graph></graphml>
