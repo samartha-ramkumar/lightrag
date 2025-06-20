@@ -46,8 +46,8 @@ class RestApiProvider:
 
     def __init__(self):
         """Initialize the REST API provider"""
-        self.base_url = get_env_value("api_base_url" "http://host.docker.internal:2100")
-        self.app_id = get_env_value("app_id", "Research-12345")
+        self.base_url = get_env_value("API_BASE_URL", "http://host.docker.internal:2100")
+        self.app_id = get_env_value("APP_ID", "Research-12345")
         self.session = None
         
         # Map of task types to model categories

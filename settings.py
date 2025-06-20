@@ -92,6 +92,9 @@ def parse_args() -> argparse.Namespace:
     args.vector_storage = get_env_value(
         "LIGHTRAG_VECTOR_STORAGE", DefaultRAGStorageConfig.VECTOR_STORAGE
     )
+    args.conversation_storage = get_env_value(
+        "LIGHTRAG_CONVERSATION_STORAGE", "PGConversationStorage"
+    )
 
     # Get MAX_PARALLEL_INSERT from environment
     args.max_parallel_insert = get_env_value("MAX_PARALLEL_INSERT", 2, int)
