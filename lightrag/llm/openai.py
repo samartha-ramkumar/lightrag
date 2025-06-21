@@ -27,7 +27,7 @@ from lightrag.utils import (
     logger,
 )
 from lightrag.types import GPTKeywordExtractionFormat
-
+from lightrag.llm.base import BaseLLMProvider
 import numpy as np
 from typing import Any, Union, Optional
 
@@ -45,7 +45,7 @@ class InvalidResponseError(Exception):
     pass
 
 
-class OpenAIProvider:
+class OpenAIProvider(BaseLLMProvider):
     """OpenAI provider class for handling OpenAI API interactions."""
 
     def __init__(self, api_key: str | None = None, base_url: str | None = None):
@@ -431,6 +431,10 @@ class OpenAIProvider:
         except Exception as e:
             logger.error(f"OpenAI vision API error: {str(e)}")
             return f"Error analyzing image: {str(e)}"
+        
+    async def cleanup(self) -> None:
+        """Clean up resources"""
+        pass
         
 
 

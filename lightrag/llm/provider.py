@@ -1,13 +1,14 @@
-
 import asyncio
 import re
 import time
 from abc import ABC, abstractmethod
 from functools import wraps
 from typing import Any, Dict, List, Optional, Union, AsyncIterator
+from lightrag.llm.base import BaseLLMProvider
 from lightrag.llm.openai import OpenAIProvider
-# from lightrag.llm.ollama import OllamaProvider
-# from lightrag.llm.restapi import RestApiProvider
+from lightrag.llm.azure_openai import AzureOpenAIProvider
+from lightrag.llm.ollama import OllamaProvider
+from lightrag.llm.restapi import RestApiProvider
 from lightrag.utils import logger
 from lightrag.utils import get_env_value
 
@@ -21,10 +22,8 @@ def llm_error_handler(func):
             # Get the class name of the first argument (self)
             class_name = args[0].__class__.__name__ if args else "Unknown"
             
-            # Get the function name
             func_name = func.__name__
             
-            # Get provider info if available in self
             provider_info = ""
             if args and hasattr(args[0], "provider_name"):
                 provider_info = f" (Provider: {args[0].provider_name})"
@@ -32,43 +31,9 @@ def llm_error_handler(func):
             # Log the error with context
             logger.error(f"{class_name}.{func_name}{provider_info} error: {str(e)}", exc_info=True)
             
-            # Return error message
             return f"Error in {func_name}: {str(e)}"
     return wrapper
 
-
-class BaseLLMProvider(ABC):
-    """Abstract base class for LLM providers"""
-    
-    @abstractmethod
-    async def generate_text(self, prompt: str, model: Optional[str] = None) -> str:
-        """Generate text based on prompt"""
-        pass
-    
-    @abstractmethod
-    async def generate_streaming_response(
-        self,
-        system_prompt: str,
-        user_prompt: str,
-        model: Optional[str] = None
-    ) -> AsyncIterator[str]:
-        """Generate streaming response"""
-        pass
-    
-    @abstractmethod
-    async def analyze_image(
-        self, 
-        image_data: str, 
-        prompt: str, 
-        model: Optional[str] = None
-    ) -> str:
-        """Analyze image based on prompt"""
-        pass
-    
-    @abstractmethod
-    async def cleanup(self) -> None:
-        """Clean up resources"""
-        pass
 
 
 class LLMServiceFactory:
@@ -84,10 +49,12 @@ class LLMServiceFactory:
         
         if provider_name == "openai":
             return OpenAIProvider()
-        # elif provider_name == "ollama":
-        #     return OllamaProvider()
-        # elif provider_name == "restapi":
-        #     return RestApiProvider()
+        elif provider_name == "azure_openai" or provider_name == "azure-openai":
+            return AzureOpenAIProvider()
+        elif provider_name == "ollama":
+            return OllamaProvider()
+        elif provider_name == "restapi":
+            return RestApiProvider()
 
         else:
             # Log warning and default to OpenAI if provider is unrecognized

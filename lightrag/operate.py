@@ -925,6 +925,7 @@ async def kg_query(
         query_param,
         chunks_vdb,
     )
+    logger.debug(f"Context: {context}")
 
     if query_param.only_need_context:
         return context
@@ -1287,7 +1288,7 @@ async def _build_query_context(
                 query_param,
                 tokenizer,
             )
-
+            # logger.debug(f"vector_data: {vector_data}")
             # If vector_data is not None, unpack it
             if vector_data is not None:
                 (
@@ -1310,7 +1311,6 @@ async def _build_query_context(
     if not entities_context and not relations_context:
         return None
 
-    # 转换为 JSON 字符串
     entities_str = json.dumps(entities_context, ensure_ascii=False)
     relations_str = json.dumps(relations_context, ensure_ascii=False)
     text_units_str = json.dumps(text_units_context, ensure_ascii=False)

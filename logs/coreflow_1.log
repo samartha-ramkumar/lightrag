@@ -7116,3 +7116,446 @@ You are a helpful assistant responding to user query about Knowledge Grap...
 2025-06-17 19:53:43,439 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
 2025-06-17 19:53:43,553 - lightrag - INFO - [lightrag.py:878] No documents to process
 2025-06-17 19:53:43,578 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 11:48:19,370 - lightrag - INFO - [restapi.py:64] Initialized REST API provider with base URL: http://localhost:2100
+2025-06-20 11:48:20,505 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 11:48:20,510 - lightrag - INFO - [falkordb_impl.py:139] Created index for base nodes on entity_id in graph project-1
+2025-06-20 11:48:21,097 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 11:48:25,155 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 11:48:25,359 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 11:48:25,548 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 11:48:25,731 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 11:48:25,923 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 11:48:26,106 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 11:48:26,106 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,106 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,107 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,107 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,107 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,108 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,108 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,108 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:48:26,486 - lightrag - INFO - [lightrag.py:840] Stored 1 new unique documents
+2025-06-20 11:48:27,192 - lightrag - INFO - [lightrag.py:914] Processing 1 document(s)
+2025-06-20 11:48:27,193 - lightrag - INFO - [lightrag.py:967] Extracting stage 1/1: unknown_source
+2025-06-20 11:48:27,193 - lightrag - INFO - [lightrag.py:970] Processing d-id: doc_1
+2025-06-20 11:48:27,212 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 11:48:27,215 - lightrag - ERROR - [restapi.py:38] RestApiProvider.generate_embeddings error: name 'text' is not defined
+Traceback (most recent call last):
+  File "/home/samartha/kaya/code/lightrag/lightrag/llm/restapi.py", line 24, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/samartha/kaya/code/lightrag/lightrag/llm/restapi.py", line 215, in generate_embeddings
+    elif isinstance(texts, str) or (isinstance(texts, List) and all(isinstance(item, str) for item in text)):
+                                                                                                      ^^^^
+NameError: name 'text' is not defined
+2025-06-20 11:48:27,224 - lightrag - ERROR - [lightrag.py:1039] Traceback (most recent call last):
+  File "/home/samartha/kaya/code/lightrag/lightrag/lightrag.py", line 1034, in process_document
+    await asyncio.gather(*tasks)
+  File "/home/samartha/kaya/code/lightrag/lightrag/kg/postgres_impl.py", line 737, in upsert
+    embeddings = np.concatenate(embeddings_list)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: zero-dimensional arrays cannot be concatenated
+
+2025-06-20 11:48:27,224 - lightrag - ERROR - [lightrag.py:1041] Failed to extract document 1/1: unknown_source
+2025-06-20 11:48:27,400 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 11:48:27,941 - lightrag - INFO - [lightrag.py:1207] Document processing pipeline completed
+2025-06-20 11:48:29,828 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 2f7e5341da70c4711bdc608b5b3f531e
+2025-06-20 11:48:30,011 - lightrag - INFO - [operate.py:1225] Process 81827 building query context...
+2025-06-20 11:48:30,011 - lightrag - INFO - [operate.py:1348] Query nodes: Query, Conversation history, Keywords, Instructions, top_k: 60, cosine: 0.2
+2025-06-20 11:48:30,012 - lightrag - ERROR - [restapi.py:38] RestApiProvider.generate_embeddings error: name 'text' is not defined
+Traceback (most recent call last):
+  File "/home/samartha/kaya/code/lightrag/lightrag/llm/restapi.py", line 24, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/samartha/kaya/code/lightrag/lightrag/llm/restapi.py", line 215, in generate_embeddings
+    elif isinstance(texts, str) or (isinstance(texts, List) and all(isinstance(item, str) for item in text)):
+                                                                                                      ^^^^
+NameError: name 'text' is not defined
+2025-06-20 11:48:30,133 - lightrag - ERROR - [postgres_impl.py:263] PostgreSQL database, error:invalid input syntax for type vector: "[E]"
+2025-06-20 11:48:30,263 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 11:49:03,134 - lightrag - INFO - [restapi.py:69] Cleaning up unclosed session on exit
+2025-06-20 11:49:03,135 - lightrag - INFO - [restapi.py:240] REST API provider session closed
+2025-06-20 11:50:25,647 - lightrag - INFO - [restapi.py:64] Initialized REST API provider with base URL: http://localhost:2100
+2025-06-20 11:50:26,197 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 11:50:26,754 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 11:50:30,541 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 11:50:30,714 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 11:50:30,892 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 11:50:31,071 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 11:50:31,247 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 11:50:31,419 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 11:50:31,420 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,420 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,421 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,421 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,421 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,422 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,422 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,422 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 11:50:31,592 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 11:50:32,235 - lightrag - INFO - [lightrag.py:914] Processing 1 document(s)
+2025-06-20 11:50:32,236 - lightrag - INFO - [lightrag.py:967] Extracting stage 1/1: unknown_source
+2025-06-20 11:50:32,236 - lightrag - INFO - [lightrag.py:970] Processing d-id: doc_1
+2025-06-20 11:50:32,249 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 11:50:32,432 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 11:50:33,264 - lightrag - ERROR - [restapi.py:228] API embedding error: 500 - {"error":"Error processing embedding","message":"Failed to generate embeddings using models. Error code: model_invocation_error"}
+2025-06-20 11:50:33,270 - lightrag - ERROR - [lightrag.py:1039] Traceback (most recent call last):
+  File "/home/samartha/kaya/code/lightrag/lightrag/lightrag.py", line 1034, in process_document
+    await asyncio.gather(*tasks)
+  File "/home/samartha/kaya/code/lightrag/lightrag/kg/postgres_impl.py", line 739, in upsert
+    d["__vector__"] = embeddings[i]
+                      ~~~~~~~~~~^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
+
+2025-06-20 11:50:33,271 - lightrag - ERROR - [lightrag.py:1041] Failed to extract document 1/1: unknown_source
+2025-06-20 11:50:33,448 - lightrag - INFO - [lightrag.py:1207] Document processing pipeline completed
+2025-06-20 11:50:34,033 - lightrag - INFO - [operate.py:1225] Process 82612 building query context...
+2025-06-20 11:50:34,033 - lightrag - INFO - [operate.py:1348] Query nodes: Query, Conversation history, Keywords, Instructions, top_k: 60, cosine: 0.2
+2025-06-20 11:50:34,737 - lightrag - ERROR - [restapi.py:228] API embedding error: 500 - {"error":"Error processing embedding","message":"Failed to generate embeddings using models. Error code: model_invocation_error"}
+2025-06-20 11:50:34,802 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 11:50:37,380 - lightrag - INFO - [restapi.py:69] Cleaning up unclosed session on exit
+2025-06-20 11:50:37,381 - lightrag - INFO - [restapi.py:240] REST API provider session closed
+2025-06-20 18:33:34,464 - lightrag - INFO - [restapi.py:64] Initialized REST API provider with base URL: http://localhost:2100
+2025-06-20 18:33:35,505 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:33:35,517 - lightrag - INFO - [falkordb_impl.py:139] Created index for base nodes on entity_id in graph project-1
+2025-06-20 18:33:35,923 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 18:33:39,682 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:33:39,841 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:33:40,006 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:33:40,174 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:33:40,333 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:33:40,501 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:33:40,502 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,502 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,503 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,503 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,504 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,504 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,505 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,505 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:33:40,668 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:33:41,432 - lightrag - INFO - [lightrag.py:914] Processing 1 document(s)
+2025-06-20 18:33:41,433 - lightrag - INFO - [lightrag.py:967] Extracting stage 1/1: unknown_source
+2025-06-20 18:33:41,434 - lightrag - INFO - [lightrag.py:970] Processing d-id: doc_1
+2025-06-20 18:33:41,446 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 18:33:41,608 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 18:33:47,982 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving default: ce5011148d8bfd1aeae61ef971b14eac
+2025-06-20 18:34:11,673 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving default: e969f1fa06fc57dcfb8029671dfd8b25
+2025-06-20 18:34:11,864 - lightrag - INFO - [operate.py:815] Chunk 1 of 1 extracted 12 Ent + 10 Rel
+2025-06-20 18:34:11,866 - lightrag - INFO - [operate.py:559] Merging stage 1/1: unknown_source
+2025-06-20 18:34:12,128 - lightrag - INFO - [operate.py:596] Updating 12 entities  1/1: unknown_source
+2025-06-20 18:34:16,353 - lightrag - INFO - [operate.py:617] Updating 10 relations 1/1: unknown_source
+2025-06-20 18:34:18,967 - lightrag - INFO - [falkordb_impl.py:165] FalkorDB index_done_callback: Exporting graph chunk_entity_relation to GraphML.
+2025-06-20 18:34:19,010 - lightrag - INFO - [falkordb_impl.py:940] Subgraph query successful | Node count: 12 | Edge count: 10
+2025-06-20 18:34:19,010 - lightrag - INFO - [falkordb_impl.py:79] Writing graph to /home/samartha/kaya/code/lightrag/testing/graph_project_1_falkordb_export.graphml with 12 nodes, 10 edges
+2025-06-20 18:34:19,074 - lightrag - INFO - [falkordb_impl.py:176] Successfully exported graph chunk_entity_relation to /home/samartha/kaya/code/lightrag/testing/graph_project_1_falkordb_export.graphml
+2025-06-20 18:34:19,074 - lightrag - INFO - [lightrag.py:1429] In memory DB persist to disk
+2025-06-20 18:34:19,074 - lightrag - INFO - [lightrag.py:1123] Completed processing file 1/1: unknown_source
+2025-06-20 18:34:19,075 - lightrag - INFO - [lightrag.py:1207] Document processing pipeline completed
+2025-06-20 18:34:19,694 - lightrag - INFO - [operate.py:1225] Process 226670 building query context...
+2025-06-20 18:34:19,694 - lightrag - INFO - [operate.py:1348] Query nodes: Query, Conversation history, Keywords, Instructions, top_k: 60, cosine: 0.2
+2025-06-20 18:34:21,063 - lightrag - INFO - [operate.py:1410] Local query uses 6 entites, 10 relations, 1 chunks
+2025-06-20 18:34:21,064 - lightrag - INFO - [operate.py:1651] Query edges: Document content, Understanding purpose, top_k: 60, cosine: 0.2
+2025-06-20 18:34:21,918 - lightrag - INFO - [operate.py:1719] Global query uses 4 entites, 3 relations, 1 chunks
+2025-06-20 18:34:22,870 - lightrag - INFO - [operate.py:1187] Vector query: 1 chunks, top_k: 60
+2025-06-20 18:34:28,406 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 46c11781fe42ed5d34024b14860b42ba
+2025-06-20 18:34:30,863 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 7a5b47cc3e6324b973887352673e5ff8
+2025-06-20 18:34:30,968 - lightrag - INFO - [operate.py:1225] Process 226670 building query context...
+2025-06-20 18:34:30,968 - lightrag - INFO - [operate.py:1348] Query nodes: Sample interview questions, Work environment, Advancement opportunities, Salary, Benefits, top_k: 60, cosine: 0.2
+2025-06-20 18:34:32,236 - lightrag - INFO - [operate.py:1410] Local query uses 9 entites, 10 relations, 1 chunks
+2025-06-20 18:34:32,236 - lightrag - INFO - [operate.py:1651] Query edges: Interview preparation, Interview process, Guidance, top_k: 60, cosine: 0.2
+2025-06-20 18:34:34,345 - lightrag - INFO - [operate.py:1719] Global query uses 11 entites, 10 relations, 1 chunks
+2025-06-20 18:34:35,598 - lightrag - INFO - [operate.py:1187] Vector query: 1 chunks, top_k: 60
+2025-06-20 18:34:38,544 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: c421d7fcd81aa449164f692d4a3acd3f
+2025-06-20 18:34:38,960 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 18:34:38,970 - lightrag - INFO - [restapi.py:69] Cleaning up unclosed session on exit
+2025-06-20 18:34:38,972 - lightrag - INFO - [restapi.py:244] REST API provider session closed
+2025-06-20 18:36:45,577 - lightrag - INFO - [restapi.py:64] Initialized REST API provider with base URL: http://localhost:2100
+2025-06-20 18:36:46,733 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:36:47,292 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 18:36:51,174 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:36:51,334 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:36:51,490 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:36:51,645 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:36:51,806 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:36:51,963 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:36:51,964 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,964 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,965 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,965 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,966 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,966 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,967 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:51,967 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:36:52,129 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:36:52,824 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-20 18:36:53,322 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 18:36:55,431 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: f74e98989cdfdc1d198b0689deab6903
+2025-06-20 18:36:55,616 - lightrag - INFO - [operate.py:1225] Process 227832 building query context...
+2025-06-20 18:36:55,617 - lightrag - INFO - [operate.py:1348] Query nodes: Sample interview questions, Questions for the interviewer, Topics to avoid, Work environment, Advancement opportunities, Growth, Training, Mission, Challenges, top_k: 60, cosine: 0.2
+2025-06-20 18:36:55,617 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 18:36:56,987 - lightrag - INFO - [operate.py:1410] Local query uses 10 entites, 10 relations, 1 chunks
+2025-06-20 18:36:56,988 - lightrag - INFO - [operate.py:1651] Query edges: Interview preparation, Interview process, Candidate assessment, top_k: 60, cosine: 0.2
+2025-06-20 18:36:59,091 - lightrag - INFO - [operate.py:1719] Global query uses 11 entites, 10 relations, 1 chunks
+2025-06-20 18:37:00,591 - lightrag - INFO - [operate.py:1187] Vector query: 1 chunks, top_k: 60
+2025-06-20 18:37:08,047 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: e846cf737ed2b95c8123a22803e40231
+2025-06-20 18:37:08,477 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 18:37:08,482 - lightrag - INFO - [restapi.py:69] Cleaning up unclosed session on exit
+2025-06-20 18:37:08,483 - lightrag - INFO - [restapi.py:244] REST API provider session closed
+2025-06-20 18:39:48,735 - lightrag - INFO - [restapi.py:64] Initialized REST API provider with base URL: http://localhost:2100
+2025-06-20 18:39:49,842 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:39:50,416 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 18:39:54,144 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:39:54,314 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:39:54,492 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:39:54,660 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:39:54,829 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:39:55,001 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:39:55,001 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,002 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,002 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,003 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,003 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,004 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,004 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,005 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:39:55,176 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:39:55,826 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-20 18:39:56,286 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 18:39:58,040 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: d500a77a1cd39db1d405401c91456e78
+2025-06-20 18:39:58,212 - lightrag - INFO - [operate.py:1225] Process 228984 building query context...
+2025-06-20 18:39:58,212 - lightrag - INFO - [operate.py:1348] Query nodes: Sample interview questions, Questions for the interviewer, Things to avoid, Themes, Fit with organization, top_k: 60, cosine: 0.2
+2025-06-20 18:39:58,213 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 18:39:59,566 - lightrag - INFO - [operate.py:1410] Local query uses 9 entites, 10 relations, 1 chunks
+2025-06-20 18:39:59,567 - lightrag - INFO - [operate.py:1651] Query edges: Interview preparation, Document overview, Unique aspect, top_k: 60, cosine: 0.2
+2025-06-20 18:40:01,564 - lightrag - INFO - [operate.py:1719] Global query uses 11 entites, 10 relations, 1 chunks
+2025-06-20 18:40:08,276 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 469c12510c007c434244de38bef55fcf
+2025-06-20 18:40:08,730 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 18:40:08,735 - lightrag - INFO - [restapi.py:69] Cleaning up unclosed session on exit
+2025-06-20 18:40:08,736 - lightrag - INFO - [restapi.py:244] REST API provider session closed
+2025-06-20 18:44:29,607 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:44:30,109 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 18:44:33,570 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:44:33,739 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:44:33,900 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:44:34,066 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:44:34,225 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:44:34,381 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:44:34,381 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,382 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,382 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,382 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,383 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,383 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,383 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,384 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:44:34,543 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:44:35,239 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-20 18:44:35,866 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 18:46:10,729 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:46:11,275 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 18:46:15,000 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:46:15,172 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:46:15,347 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:46:15,519 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:46:15,691 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:46:15,864 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:46:15,865 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,865 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,866 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,866 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,866 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,867 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,867 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:15,868 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:46:16,039 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:46:16,749 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-20 18:46:17,247 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 18:46:19,938 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: b1ec0f3db69ff9a0be69198a216ba5ef
+2025-06-20 18:46:20,122 - lightrag - INFO - [operate.py:1225] Process 231415 building query context...
+2025-06-20 18:46:20,122 - lightrag - INFO - [operate.py:1348] Query nodes: Sample interview questions, Themes, Self-awareness, Skills, Experience, Stress questions, Questions for the interviewer, Topics to avoid, Professionalism, Organizational fit, top_k: 60, cosine: 0.2
+2025-06-20 18:46:20,123 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 18:46:20,124 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:46:22,043 - lightrag - INFO - [operate.py:1410] Local query uses 10 entites, 10 relations, 1 chunks
+2025-06-20 18:46:22,044 - lightrag - INFO - [operate.py:1651] Query edges: Document uniqueness, Interview preparation, Candidate assessment, top_k: 60, cosine: 0.2
+2025-06-20 18:46:22,044 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:46:23,932 - lightrag - INFO - [operate.py:1719] Global query uses 11 entites, 10 relations, 1 chunks
+2025-06-20 18:46:23,933 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:46:30,295 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: bb49455751fb186b6c5b1098c5be915f
+2025-06-20 18:46:30,715 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 18:47:10,240 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:47:10,782 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at coreflowsdemo.postgres.database.azure.com:5432/postgres
+2025-06-20 18:47:14,251 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:47:14,418 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:47:14,575 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:47:14,739 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:47:14,914 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:47:15,088 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:47:15,088 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,089 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,089 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,090 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,090 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,091 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,091 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,091 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:47:15,248 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:47:15,913 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-20 18:47:16,360 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 18:47:18,908 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: e7f6bd44ca6d8fc71d86a3707af8bc58
+2025-06-20 18:47:19,078 - lightrag - INFO - [operate.py:1225] Process 231781 building query context...
+2025-06-20 18:47:19,078 - lightrag - INFO - [operate.py:1348] Query nodes: Categorized questions, Self-awareness, Skills, Experience, Candidate-interviewer interaction, Topics to avoid, Question types, Organizational fit, top_k: 60, cosine: 0.2
+2025-06-20 18:47:19,079 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 18:47:19,082 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:47:20,477 - lightrag - INFO - [operate.py:1410] Local query uses 10 entites, 10 relations, 1 chunks
+2025-06-20 18:47:20,478 - lightrag - INFO - [operate.py:1651] Query edges: Document analysis, Interview preparation, Candidate evaluation, top_k: 60, cosine: 0.2
+2025-06-20 18:47:20,478 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:47:22,200 - lightrag - INFO - [operate.py:1719] Global query uses 11 entites, 10 relations, 1 chunks
+2025-06-20 18:47:22,201 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:47:28,379 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 441794a6c0405471b6eee837c32812db
+2025-06-20 18:47:28,799 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool
+2025-06-20 18:51:52,162 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:51:52,228 - lightrag - INFO - [falkordb_impl.py:139] Created index for base nodes on entity_id in graph project-1
+2025-06-20 18:51:52,229 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at localhost:5432/postgres
+2025-06-20 18:51:52,242 - lightrag - ERROR - [postgres_impl.py:263] PostgreSQL database, error:relation "lightrag_doc_full" does not exist
+2025-06-20 18:51:52,245 - lightrag - INFO - [postgres_impl.py:165] PostgreSQL, Try Creating table LIGHTRAG_DOC_FULL in database
+2025-06-20 18:51:52,284 - lightrag - INFO - [postgres_impl.py:167] PostgreSQL, Creation success table LIGHTRAG_DOC_FULL in PostgreSQL database
+2025-06-20 18:51:52,295 - lightrag - INFO - [postgres_impl.py:188] PostgreSQL, Creating index idx_lightrag_doc_full_id on table LIGHTRAG_DOC_FULL
+2025-06-20 18:51:52,306 - lightrag - INFO - [postgres_impl.py:207] PostgreSQL, Creating composite index idx_lightrag_doc_full_workspace_id on table LIGHTRAG_DOC_FULL
+2025-06-20 18:51:52,313 - lightrag - ERROR - [postgres_impl.py:263] PostgreSQL database, error:relation "lightrag_doc_chunks" does not exist
+2025-06-20 18:51:52,315 - lightrag - INFO - [postgres_impl.py:165] PostgreSQL, Try Creating table LIGHTRAG_DOC_CHUNKS in database
+2025-06-20 18:51:52,320 - lightrag - ERROR - [postgres_impl.py:294] PostgreSQL database,
+sql:CREATE TABLE LIGHTRAG_DOC_CHUNKS (
+                    id VARCHAR(255),
+                    workspace VARCHAR(255),
+                    full_doc_id VARCHAR(256),
+                    chunk_order_index INTEGER,
+                    tokens INTEGER,
+                    content TEXT,
+                    content_vector VECTOR,
+                    file_path VARCHAR(256),
+                    create_time TIMESTAMP(0) WITH TIME ZONE,
+                    update_time TIMESTAMP(0) WITH TIME ZONE,
+	                CONSTRAINT LIGHTRAG_DOC_CHUNKS_PK PRIMARY KEY (workspace, id)
+                    ),
+data:None,
+error:type "vector" does not exist
+2025-06-20 18:51:52,321 - lightrag - ERROR - [postgres_impl.py:171] PostgreSQL, Failed to create table LIGHTRAG_DOC_CHUNKS in database, Please verify the connection with PostgreSQL database, Got: type "vector" does not exist
+2025-06-20 18:55:22,302 - lightrag - INFO - [falkordb_impl.py:121] Connected to FalkorDB graph project-1 at localhost:6379
+2025-06-20 18:55:22,391 - lightrag - INFO - [postgres_impl.py:73] PostgreSQL, Connected to database at localhost:5432/lightrag
+2025-06-20 18:55:22,638 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.create_time is already timezone-aware, no migration needed
+2025-06-20 18:55:22,649 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_ENTITY.update_time is already timezone-aware, no migration needed
+2025-06-20 18:55:22,658 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.create_time is already timezone-aware, no migration needed
+2025-06-20 18:55:22,668 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_VDB_RELATION.update_time is already timezone-aware, no migration needed
+2025-06-20 18:55:22,680 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.create_time is already timezone-aware, no migration needed
+2025-06-20 18:55:22,689 - lightrag - INFO - [postgres_impl.py:135] Column LIGHTRAG_DOC_CHUNKS.update_time is already timezone-aware, no migration needed
+2025-06-20 18:55:22,689 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,689 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,689 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,690 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,690 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,690 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,690 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,691 - lightrag - INFO - [postgres_impl.py:352] PostgreSQL database connection pool initialized for workspace: project_1
+2025-06-20 18:55:22,701 - lightrag - INFO - [lightrag.py:835] No new unique documents were found.
+2025-06-20 18:55:22,862 - lightrag - INFO - [lightrag.py:878] No documents to process
+2025-06-20 18:55:22,915 - lightrag - INFO - [utils.py:501] limit_async: 4 new workers initialized
+2025-06-20 18:55:25,442 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: e7f6bd44ca6d8fc71d86a3707af8bc58
+2025-06-20 18:55:25,458 - lightrag - INFO - [operate.py:1225] Process 235399 building query context...
+2025-06-20 18:55:25,458 - lightrag - INFO - [operate.py:1348] Query nodes: General questions, Self awareness questions, Weaknesses questions, Skills questions, Organization knowledge questions, Values questions, Experience questions, Goals questions, Interests questions, Stress questions, Brain teasers, Candidate questions, Salary inquiries, top_k: 60, cosine: 0.2
+2025-06-20 18:55:25,459 - lightrag - INFO - [utils.py:501] limit_async: 16 new workers initialized
+2025-06-20 18:55:25,460 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:55:25,888 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Self Awareness Questions'
+2025-06-20 18:55:25,888 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Questions for the Interviewer'
+2025-06-20 18:55:25,888 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'General Questions'
+2025-06-20 18:55:25,888 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Weaknesses Questions'
+2025-06-20 18:55:25,888 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'General Interview Questions'
+2025-06-20 18:55:25,889 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Weaknesses/Negatives Questions'
+2025-06-20 18:55:25,889 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Knowledge of the Organization Questions'
+2025-06-20 18:55:25,889 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Knowledge Questions'
+2025-06-20 18:55:25,889 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Skills/Abilities/Qualifications Questions'
+2025-06-20 18:55:25,889 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Skills Questions'
+2025-06-20 18:55:25,889 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Values Questions'
+2025-06-20 18:55:25,890 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'interview questions'
+2025-06-20 18:55:25,890 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Stress Questions'
+2025-06-20 18:55:25,890 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'SAMPLE INTERVIEW QUESTIONS'
+2025-06-20 18:55:25,890 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Experience Questions'
+2025-06-20 18:55:25,890 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Goals Questions'
+2025-06-20 18:55:25,891 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Interests Questions'
+2025-06-20 18:55:25,891 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Brain Teasers'
+2025-06-20 18:55:25,891 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Goals/Objectives Questions'
+2025-06-20 18:55:25,891 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Education Questions'
+2025-06-20 18:55:25,891 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'organization'
+2025-06-20 18:55:25,892 - lightrag - WARNING - [operate.py:1373] Some nodes are missing, maybe the storage is damaged
+2025-06-20 18:55:25,898 - lightrag - WARNING - [operate.py:1555] No valid text units found
+2025-06-20 18:55:25,906 - lightrag - INFO - [operate.py:1410] Local query uses 0 entites, 0 relations, 0 chunks
+2025-06-20 18:55:25,906 - lightrag - INFO - [operate.py:1651] Query edges: Document overview, Interview questions, Job interview process, top_k: 60, cosine: 0.2
+2025-06-20 18:55:25,907 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:55:26,594 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'General Interview Questions'
+2025-06-20 18:55:26,594 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'interview questions'
+2025-06-20 18:55:26,594 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Self Awareness Questions'
+2025-06-20 18:55:26,594 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Skills/Abilities/Qualifications Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'General Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Goals/Objectives Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Education Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Weaknesses Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Goals Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Values Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Stress Questions'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'SAMPLE INTERVIEW QUESTIONS'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Questions for the Interviewer'
+2025-06-20 18:55:26,595 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Skills Questions'
+2025-06-20 18:55:26,596 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Weaknesses/Negatives Questions'
+2025-06-20 18:55:26,596 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Experience Questions'
+2025-06-20 18:55:26,596 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Interests Questions'
+2025-06-20 18:55:26,596 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Brain Teasers'
+2025-06-20 18:55:26,596 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Knowledge Questions'
+2025-06-20 18:55:26,596 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Knowledge of the Organization Questions'
+2025-06-20 18:55:26,597 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'organization'
+2025-06-20 18:55:26,597 - lightrag - WARNING - [operate.py:1861] No valid text chunks found
+2025-06-20 18:55:26,600 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Questions for the Interviewer'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'SAMPLE INTERVIEW QUESTIONS'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'interview questions'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'organization'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'General Interview Questions'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'General Questions'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Knowledge Questions'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Experience Questions'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Knowledge of the Organization Questions'
+2025-06-20 18:55:26,601 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Education Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Skills Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Stress Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Self Awareness Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Interests Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Values Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Weaknesses Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Goals Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Goals/Objectives Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Skills/Abilities/Qualifications Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Weaknesses/Negatives Questions'
+2025-06-20 18:55:26,602 - lightrag - WARNING - [falkordb_impl.py:406] No node found with label 'Brain Teasers'
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'Questions for the Interviewer' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'SAMPLE INTERVIEW QUESTIONS' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'interview questions' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'organization' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'General Interview Questions' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'General Questions' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'Knowledge Questions' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'Experience Questions' not found in batch retrieval.
+2025-06-20 18:55:26,603 - lightrag - WARNING - [operate.py:1809] Node 'Knowledge of the Organization Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Education Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Skills Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Stress Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Self Awareness Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Interests Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Values Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Weaknesses Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Goals Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Goals/Objectives Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Skills/Abilities/Qualifications Questions' not found in batch retrieval.
+2025-06-20 18:55:26,604 - lightrag - WARNING - [operate.py:1809] Node 'Weaknesses/Negatives Questions' not found in batch retrieval.
+2025-06-20 18:55:26,605 - lightrag - WARNING - [operate.py:1809] Node 'Brain Teasers' not found in batch retrieval.
+2025-06-20 18:55:26,605 - lightrag - INFO - [operate.py:1719] Global query uses 0 entites, 27 relations, 0 chunks
+2025-06-20 18:55:26,605 - lightrag - INFO - [provider.py:289] Generating embeddings with openai using model: text-embedding-3-small
+2025-06-20 18:55:30,336 - lightrag - INFO - [utils.py:1071]  == LLM cache == saving mix: 441794a6c0405471b6eee837c32812db
+2025-06-20 18:55:30,366 - lightrag - INFO - [postgres_impl.py:365] Closed PostgreSQL database connection pool

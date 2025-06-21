@@ -84,6 +84,7 @@ def create_app(args):
         graph_storage=args.graph_storage,
         vector_storage=args.vector_storage,
         doc_status_storage=args.doc_status_storage,
+        conversation_storage=args.conversation_storage,
         vector_db_storage_cls_kwargs={
             "cosine_better_than_threshold": args.cosine_threshold
         },

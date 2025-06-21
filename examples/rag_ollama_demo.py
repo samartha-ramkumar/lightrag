@@ -4,7 +4,7 @@ import inspect
 import logging
 import logging.config
 from lightrag import LightRAG, QueryParam
-from lightrag.llm.ollama import ollama_model_complete, ollama_embed
+from lightrag.llm.provider import LLMService
 from lightrag.utils import EmbeddingFunc, logger, set_verbose_debug
 from lightrag.kg.shared_storage import initialize_pipeline_status
 
@@ -83,9 +83,20 @@ if not os.path.exists(WORKING_DIR):
 
 
 async def initialize_rag():
+    llm_provider = LLMService(provider_name="ollama")
+
+    embedding_func = EmbeddingFunc(
+        embedding_dim=int(os.getenv("EMBEDDING_DIM", "1024")),
+        max_token_size=int(os.getenv("MAX_EMBED_TOKENS", "8192")),
+        func=lambda texts: llm_provider.generate_embeddings(
+            texts,
+            model=os.getenv("EMBEDDING_MODEL", "bge-m3:latest")
+        ),
+    )
+
     rag = LightRAG(
         working_dir=WORKING_DIR,
-        llm_model_func=ollama_model_complete,
+        llm_model_func=llm_provider.generate_text,
         llm_model_name=os.getenv("LLM_MODEL", "qwen2.5-coder:7b"),
         llm_model_max_token_size=8192,
         llm_model_kwargs={
@@ -93,15 +104,7 @@ async def initialize_rag():
             "options": {"num_ctx": 8192},
             "timeout": int(os.getenv("TIMEOUT", "300")),
         },
-        embedding_func=EmbeddingFunc(
-            embedding_dim=int(os.getenv("EMBEDDING_DIM", "1024")),
-            max_token_size=int(os.getenv("MAX_EMBED_TOKENS", "8192")),
-            func=lambda texts: ollama_embed(
-                texts,
-                embed_model=os.getenv("EMBEDDING_MODEL", "bge-m3:latest"),
-                host=os.getenv("EMBEDDING_BINDING_HOST", "http://localhost:11434"),
-            ),
-        ),
+        embedding_func=embedding_func,
     )
 
     await rag.initialize_storages()
@@ -117,22 +120,6 @@ async def print_stream(stream):
 
 async def main():
     try:
-        # Clear old data files
-        files_to_delete = [
-            "graph_chunk_entity_relation.graphml",
-            "kv_store_doc_status.json",
-            "kv_store_full_docs.json",
-            "kv_store_text_chunks.json",
-            "vdb_chunks.json",
-            "vdb_entities.json",
-            "vdb_relationships.json",
-        ]
-
-        for file in files_to_delete:
-            file_path = os.path.join(WORKING_DIR, file)
-            if os.path.exists(file_path):
-                os.remove(file_path)
-                print(f"Deleting old file:: {file_path}")
 
         # Initialize RAG instance
         rag = await initialize_rag()
@@ -150,18 +137,6 @@ async def main():
         with open("./book.txt", "r", encoding="utf-8") as f:
             await rag.ainsert(f.read())
 
-        # Perform naive search
-        print("\n=====================")
-        print("Query mode: naive")
-        print("=====================")
-        resp = await rag.aquery(
-            "What are the top themes in this story?",
-            param=QueryParam(mode="naive", stream=True),
-        )
-        if inspect.isasyncgen(resp):
-            await print_stream(resp)
-        else:
-            print(resp)
 
         # Perform local search
         print("\n=====================")
@@ -205,8 +180,7 @@ async def main():
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        if rag:
-            await rag.llm_response_cache.index_done_callback()
+        if 'rag' in locals():
             await rag.finalize_storages()
 
 

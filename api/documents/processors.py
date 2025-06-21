@@ -195,18 +195,17 @@ async def pipeline_enqueue_file(rag: LightRAG, doc_id:str, file_path: Path) -> b
                         f"Error processing PPTX file {file_path.name}. Ensure python-pptx is installed."
                     )
 
-            case 'csv':
+            case '.csv':
                 try:
                     df = pd.read_csv(io.BytesIO(file))
                     sheet_text = f"\n\n--- Filename: {file_path.name} ---\n\n"
                     records = df.to_dict(orient='records')
-                    markdown_content = {"markdown": sheet_text + str(records)}
-                    logger.debug(f"CSV processing markdown {markdown_content}")
-                    logger.debug(f"Converted CSV to markdown table, {len(df)} rows")
+                    content +=  sheet_text + str(records)
+                    logger.debug(f"CSV processing content {content[:100]}......")
                 except Exception as e:
                     logger.error(f"Error processing CSV file: {str(e)}")
 
-            case 'xlsx' | 'xls' | 'xlsm':
+            case '.xlsx' | '.xls' | '.xlsm':
                 try:
                     excel_file = io.BytesIO(file)
                     all_sheets_content = ""
@@ -224,7 +223,7 @@ async def pipeline_enqueue_file(rag: LightRAG, doc_id:str, file_path: Path) -> b
                         num_sheets += 1
                         
                     # Join all sheets with separator
-                    markdown_content = {"markdown": all_sheets_content}
+                    content = all_sheets_content
                     logger.info(f"Processed Excel file with {num_sheets} sheets")
                 except Exception as e:
                     logger.error(f"Error processing Excel file: {str(e)}")

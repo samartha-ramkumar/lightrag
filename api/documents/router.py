@@ -35,7 +35,6 @@ router = APIRouter(
 # Temporary file prefix
 temp_prefix = "__tmp__"
 
-# TODO: deprecate after /insert_file is removed
 async def save_temp_file(input_dir: Path, file: UploadFile = File(...)) -> Path:
     """Save the uploaded file to a temporary location
 
@@ -120,12 +119,11 @@ def create_document_routes(
 
 
     
-    # TODO: deprecated, use /upload instead
     @router.post(
         "/file", response_model=InsertResponse
     )
     async def insert_file(
-        background_tasks: BackgroundTasks, file: UploadFile = File(...)
+        background_tasks: BackgroundTasks, knowledge_id: str, file: UploadFile = File(...)
     ):
         """
         Insert a file directly into the RAG system.
@@ -135,6 +133,7 @@ def create_document_routes(
 
         Args:
             background_tasks: FastAPI BackgroundTasks for async processing
+            knowledge_id: The ID associated with the knowledge base
             file (UploadFile): The file to be processed
 
         Returns:
@@ -153,7 +152,7 @@ def create_document_routes(
             temp_path = await save_temp_file(doc_manager.input_dir, file)
 
             # Add to background tasks
-            background_tasks.add_task(pipeline_index_file, rag, temp_path)
+            background_tasks.add_task(pipeline_index_file, rag, knowledge_id, temp_path)
 
             return InsertResponse(
                 status="success",

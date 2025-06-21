@@ -143,23 +143,29 @@ async def main():
         print("=====================")
         
         # Example 1: Using chat method with automatic conversation management
-        # response, conversation_id = await rag.achat(
-        #     "What is this document about?",
-        #     param=QueryParam(mode="mix")
-        # )
-        # print(f"Conversation ID: {conversation_id}")
-        # print(f"Response: {response}")
+        response, conversation_id = await rag.achat(
+            "What is this document about?",
+            param=QueryParam(mode="mix")
+        )
+        print(f"Conversation ID: {conversation_id}")
+        print(f"Response: {response}")
         
         # Continue the conversation
-        conversation_id = "c7bb9a0f-72c1-41e7-8dc7-9db495865692"
+        # conversation_id = "c7bb9a0f-72c1-41e7-8dc7-9db495865692"
+        start = time.time()
         response2, _ = await rag.achat(
-            "I understand ..but what you gave is too much...Can you answer my question in less than 50-60 words?",
+            # "I understand ..but what you gave is too much...Can you answer my question in less than 50-60 words?",
+            # "My apologies, that became a little too less now. Can you give a bit more than that but still keep it concise?",
+            # "What is the unique aspect of this document?",
+            # "Is there nothing special about this document?",
+            "Tell me something boring about this document.",
             conversation_id=conversation_id,
             param=QueryParam(mode="mix")
         )
         print(f"Follow-up response: {response2}")
         print(f"Conversation ID: {_}")
-        
+        end = time.time()
+        print(f"\nTotal time for follow-up query: {end - start:.2f} seconds")
         # Example 2: Manual conversation history (original approach still works)
         # print("\n=== Manual Conversation History ===")
         # print(
